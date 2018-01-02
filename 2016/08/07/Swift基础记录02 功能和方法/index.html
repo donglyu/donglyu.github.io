@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Swift 基础记录 02 [函数和方法 类&amp;初始化] | lydsnm</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="Swift" />
+    
+    <meta name="description" content="1.函数和方法
+A function is a reusable, named piece of code that can be referred to from many places in a program.
+  使用func来声明一个函数, 可以不带或带多个参数 : name: Type.   函数返回值 写在 -&amp;gt;后,
+
+
+123func greet(name: String,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 基础记录 02 [函数和方法 类&初始化]">
+<meta property="og:url" content="http://www.lydsnm.top/2016/08/07/Swift基础记录02 功能和方法/index.html">
+<meta property="og:site_name" content="lydsnm">
+<meta property="og:description" content="1.函数和方法
+A function is a reusable, named piece of code that can be referred to from many places in a program.
+  使用func来声明一个函数, 可以不带或带多个参数 : name: Type.   函数返回值 写在 -&amp;gt;后,
+
+
+123func greet(name: String,">
+<meta property="og:updated_time" content="2018-01-02T13:48:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift 基础记录 02 [函数和方法 类&初始化]">
+<meta name="twitter:description" content="1.函数和方法
+A function is a reusable, named piece of code that can be referred to from many places in a program.
+  使用func来声明一个函数, 可以不带或带多个参数 : name: Type.   函数返回值 写在 -&amp;gt;后,
+
+
+123func greet(name: String,">
+    
+
+    
+        <link rel="alternate" href="/" title="lydsnm" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">...多做多说...</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/iOS/">iOS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/工具/">工具</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/开发/">开发</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/生活/">生活</a></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/iOS/">iOS</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-Swift基础记录02 功能和方法" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Swift 基础记录 02 [函数和方法 类&amp;初始化]
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2016/08/07/Swift基础记录02 功能和方法/" class="article-date">
+            <time datetime="2016-08-06T16:00:00.000Z" itemprop="datePublished">2016-08-07</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Swift/">Swift</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h5 id="1-函数和方法"><a href="#1-函数和方法" class="headerlink" title="1.函数和方法"></a>1.函数和方法</h5><ul>
+<li><p>A function is a reusable, named piece of code that can be referred to from many places in a program.</p>
+<p>  使用func来声明一个函数, 可以不带或带多个参数 : <code>name: Type</code>.   函数返回值 写在 <code>-&gt;</code>后,</p>
+</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">func greet(name: String, day: String) -&gt; String &#123;</div><div class="line">	<span class="keyword">return</span> <span class="string">"Hello \(name), today is \(day)."</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>而调用函数则需要跟上参数名称, 第一个参数名字不需要带上.</p>
+<a id="more"></a>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">greet(<span class="string">"Anna"</span>, day: <span class="string">"Tuesday"</span>)</div><div class="line">greet(<span class="string">"Bob"</span>, day: <span class="string">"Friday"</span>)</div><div class="line"></div><div class="line">var array = [<span class="string">"apple"</span>, <span class="string">"banana"</span>, <span class="string">"dragonfruit"</span>]</div><div class="line">array.insert(<span class="string">"cherry"</span>, atIndex: <span class="number">2</span>)</div></pre></td></tr></table></figure>
+<h5 id="2-类-amp-初始化"><a href="#2-类-amp-初始化" class="headerlink" title="2.类&amp;初始化"></a>2.类&amp;初始化</h5><ul>
+<li>定义类 <code>class</code> Shape</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Shape &#123;</div><div class="line">	var numberOfSides = <span class="number">0</span></div><div class="line">	func simpleDescription() -&gt; String &#123;</div><div class="line">		<span class="keyword">return</span> <span class="string">"A shape with \(numberOfSides) sides."</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>调用<code>class</code></li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var shape = Shape()</div><div class="line">shape.numberOfSides = <span class="number">7</span></div><div class="line">var shapeDescription = shape.simpleDescription()</div></pre></td></tr></table></figure>
+<ul>
+<li>初始化<br>现在的Shape类 缺少一个重要的东西:类的初始化</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> NamedShape &#123;</div><div class="line">	</div><div class="line">	init(name: String)&#123;</div><div class="line">		<span class="keyword">self</span>.name = name</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	func simpleDescription() -&gt; String&#123;</div><div class="line">		<span class="keyword">return</span> <span class="string">"A shape with \(numberOfSides) sides."</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>而初始化一个类时不写<code>init</code>,而仅仅是通过以下方式调用</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let namedShape = NamedShape(name: <span class="string">"my named shape"</span>)</div></pre></td></tr></table></figure>
+<ul>
+<li>继承<br>通过 <code>:</code>接其父类就可</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Square: NamedShape &#123;</div><div class="line">    var sideLength: Double</div><div class="line"></div><div class="line">    init(sideLength: Double, name: String) &#123;</div><div class="line">        <span class="keyword">self</span>.sideLength = sideLength</div><div class="line">        <span class="keyword">super</span>.init(name: name)</div><div class="line">        numberOfSides = <span class="number">4</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    func area() -&gt;  Double &#123;</div><div class="line">        <span class="keyword">return</span> sideLength * sideLength</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    override func simpleDescription() -&gt; String &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"A square with sides of length \(sideLength)."</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">let testSquare = Square(sideLength: <span class="number">5.2</span>, name: <span class="string">"my test square"</span>)</div><div class="line">testSquare.area()</div><div class="line">testSquare.simpleDescription()</div></pre></td></tr></table></figure>
+<p>注意: Square类的初始化过程有三步:</p>
+<pre><code>1. 为子类Square声明的属性赋值
+2. 调用父类(NamedShape)的初始化方法
+3. 更改父类Namedshape的属性, 以及其他方法,getter&amp;setter等方法.
+</code></pre><p>有时, 根据传入参数, 我们需要返回一个fail . 用<code>init?</code>来声明一个可失败的初始化方法</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Circle: NamedShape &#123;</div><div class="line">    var radius: Double</div><div class="line"></div><div class="line">    init?(radius: Double, name: String) &#123;</div><div class="line">        <span class="keyword">self</span>.radius = radius</div><div class="line">        <span class="keyword">super</span>.init(name: name)</div><div class="line">        numberOfSides = <span class="number">1</span></div><div class="line">        <span class="keyword">if</span> radius &lt;= <span class="number">0</span> &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    override func simpleDescription() -&gt; String &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"A circle with a radius of \(radius)."</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">let successfulCircle = Circle(radius: <span class="number">4.2</span>, name: <span class="string">"successful circle"</span>)</div><div class="line">let failedCircle = Circle(radius: <span class="number">-7</span>, name: <span class="string">"failed circle"</span>)</div></pre></td></tr></table></figure>
+<p>其他关键字:<br>designated<br>convenience<br>required  标识强制类实现此方法</p>
+<p>所有不加修饰的init方法都需要在方法中确保非Optional的实例变量被赋值初始化,而在子类中也强制 （显式或隐式地）调用super版本的designated初始化，所以无论如何走何种路径，被初始化的对象总是可以完成完整的初始化的。</p>
+<p>与designated初始化方法对应的是在init前加上convenience关键字的初始化方法。这类方法是Swift初始化方法中的“二等公民”，只作为补充和提供使用上的方便。所有的convenience初始化方法都必须调用同一个类中的designated初始化完成设置，另外convenience的初始化方法是不能被子类重写或从子类中以super的方式被调用的。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> ClassA &#123;</div><div class="line">    let numA: Int</div><div class="line">    init(num: Int) &#123;</div><div class="line">        numA = num</div><div class="line">    &#125;</div><div class="line">    convenience init(bigNum: Bool) &#123;</div><div class="line">        <span class="keyword">self</span>.init(num: bigNum ? <span class="number">10000</span> : <span class="number">1</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">class</span> ClassB: ClassA &#123;</div><div class="line">    let numB: Int</div><div class="line">    override init(num: Int) &#123;</div><div class="line">        numB = num + <span class="number">1</span></div><div class="line">        <span class="keyword">super</span>.init(num: num)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>只要在子类中实现重写了父类convenience方法所需要的init方法的话，我们在子类中就也可以使用父类的convenience初始化方法了。比如在上面的代码中，我们在ClassB里实现了init(num: Int)的重写。这样，即使在ClassB中没有bigNum版本的convenience init(bigNum: Bool)，我们仍然还是可以用这个方法来完成子类初始化：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let anObj = ClassB(bigNum: <span class="literal">true</span>)</div><div class="line"><span class="comment">// anObj.numA = 10000, anObj.numB = 10001</span></div></pre></td></tr></table></figure>
+<p>初始化方法永远遵循以下两个原则：</p>
+<p>1.初始化路径必须保证对象完全初始化，这可以通过调用本类型的designated初始化方法来得到保证；</p>
+<p>2.子类的designated初始化方法必须调用父类的designated方法，以保证父类也完成初始化。</p>
+<hr>
+<p>官方原文从底层介绍比较复杂, 建议有需求阅读原文.<br>本人看了一下有点抽象和晕, 看了下别人总结: </p>
+<p> 1、自定义初始化方法要先调用自己类默认初始化方法，自己重写默认初始化方法要先调用父类默认初始化方法</p>
+<p> 2、应该要先调用父类的构造器或者自身的默认构造器，以防止先给属性赋值了然后才调用父类或者自身的默认构造器把以前的赋值覆盖了</p>
+<p>原文: (<a href="http://justcoding.iteye.com/blog/2080763" target="_blank" rel="external">http://justcoding.iteye.com/blog/2080763</a>)</p>
+<hr>
+<p>待看:</p>
+<p>Initializers can have quite a few keywords associated with them. A designated initializer indicates that it’s one of the primary initializers for a class; any initializer within a class must ultimately call through to a designated initializer. A convenience initializer is a secondary initializer, which adds additional behavior or customization, but must eventually call through to a designated initializer. Designated and convenience initializers are indicated with the <code>designated</code> and <code>convenience</code> keywords, respectively.</p>
+<p>A <code>required</code> keyword next to an initializer indicates that every subclass of the class that has that initializer must implement its own version of the initializer (if it implements any initializer).</p>
+<p>Type casting is a way to check the type of an instance, and to treat that instance as if it’s a different superclass or subclass from somewhere else in its own class hierarchy.</p>
+<p>A constant or variable of a certain class type may actually refer to an instance of a subclass behind the scenes. Where you believe this is the case, you can try to downcast to the subclass type using a type cast operator.</p>
+<p>Because downcasting can fail, the type cast operator comes in two different forms. The optional form, <code>as?</code>, returns an optional value of the type you are trying to downcast to. The forced form, as!, attempts the downcast and force-unwraps the result as a single compound action.</p>
+<p>Use the optional type cast operator (<code>as?</code>) when you’re not sure if the downcast will succeed. This form of the operator will always return an optional value, and the value will be nil if the downcast was not possible. This lets you check for a successful downcast.</p>
+<p>Use the forced type cast operator (<code>as!</code>) only when you’re sure that the downcast will always succeed. This form of the operator will trigger a runtime error if you try to downcast to an incorrect class type.</p>
+<p>This example shows the use of the optional type cast operator (as?) to check whether a shape in an array of shapes is a circle or a square. You increment the count of the squares and triangles variables by one each time the corresponding shape is found, printing the values at the end.</p>
+<figure class="highlight mm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Triangle: NamedShape &#123;</div><div class="line">    init(sideLength: Double, name: String) &#123;</div><div class="line">        <span class="keyword">super</span>.init(name: name)</div><div class="line">        numberOfSides = <span class="number">3</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let shapesArray = [Triangle(sideLength: <span class="number">1.5</span>, name: <span class="string">"triangle1"</span>), Triangle(sideLength: <span class="number">4.2</span>, name: <span class="string">"triangle2"</span>), Square(sideLength: <span class="number">3.2</span>, name: <span class="string">"square1"</span>), Square(sideLength: <span class="number">2.7</span>, name: <span class="string">"square2"</span>)]</div><div class="line">var squares = <span class="number">0</span></div><div class="line">var triangles = <span class="number">0</span></div><div class="line"><span class="keyword">for</span> shape <span class="keyword">in</span> shapesArray &#123;</div><div class="line">   <span class="keyword">if</span> let square = shape as? Square &#123;</div><div class="line">      squares += <span class="number">1</span></div><div class="line">   &#125; <span class="keyword">else</span> <span class="keyword">if</span> let triangle = shape as? Triangle &#123;</div><div class="line">      triangles += <span class="number">1</span></div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line">print(<span class="string">"\(squares) squares and \(triangles) triangles."</span>)</div></pre></td></tr></table></figure>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://www.lydsnm.top/2016/08/07/Swift基础记录02 功能和方法/" data-id="cj3bl3fq0001s2nit9mptc8de" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="/" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google-plus" href="/" target="_blank">
+                        <i class="icon fa fa-google-plus"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/ppoffice/hexo-theme-hueman" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="/" target="_blank">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/08/08/Swift基础记录03 枚举结构体协议/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            Swift 基础记录 03 [枚举&amp;结构体&amp;协议]
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2016/08/07/Swift基础笔记01 基础类型和控制流/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">Swift 基础记录 01 [基础类型和控制流]</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/05/30/Slice一个小而精简的Mac计时软件，拖延症神器，倒计时小工具/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ocs32tleq.bkt.clouddn.com/14961482427792.jpg)" alt="Slice 一个小而精简的Mac计时软件. 拖延症神器.倒计时小工具" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/工具/">工具</a></p>
+                            <p class="item-title"><a href="/2017/05/30/Slice一个小而精简的Mac计时软件，拖延症神器，倒计时小工具/" class="title">Slice 一个小而精简的Mac计时软件. 拖延症神器.倒计时小工具</a></p>
+                            <p class="item-date"><time datetime="2017-05-29T16:00:00.000Z" itemprop="datePublished">2017-05-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/04/20/iOS实现实时通信或推送的常用策略/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/iOS/">iOS</a></p>
+                            <p class="item-title"><a href="/2017/04/20/iOS实现实时通信或推送的常用策略/" class="title">iOS实现实时通信或推送的常用策略</a></p>
+                            <p class="item-date"><time datetime="2017-04-19T16:00:00.000Z" itemprop="datePublished">2017-04-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/02/06/实现自定义UIWebView 的UIMenuController选项/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/iOS/">iOS</a></p>
+                            <p class="item-title"><a href="/2017/02/06/实现自定义UIWebView 的UIMenuController选项/" class="title">实现自定义UIWebView 的UIMenuController选项</a></p>
+                            <p class="item-date"><time datetime="2017-02-05T16:00:00.000Z" itemprop="datePublished">2017-02-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/10/20/[OC]Objective-C深入记录 (四)/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/iOS/">iOS</a></p>
+                            <p class="item-title"><a href="/2016/10/20/[OC]Objective-C深入记录 (四)/" class="title">OC 深入记录 (四)</a></p>
+                            <p class="item-date"><time datetime="2016-10-19T16:00:00.000Z" itemprop="datePublished">2016-10-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/10/19/[OC]Objective-C深入记录 (三)/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ocs32tleq.bkt.clouddn.com/blockMemory.png)" alt="OC 深入记录 (三)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/iOS/">iOS</a></p>
+                            <p class="item-title"><a href="/2016/10/19/[OC]Objective-C深入记录 (三)/" class="title">OC 深入记录 (三)</a></p>
+                            <p class="item-date"><time datetime="2016-10-18T16:00:00.000Z" itemprop="datePublished">2016-10-19</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><span class="category-list-count">26</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开发/">开发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/runtime-运行时/" style="font-size: 10px;">-runtime -运行时</a> <a href="/tags/GCD/" style="font-size: 10px;">GCD</a> <a href="/tags/GCD-同步异步/" style="font-size: 10px;">GCD 同步异步</a> <a href="/tags/OC/" style="font-size: 15px;">OC</a> <a href="/tags/Photos/" style="font-size: 10px;">Photos</a> <a href="/tags/Swift/" style="font-size: 20px;">Swift</a> <a href="/tags/UIButton/" style="font-size: 10px;">UIButton</a> <a href="/tags/UITextView-UITextField/" style="font-size: 10px;">UITextView UITextField</a> <a href="/tags/cocoaPods/" style="font-size: 10px;">cocoaPods</a> <a href="/tags/coredata/" style="font-size: 10px;">coredata</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/iOS10适配/" style="font-size: 10px;">iOS10适配</a> <a href="/tags/mvp-mvvm/" style="font-size: 10px;">mvp mvvm</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/up/" style="font-size: 10px;">up</a> <a href="/tags/动画/" style="font-size: 10px;">动画</a> <a href="/tags/定时推送/" style="font-size: 10px;">定时推送</a> <a href="/tags/推送/" style="font-size: 10px;">推送</a> <a href="/tags/本地推送/" style="font-size: 10px;">本地推送</a> <a href="/tags/计划/" style="font-size: 10px;">计划</a> <a href="/tags/许可证-开源/" style="font-size: 10px;">许可证, 开源</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源-干货/" style="font-size: 10px;">资源 干货</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 lydsnm</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://www.lydsnm.top/2016/08/07/Swift基础记录02 功能和方法/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

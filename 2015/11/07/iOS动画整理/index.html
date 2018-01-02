@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>iOS动画整理 | lydsnm</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="动画" />
+    
+    <meta name="description" content="一. Core AnimationCore Animation (核心动画), 一组跨平台动画API, 可以再Mac OS X和iOS平台使用.Core Animation 的动画执行不会阻塞主线程.Core Animation 是直接作用在CALayer上的, 并非UIView.
+基本动画
+引入头文件
+初始化一个CAAnimation对象.
+通过给UIView的CALayer方法添加CAAnim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS动画整理">
+<meta property="og:url" content="http://www.lydsnm.top/2015/11/07/iOS动画整理/index.html">
+<meta property="og:site_name" content="lydsnm">
+<meta property="og:description" content="一. Core AnimationCore Animation (核心动画), 一组跨平台动画API, 可以再Mac OS X和iOS平台使用.Core Animation 的动画执行不会阻塞主线程.Core Animation 是直接作用在CALayer上的, 并非UIView.
+基本动画
+引入头文件
+初始化一个CAAnimation对象.
+通过给UIView的CALayer方法添加CAAnim">
+<meta property="og:updated_time" content="2016-11-23T14:12:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS动画整理">
+<meta name="twitter:description" content="一. Core AnimationCore Animation (核心动画), 一组跨平台动画API, 可以再Mac OS X和iOS平台使用.Core Animation 的动画执行不会阻塞主线程.Core Animation 是直接作用在CALayer上的, 并非UIView.
+基本动画
+引入头文件
+初始化一个CAAnimation对象.
+通过给UIView的CALayer方法添加CAAnim">
+    
+
+    
+        <link rel="alternate" href="/" title="lydsnm" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">...多做多说...</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/iOS/">iOS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/工具/">工具</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/开发/">开发</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/生活/">生活</a></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/iOS/">iOS</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-iOS动画整理" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        iOS动画整理
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2015/11/07/iOS动画整理/" class="article-date">
+            <time datetime="2015-11-06T16:00:00.000Z" itemprop="datePublished">2015-11-07</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/动画/">动画</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h3 id="一-Core-Animation"><a href="#一-Core-Animation" class="headerlink" title="一. Core Animation"></a>一. Core Animation</h3><p>Core Animation (核心动画), 一组跨平台动画API, 可以再Mac OS X和iOS平台使用.<br>Core Animation 的动画执行不会阻塞主线程.<br>Core Animation 是直接作用在CALayer上的, 并非UIView.</p>
+<h4 id="基本动画"><a href="#基本动画" class="headerlink" title="基本动画"></a>基本动画</h4><ol>
+<li>引入头文件<quartzcore quartzcore.h=""></quartzcore></li>
+<li>初始化一个CAAnimation对象.</li>
+<li>通过给UIView的CALayer方法添加CAAnimation到CALayer中.</li>
+</ol>
+<p>CAAnimation是所有动画类的父类, 但不能直接实用, 应该使用它的之类.<br>常用的属性有: </p>
+<blockquote>
+<p>duration: 动画持续时间<br>repeatCount: 动画的重复次数<br>timingFunction: 控制动画运行的节奏</p>
+</blockquote>
+<p>补充: <code>CABasicAnimation</code>, <code>CAKeyframeAnimation</code>, <code>CATransition</code> , <code>CAAnimationGroup</code> 4 个子动画类<br><code>CAPropertyAnimation</code> 是 <code>CAAnimation</code> 的子类, 但是不能直接使用, 要想创建动画对象, 应该用它的两个子类: <font color="10d3c4">CABasicAnimation</font> 和 <font color="10d3c4">CAKeyframeAnimation</font>.</p>
+<p>它由个 <font color="10d3c4">keyPath</font>属性. 可以指定CALayer的某个属性名为 keyPath, 并且对CALayer的这个属性进行修改, 达到相应的动画效果. 比如: 指定 <font color="10d3c4">@”position”</font>为keyPath, 就会修改CALayer的position属性的值, 以达到平移的动画效果.</p>
+<a id="more"></a>
+<p>eg:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">CABasicAnimation</span> *anima=[<span class="built_in">CABasicAnimation</span> animation];</div><div class="line"><span class="comment">//平移</span></div><div class="line">anima.keyPath=<span class="string">@"position"</span>;</div><div class="line"><span class="comment">//设置执行的动画</span></div><div class="line">anima.toValue=[<span class="built_in">NSValue</span> valueWithCGPoint:<span class="built_in">CGPointMake</span>(<span class="number">200</span>, <span class="number">300</span>)];</div><div class="line"><span class="comment">//设置执行动画的时间</span></div><div class="line">anima.duration=<span class="number">2.0</span>;</div><div class="line"><span class="comment">//设置动画执行完毕之后不删除动画</span></div><div class="line">anima.removedOnCompletion=<span class="literal">NO</span>;</div><div class="line"><span class="comment">//设置保存动画的最新状态</span></div><div class="line">anima.fillMode=kCAFillModeForwards;</div><div class="line"><span class="comment">//anima.fillMode=kCAFillModeBackwards;</span></div><div class="line"><span class="comment">//设置动画的代理</span></div><div class="line">anima.delegate=<span class="keyword">self</span>;</div><div class="line"><span class="comment">//2.添加核心动画</span></div><div class="line">[<span class="keyword">self</span>.customView.layer addAnimation:anima forKey:<span class="literal">nil</span>];</div></pre></td></tr></table></figure>
+<h3 id="二-UIView封装动画"><a href="#二-UIView封装动画" class="headerlink" title="二. UIView封装动画"></a>二. UIView封装动画</h3><p>UIKit 直接将动画集成到UIView类中, 当内部的一些属性发生改变时, UIView将为这些改变提供动画支持. 但是执行动画所需要的工作由 UIView 类自动完成, 但仍要在洗碗执行动画时通知视图, So 需要将改变属性的代码放在 <font color="10d3c4">[UIView beginAnimations:nil context:nil]</font> 和 <font color="10d3c4"> [UIView commitAnimations]</font> 之间.</p>
+<p>常见方法: </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">+ (<span class="keyword">void</span>)setAnimationDelegate:(<span class="keyword">id</span>)delegate     <span class="comment">//设置动画代理对象，当动画开始或者结束时会发消息给代理对象</span></div><div class="line"></div><div class="line">+ (<span class="keyword">void</span>)setAnimationWillStartSelector:(SEL)selector   <span class="comment">//当动画即将开始时，执行delegate对象的selector，并且把beginAnimations:context:中传入的参数传进selector</span></div><div class="line"></div><div class="line">+ (<span class="keyword">void</span>)setAnimationDidStopSelector:(SEL)selector  <span class="comment">//当动画结束时，执行delegate对象的selector，并且把beginAnimations:context:中传入的参数传进selector</span></div><div class="line"></div><div class="line">+ (<span class="keyword">void</span>)setAnimationDuration:(<span class="built_in">NSTimeInterval</span>)duration   <span class="comment">//动画的持续时间，秒为单位</span></div><div class="line"></div><div class="line">+ (<span class="keyword">void</span>)setAnimationDelay:(<span class="built_in">NSTimeInterval</span>)delay  <span class="comment">//动画延迟delay秒后再开始</span></div><div class="line"></div><div class="line">+ (<span class="keyword">void</span>)setAnimationStartDate:(<span class="built_in">NSDate</span> *)startDate   <span class="comment">//动画的开始时间，默认为now</span></div><div class="line"></div><div class="line">+ (<span class="keyword">void</span>)setAnimationCurve:(<span class="built_in">UIViewAnimationCurve</span>)curve  <span class="comment">//动画的节奏控制</span></div><div class="line"></div><div class="line">+ (<span class="keyword">void</span>)setAnimationRepeatCount:(<span class="keyword">float</span>)repeatCount  <span class="comment">//动画的重复次数</span></div><div class="line"></div><div class="line">+ (<span class="keyword">void</span>)setAnimationRepeatAutoreverses:(<span class="built_in">BOOL</span>)repeatAutoreverses  <span class="comment">//如果设置为YES,代表动画每次重复执行的效果会跟上一次相反</span></div><div class="line"></div><div class="line">+ (<span class="keyword">void</span>)setAnimationTransition:(<span class="built_in">UIViewAnimationTransition</span>)transition forView:(<span class="built_in">UIView</span> *)view cache:(<span class="built_in">BOOL</span>)cache  <span class="comment">//设置视图view的过渡效果, transition指定过渡类型, cache设置YES代表使用视图缓存，性能较好</span></div></pre></td></tr></table></figure>
+<p>eg:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//首尾式动画</span></div><div class="line">[<span class="built_in">UIView</span> beginAnimations:<span class="literal">nil</span> context:<span class="literal">nil</span>];</div><div class="line"><span class="comment">//执行动画</span></div><div class="line"><span class="comment">//设置动画执行时间</span></div><div class="line">[<span class="built_in">UIView</span> setAnimationDuration:<span class="number">2.0</span>];</div><div class="line"><span class="comment">//设置代理</span></div><div class="line">[<span class="built_in">UIView</span> setAnimationDelegate:<span class="keyword">self</span>];</div><div class="line"><span class="comment">//设置动画执行完毕调用的事件</span></div><div class="line">[<span class="built_in">UIView</span> setAnimationDidStopSelector:<span class="keyword">@selector</span>(didStopAnimation)];</div><div class="line"><span class="keyword">self</span>.customView.center = <span class="built_in">CGPointMake</span>(<span class="number">200</span>, <span class="number">300</span>); <span class="comment">// 更改位置</span></div><div class="line">[<span class="built_in">UIView</span> commitAnimations];</div></pre></td></tr></table></figure>
+<ul>
+<li>UIView封装动画与CALayer 动画对比<br>使用 UIView和CALayer都能实现动画效果, 一般来说, 开发中用UIView封装的动画情况较多.<br>区别: <font color="a52a2a">UIView封装的动画执行完毕之后不会反弹。即如果是通过CALayer核心动画改变layer的位置状态，表面上看虽然已经改变了，但是实际上它的位置是没有改变的。</font></li>
+</ul>
+<h3 id="三-block-动画"><a href="#三-block-动画" class="headerlink" title="三. block 动画"></a>三. block 动画</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+ (<span class="keyword">void</span>)animateWithDuration:(<span class="built_in">NSTimeInterval</span>)duration delay:(<span class="built_in">NSTimeInterval</span>)delay options:(<span class="built_in">UIViewAnimationOptions</span>)options animations:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))animations completion:(<span class="keyword">void</span> (^)(<span class="built_in">BOOL</span> finished))completion</div></pre></td></tr></table></figure>
+<p>参数解析:</p>
+<blockquote>
+<p>duration：动画的持续时间<br>delay：动画延迟delay秒后开始<br>options：动画的节奏控制<br>animations：将改变视图属性的代码放在这个block中<br>completion：动画结束后，会自动调用这个block</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[<span class="built_in">UIView</span> animateWithDuration:<span class="number">4.0</span> <span class="comment">// 动画时长</span></div><div class="line">                 animations:^&#123;</div><div class="line">                     <span class="comment">// code</span></div><div class="line">&#125;];</div><div class="line"><span class="comment">//...</span></div></pre></td></tr></table></figure>
+<p>转场动画</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+ (<span class="keyword">void</span>)transitionWithView:(<span class="built_in">UIView</span> *)view duration:(<span class="built_in">NSTimeInterval</span>)duration options:(<span class="built_in">UIViewAnimationOptions</span>)options animations:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))animations completion:(<span class="keyword">void</span> (^)(<span class="built_in">BOOL</span> finished))completion</div></pre></td></tr></table></figure>
+<p>参数解析:</p>
+<blockquote>
+<p>duration：动画的持续时间<br>view：需要进行转场动画的视图<br>options：转场动画的类型<br>animations：将改变视图属性的代码放在这个block中<br>completion：动画结束后，会自动调用这个block</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+ (<span class="keyword">void</span>)transitionFromView:(<span class="built_in">UIView</span> *)fromView toView:(<span class="built_in">UIView</span> *)toView duration:(<span class="built_in">NSTimeInterval</span>)duration options:(<span class="built_in">UIViewAnimationOptions</span>)options completion:(<span class="keyword">void</span> (^)(<span class="built_in">BOOL</span> finished))completion</div></pre></td></tr></table></figure>
+<p>方法调用完毕后，相当于执行了下面两句代码：</p>
+<p>// 添加toView到父视图</p>
+<p><code>[fromView.superview addSubview:toView];</code></p>
+<p>// 把fromView从父视图中移除</p>
+<p><code>[fromView removeFromSuperview];</code></p>
+<p>参数解析:</p>
+<blockquote>
+<p>duration：动画的持续时间<br>options：转场动画的类型<br>animations：将改变视图属性的代码放在这个block中<br>completion：动画结束后，会自动调用这个block</p>
+</blockquote>
+<h3 id="四-关键帧动画"><a href="#四-关键帧动画" class="headerlink" title="四. 关键帧动画"></a>四. 关键帧动画</h3><p><font color="10d3c4">UIView动画</font> 已经具备高级的方法来创建动画, 而且可以更好地理解和构建动画. iOS 7后有了一个新的方法 <font color="10d3c4">animateKeyframeWithDuration</font> 的方法, 可以用它来创建更多更复杂的动画效果. 而不需要区实用核心动画(Core Animation).</p>
+<ul>
+<li>创建关键帧方法:</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> *  添加关键帧方法</div><div class="line"> *</div><div class="line"> *  @param duration   动画时长</div><div class="line"> *  @param delay      动画延迟</div><div class="line"> *  @param options    动画效果选项</div><div class="line"> *  @param animations 动画执行代码</div><div class="line"> *  @param completion 动画结束执行代码</div><div class="line"> */</div><div class="line">+ (<span class="keyword">void</span>)animateKeyframesWithDuration:(<span class="built_in">NSTimeInterval</span>)duration</div><div class="line">                               delay:(<span class="built_in">NSTimeInterval</span>)delay</div><div class="line">                             options:(<span class="built_in">UIViewKeyframeAnimationOptions</span>)options</div><div class="line">                          animations:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))animations</div><div class="line">                          completion:(<span class="keyword">void</span> (^)(<span class="built_in">BOOL</span> finished))completion;</div></pre></td></tr></table></figure>
+<ul>
+<li>添加关键帧方法</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> *  添加关键帧</div><div class="line"> *</div><div class="line"> *  @param frameStartTime 动画相对开始时间</div><div class="line"> *  @param frameDuration  动画相对持续时间</div><div class="line"> *  @param animations     动画执行代码</div><div class="line"> */</div><div class="line">+ (<span class="keyword">void</span>)addKeyframeWithRelativeStartTime:(<span class="keyword">double</span>)frameStartTime</div><div class="line">                        relativeDuration:(<span class="keyword">double</span>)frameDuration</div><div class="line">                              animations:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))animations;</div></pre></td></tr></table></figure>
+<p>以上说的相对时间，也就是说：“它们自身会根据动画总持续时长自动匹配其运行时长”。</p>
+<p>eg:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> (^keyFrameBlock)() = ^()&#123;</div><div class="line">    <span class="comment">// 创建颜色数组</span></div><div class="line">    <span class="built_in">NSArray</span> *arrayColors = @[[<span class="built_in">UIColor</span> orangeColor],</div><div class="line">                             [<span class="built_in">UIColor</span> yellowColor],</div><div class="line">                             [<span class="built_in">UIColor</span> greenColor],</div><div class="line">                             [<span class="built_in">UIColor</span> blueColor],</div><div class="line">                             [<span class="built_in">UIColor</span> purpleColor],</div><div class="line">                             [<span class="built_in">UIColor</span> redColor]];</div><div class="line">    <span class="built_in">NSUInteger</span> colorCount = [arrayColors count];</div><div class="line">    <span class="comment">// 循环添加关键帧</span></div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSUInteger</span> i = <span class="number">0</span>; i &lt; colorCount; i++) &#123;</div><div class="line">        [<span class="built_in">UIView</span> addKeyframeWithRelativeStartTime:i / (<span class="built_in">CGFloat</span>)colorCount</div><div class="line">                                relativeDuration:<span class="number">1</span> / (<span class="built_in">CGFloat</span>)colorCount</div><div class="line">                                      animations:^&#123;</div><div class="line">                                          [_graduallyView setBackgroundColor:arrayColors[i]];</div><div class="line">                                      &#125;];</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">[<span class="built_in">UIView</span> animateKeyframesWithDuration:<span class="number">4.0</span></div><div class="line">                               delay:<span class="number">0.0</span></div><div class="line">                             options:<span class="built_in">UIViewKeyframeAnimationOptionCalculationModeCubic</span> | <span class="built_in">UIViewAnimationOptionCurveLinear</span></div><div class="line">                          animations:keyFrameBlock</div><div class="line">                          completion:^(<span class="built_in">BOOL</span> finished) &#123;</div><div class="line">                              <span class="comment">// 动画完成后执行</span></div><div class="line">                              <span class="comment">// code...</span></div><div class="line">                          &#125;];</div></pre></td></tr></table></figure>
+<h3 id="五-UIImageView的帧动画"><a href="#五-UIImageView的帧动画" class="headerlink" title="五. UIImageView的帧动画"></a>五. UIImageView的帧动画</h3><p>UIImageView可以让一系列的图片在特定的时间内按顺序显示<br>相关属性解析:</p>
+<blockquote>
+<p>animationImages：要显示的图片(一个装着UIImage的NSArray)<br>animationDuration：完整地显示一次animationImages中的所有图片所需的时间<br>animationRepeatCount：动画的执行次数(默认为0，代表无限循环)</p>
+</blockquote>
+<p>相关方法解析:</p>
+<blockquote>
+<ul>
+<li>(void)startAnimating; 开始动画</li>
+<li>(void)stopAnimating;  停止动画</li>
+<li>(BOOL)isAnimating;  是否正在运行动画</li>
+</ul>
+</blockquote>
+<hr>
+<p>动画的一些应用 (不定时更新):<br>…</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://www.lydsnm.top/2015/11/07/iOS动画整理/" data-id="cj3bl3foz000n2nituj1bu1zk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="/" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google-plus" href="/" target="_blank">
+                        <i class="icon fa fa-google-plus"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/ppoffice/hexo-theme-hueman" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="/" target="_blank">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2015/12/06/CoreData使用记录学习/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            CoreData使用记录学习
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2015/11/06/iOS三方资源整理/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">iOS三方轮子整理</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/05/30/Slice一个小而精简的Mac计时软件，拖延症神器，倒计时小工具/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ocs32tleq.bkt.clouddn.com/14961482427792.jpg)" alt="Slice 一个小而精简的Mac计时软件. 拖延症神器.倒计时小工具" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/工具/">工具</a></p>
+                            <p class="item-title"><a href="/2017/05/30/Slice一个小而精简的Mac计时软件，拖延症神器，倒计时小工具/" class="title">Slice 一个小而精简的Mac计时软件. 拖延症神器.倒计时小工具</a></p>
+                            <p class="item-date"><time datetime="2017-05-29T16:00:00.000Z" itemprop="datePublished">2017-05-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/04/20/iOS实现实时通信或推送的常用策略/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/iOS/">iOS</a></p>
+                            <p class="item-title"><a href="/2017/04/20/iOS实现实时通信或推送的常用策略/" class="title">iOS实现实时通信或推送的常用策略</a></p>
+                            <p class="item-date"><time datetime="2017-04-19T16:00:00.000Z" itemprop="datePublished">2017-04-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/02/06/实现自定义UIWebView 的UIMenuController选项/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/iOS/">iOS</a></p>
+                            <p class="item-title"><a href="/2017/02/06/实现自定义UIWebView 的UIMenuController选项/" class="title">实现自定义UIWebView 的UIMenuController选项</a></p>
+                            <p class="item-date"><time datetime="2017-02-05T16:00:00.000Z" itemprop="datePublished">2017-02-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/10/20/[OC]Objective-C深入记录 (四)/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/iOS/">iOS</a></p>
+                            <p class="item-title"><a href="/2016/10/20/[OC]Objective-C深入记录 (四)/" class="title">OC 深入记录 (四)</a></p>
+                            <p class="item-date"><time datetime="2016-10-19T16:00:00.000Z" itemprop="datePublished">2016-10-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/10/19/[OC]Objective-C深入记录 (三)/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ocs32tleq.bkt.clouddn.com/blockMemory.png)" alt="OC 深入记录 (三)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/iOS/">iOS</a></p>
+                            <p class="item-title"><a href="/2016/10/19/[OC]Objective-C深入记录 (三)/" class="title">OC 深入记录 (三)</a></p>
+                            <p class="item-date"><time datetime="2016-10-18T16:00:00.000Z" itemprop="datePublished">2016-10-19</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><span class="category-list-count">26</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开发/">开发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/runtime-运行时/" style="font-size: 10px;">-runtime -运行时</a> <a href="/tags/GCD/" style="font-size: 10px;">GCD</a> <a href="/tags/GCD-同步异步/" style="font-size: 10px;">GCD 同步异步</a> <a href="/tags/OC/" style="font-size: 15px;">OC</a> <a href="/tags/Photos/" style="font-size: 10px;">Photos</a> <a href="/tags/Swift/" style="font-size: 20px;">Swift</a> <a href="/tags/UIButton/" style="font-size: 10px;">UIButton</a> <a href="/tags/UITextView-UITextField/" style="font-size: 10px;">UITextView UITextField</a> <a href="/tags/cocoaPods/" style="font-size: 10px;">cocoaPods</a> <a href="/tags/coredata/" style="font-size: 10px;">coredata</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/iOS10适配/" style="font-size: 10px;">iOS10适配</a> <a href="/tags/mvp-mvvm/" style="font-size: 10px;">mvp mvvm</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/up/" style="font-size: 10px;">up</a> <a href="/tags/动画/" style="font-size: 10px;">动画</a> <a href="/tags/定时推送/" style="font-size: 10px;">定时推送</a> <a href="/tags/推送/" style="font-size: 10px;">推送</a> <a href="/tags/本地推送/" style="font-size: 10px;">本地推送</a> <a href="/tags/计划/" style="font-size: 10px;">计划</a> <a href="/tags/许可证-开源/" style="font-size: 10px;">许可证, 开源</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源-干货/" style="font-size: 10px;">资源 干货</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 lydsnm</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://www.lydsnm.top/2015/11/07/iOS动画整理/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

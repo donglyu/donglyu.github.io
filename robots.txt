@@ -1,0 +1,9 @@
+# hexo robots.txt
+User-agent: *
+Allow: /
+Allow: /archives/
+Disallow: /js/
+Disallow: /css/
+Disallow: /lib/
+Sitemap: http://www.donglyu.com/sitemap.xml
+Sitemap: http://http://www.donglyu.com/baidusitemap.xml

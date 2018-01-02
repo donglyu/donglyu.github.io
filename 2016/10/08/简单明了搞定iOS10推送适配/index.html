@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>简单明了搞定 iOS 10推送适配 | lydsnm</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="iOS10适配,推送" />
+    
+    <meta name="description" content="iOS 10 更新了后发现正式环境, 推送粗问题了.查了相关资料后, 整理了一下解决办法. iOS 10后, 增加了UNUserNotificationCenter, 并且推送通知的处理要在代理方法
+
+userNotificationCenter:didReceiveNotificationResponse 推送时 APP 在后台
+
+userNotificationCenter:willPrese">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单明了搞定 iOS 10推送适配">
+<meta property="og:url" content="http://www.lydsnm.top/2016/10/08/简单明了搞定iOS10推送适配/index.html">
+<meta property="og:site_name" content="lydsnm">
+<meta property="og:description" content="iOS 10 更新了后发现正式环境, 推送粗问题了.查了相关资料后, 整理了一下解决办法. iOS 10后, 增加了UNUserNotificationCenter, 并且推送通知的处理要在代理方法
+
+userNotificationCenter:didReceiveNotificationResponse 推送时 APP 在后台
+
+userNotificationCenter:willPrese">
+<meta property="og:updated_time" content="2016-10-18T15:21:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简单明了搞定 iOS 10推送适配">
+<meta name="twitter:description" content="iOS 10 更新了后发现正式环境, 推送粗问题了.查了相关资料后, 整理了一下解决办法. iOS 10后, 增加了UNUserNotificationCenter, 并且推送通知的处理要在代理方法
+
+userNotificationCenter:didReceiveNotificationResponse 推送时 APP 在后台
+
+userNotificationCenter:willPrese">
+    
+
+    
+        <link rel="alternate" href="/" title="lydsnm" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">...多做多说...</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/iOS/">iOS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/工具/">工具</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/开发/">开发</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/生活/">生活</a></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/iOS/">iOS</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-简单明了搞定iOS10推送适配" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        简单明了搞定 iOS 10推送适配
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2016/10/08/简单明了搞定iOS10推送适配/" class="article-date">
+            <time datetime="2016-10-07T16:00:00.000Z" itemprop="datePublished">2016-10-08</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/iOS10适配/">iOS10适配</a>, <a class="tag-link" href="/tags/推送/">推送</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>iOS 10 更新了后发现正式环境, 推送粗问题了.查了相关资料后, 整理了一下解决办法. iOS 10后, 增加了<font color="#1E90FF">UNUserNotificationCenter</font>, 并且推送通知的处理要在代理方法</p>
+<ul>
+<li><p><font color="#A52A2A">userNotificationCenter:didReceiveNotificationResponse</font> 推送时 APP 在后台</p>
+</li>
+<li><p><font color="#A52A2A">userNotificationCenter:willPresentNotification</font> 推送时 APP 在前台</p>
+</li>
+</ul>
+<a id="more"></a>
+<p><br></p>
+<h4 id="1-导入头文件"><a href="#1-导入头文件" class="headerlink" title="1. 导入头文件"></a>1. 导入头文件</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">&lt;UserNotifications/UserNotifications.h&gt;</span></span></div></pre></td></tr></table></figure>
+<h4 id="2-遵守协议"><a href="#2-遵守协议" class="headerlink" title="2. 遵守协议"></a>2. 遵守协议</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">AppDelegate</span> ()&lt;<span class="title">UNUserNotificationCenterDelegate</span>&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<h4 id="3-在application-didFinishLaunchingWithOptions方法中注册推送。"><a href="#3-在application-didFinishLaunchingWithOptions方法中注册推送。" class="headerlink" title="3. 在application: didFinishLaunchingWithOptions方法中注册推送。"></a>3. 在<font color="#1E90FF">application: didFinishLaunchingWithOptions</font>方法中注册推送。</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (kiOS10Later) &#123;  <span class="comment">//iOS10 之后用UNUserNotificationCenter注册通知</span></div><div class="line">        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];</div><div class="line">        center.delegate = <span class="keyword">self</span>;</div><div class="line">        [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(<span class="built_in">BOOL</span> granted, <span class="built_in">NSError</span> * _Nullable error) &#123;</div><div class="line">            <span class="keyword">if</span> (!error) &#123;</div><div class="line">                [[<span class="built_in">UIApplication</span> sharedApplication] registerForRemoteNotifications];</div><div class="line">                <span class="built_in">NSLog</span>(<span class="string">@"OK!"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;];</div><div class="line">    &#125;<span class="keyword">else</span>&#123; <span class="comment">//iOS10 之前的注册通知</span></div><div class="line">        <span class="keyword">if</span> ([[<span class="built_in">UIApplication</span> sharedApplication] respondsToSelector:<span class="keyword">@selector</span>(registerUserNotificationSettings:)]) &#123;</div><div class="line">        <span class="built_in">UIUserNotificationSettings</span> *settings = [<span class="built_in">UIUserNotificationSettings</span> settingsForTypes:(<span class="built_in">UIUserNotificationTypeBadge</span> |<span class="built_in">UIUserNotificationTypeSound</span> |<span class="built_in">UIUserNotificationTypeAlert</span>)</div><div class="line">                                                                                 categories:<span class="literal">nil</span>];</div><div class="line">        [[<span class="built_in">UIApplication</span> sharedApplication] registerUserNotificationSettings:settings];</div><div class="line">        [[<span class="built_in">UIApplication</span> sharedApplication] registerForRemoteNotifications];</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h4 id="4-APP-未启动-iOS10中遗弃UIApplicationLaunchOptionsRemoteNotificationKey-采用统一的方式来处理-见下一条"><a href="#4-APP-未启动-iOS10中遗弃UIApplicationLaunchOptionsRemoteNotificationKey-采用统一的方式来处理-见下一条" class="headerlink" title="4. APP 未启动, iOS10中遗弃UIApplicationLaunchOptionsRemoteNotificationKey,采用统一的方式来处理, 见下一条."></a>4. APP 未启动, iOS10中遗弃<font color="#1E90FF">UIApplicationLaunchOptionsRemoteNotificationKey</font>,采用统一的方式来处理, 见下一条.</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// application: didFinishLaunchingWithOptions 中 iOS 9及以下,还是要保留以下代码</span></div><div class="line"> <span class="built_in">NSDictionary</span> *remoteUserInfo = launchOptions[<span class="built_in">UIApplicationLaunchOptionsRemoteNotificationKey</span>];  </div><div class="line">    <span class="keyword">if</span> (remoteUserInfo) &#123;  </div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"remoteUserInfo:%@"</span>,remoteUserInfo);  </div><div class="line">        <span class="comment">//APP未启动，点击推送消息，iOS10下还是跟以前一样在此获取  </span></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h4 id="5-实现接收推送消息的回调方法"><a href="#5-实现接收推送消息的回调方法" class="headerlink" title="5. 实现接收推送消息的回调方法"></a>5. 实现接收推送消息的回调方法</h4><p>iOS10之前使用<font color="#1E90FF">application: didReceiveRemoteNotification</font> 来进行回调处理，而在iOS10里则要实现用<font color="1E90FF">UNUserNotificationCenterDelegate</font>的两个代理方法： </p>
+<blockquote>
+<ul>
+<li><font color="#A52A2A">userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification</font></li>
+<li><font color="#A52A2A">userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse</font>
+
+</li>
+</ul>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//iOS10之前 接收推送消息</span></div><div class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didReceiveRemoteNotification:(<span class="built_in">NSDictionary</span> *)userInfo fetchCompletionHandler:(<span class="keyword">void</span> (^)(<span class="built_in">UIBackgroundFetchResult</span>))completionHandler &#123;</div><div class="line">    Log(<span class="string">@"userInfo: %@"</span>, userInfo);</div><div class="line">    <span class="keyword">if</span> ( application.applicationState == <span class="built_in">UIApplicationStateActive</span>) &#123;<span class="comment">// 程序在运行过程中受到推送通知</span></div><div class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">//在background状态受到推送通知</span></div><div class="line">    </div><div class="line">    &#125;</div><div class="line">    completionHandler(<span class="built_in">UIBackgroundFetchResultNewData</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// iOS 10之后 后台推送消息接收</span></div><div class="line">- (<span class="keyword">void</span>)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(<span class="keyword">void</span> (^)())completionHandler&#123;</div><div class="line">    <span class="built_in">NSDictionary</span> *userInfo = response.notification.request.content.userInfo;</div><div class="line">    <span class="comment">// TO DO</span></div><div class="line">    </div><div class="line">    completionHandler(<span class="built_in">UIBackgroundFetchResultNewData</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// iOS 10之后 前台推送消息处理.</span></div><div class="line">- (<span class="keyword">void</span>)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(<span class="keyword">nonnull</span> UNNotification *)notification withCompletionHandler:(<span class="keyword">nonnull</span> <span class="keyword">void</span> (^)(UNNotificationPresentationOptions))completionHandler&#123;</div><div class="line">    DLog(<span class="string">@"iOS 10 Receive Remote Notification in foreground! [willPresentNotification]"</span>);</div><div class="line">    <span class="comment">// 可在APP 前台状态下,弹出推送弹窗</span></div><div class="line">    completionHandler(UNNotificationPresentationOptionAlert);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="6-而对于本地推送回调-和以前没有变化"><a href="#6-而对于本地推送回调-和以前没有变化" class="headerlink" title="6. 而对于本地推送回调, 和以前没有变化:"></a>6. 而对于本地推送回调, 和以前没有变化:</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-(<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didReceiveLocalNotification:(<span class="built_in">UILocalNotification</span> *)notification&#123;</div><div class="line">  <span class="comment">// TO DO</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><br></p>
+<h4 id="7-其他问题"><a href="#7-其他问题" class="headerlink" title="7. 其他问题"></a>7. 其他问题</h4><ul>
+<li>对于<font color="#1E90FF">Xcode 8</font>, 默认生成的<font color="#1E90FF">XXX.entitlements</font>中的<font color="#1E90FF">APS Enviroment</font> 发布时,可以不用从development 改成 production. Xcode 在发布时会自动帮我们处理改好.</li>
+</ul>
+<ul>
+<li>推送开关记得要打开;capabilities 里面<font color="#1E90FF">Background Modes–&gt;remote notification&amp;push notification</font></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://www.lydsnm.top/2016/10/08/简单明了搞定iOS10推送适配/" data-id="cj3bl3fqp002j2nit0xhlwlp1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="/" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google-plus" href="/" target="_blank">
+                        <i class="icon fa fa-google-plus"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/ppoffice/hexo-theme-hueman" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="/" target="_blank">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/10/18/本地推送之定时推送/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            本地推送之定时推送
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2016/09/20/[OC]Objective-C深入记录 (二)/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">OC 深入记录 (二)</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/05/30/Slice一个小而精简的Mac计时软件，拖延症神器，倒计时小工具/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ocs32tleq.bkt.clouddn.com/14961482427792.jpg)" alt="Slice 一个小而精简的Mac计时软件. 拖延症神器.倒计时小工具" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/工具/">工具</a></p>
+                            <p class="item-title"><a href="/2017/05/30/Slice一个小而精简的Mac计时软件，拖延症神器，倒计时小工具/" class="title">Slice 一个小而精简的Mac计时软件. 拖延症神器.倒计时小工具</a></p>
+                            <p class="item-date"><time datetime="2017-05-29T16:00:00.000Z" itemprop="datePublished">2017-05-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/04/20/iOS实现实时通信或推送的常用策略/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/iOS/">iOS</a></p>
+                            <p class="item-title"><a href="/2017/04/20/iOS实现实时通信或推送的常用策略/" class="title">iOS实现实时通信或推送的常用策略</a></p>
+                            <p class="item-date"><time datetime="2017-04-19T16:00:00.000Z" itemprop="datePublished">2017-04-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/02/06/实现自定义UIWebView 的UIMenuController选项/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/iOS/">iOS</a></p>
+                            <p class="item-title"><a href="/2017/02/06/实现自定义UIWebView 的UIMenuController选项/" class="title">实现自定义UIWebView 的UIMenuController选项</a></p>
+                            <p class="item-date"><time datetime="2017-02-05T16:00:00.000Z" itemprop="datePublished">2017-02-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/10/20/[OC]Objective-C深入记录 (四)/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/iOS/">iOS</a></p>
+                            <p class="item-title"><a href="/2016/10/20/[OC]Objective-C深入记录 (四)/" class="title">OC 深入记录 (四)</a></p>
+                            <p class="item-date"><time datetime="2016-10-19T16:00:00.000Z" itemprop="datePublished">2016-10-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/10/19/[OC]Objective-C深入记录 (三)/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ocs32tleq.bkt.clouddn.com/blockMemory.png)" alt="OC 深入记录 (三)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/iOS/">iOS</a></p>
+                            <p class="item-title"><a href="/2016/10/19/[OC]Objective-C深入记录 (三)/" class="title">OC 深入记录 (三)</a></p>
+                            <p class="item-date"><time datetime="2016-10-18T16:00:00.000Z" itemprop="datePublished">2016-10-19</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><span class="category-list-count">26</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开发/">开发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/runtime-运行时/" style="font-size: 10px;">-runtime -运行时</a> <a href="/tags/GCD/" style="font-size: 10px;">GCD</a> <a href="/tags/GCD-同步异步/" style="font-size: 10px;">GCD 同步异步</a> <a href="/tags/OC/" style="font-size: 15px;">OC</a> <a href="/tags/Photos/" style="font-size: 10px;">Photos</a> <a href="/tags/Swift/" style="font-size: 20px;">Swift</a> <a href="/tags/UIButton/" style="font-size: 10px;">UIButton</a> <a href="/tags/UITextView-UITextField/" style="font-size: 10px;">UITextView UITextField</a> <a href="/tags/cocoaPods/" style="font-size: 10px;">cocoaPods</a> <a href="/tags/coredata/" style="font-size: 10px;">coredata</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/iOS10适配/" style="font-size: 10px;">iOS10适配</a> <a href="/tags/mvp-mvvm/" style="font-size: 10px;">mvp mvvm</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/up/" style="font-size: 10px;">up</a> <a href="/tags/动画/" style="font-size: 10px;">动画</a> <a href="/tags/定时推送/" style="font-size: 10px;">定时推送</a> <a href="/tags/推送/" style="font-size: 10px;">推送</a> <a href="/tags/本地推送/" style="font-size: 10px;">本地推送</a> <a href="/tags/计划/" style="font-size: 10px;">计划</a> <a href="/tags/许可证-开源/" style="font-size: 10px;">许可证, 开源</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源-干货/" style="font-size: 10px;">资源 干货</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 lydsnm</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://www.lydsnm.top/2016/10/08/简单明了搞定iOS10推送适配/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
