@@ -3,6 +3,7 @@
 
 
     
+    
   <url>
     <loc>http://www.lydsnm.top/2017/05/30/Slice%E4%B8%80%E4%B8%AA%E5%B0%8F%E8%80%8C%E7%B2%BE%E7%AE%80%E7%9A%84Mac%E8%AE%A1%E6%97%B6%E8%BD%AF%E4%BB%B6%EF%BC%8C%E6%8B%96%E5%BB%B6%E7%97%87%E7%A5%9E%E5%99%A8%EF%BC%8C%E5%80%92%E8%AE%A1%E6%97%B6%E5%B0%8F%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2018-01-02T13:49:58.000Z</lastmod>
@@ -50,86 +51,6 @@
         <display>
         <title>简单整理Swift与Objective-C的一些不同</title>
         <pubTime>2016-08-22T16:00:00.000Z</pubTime>
-        
-        <tag>Swift</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="http://www.lydsnm.top/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.lydsnm.top/2016/08/09/Swift%20%E8%AE%B0%E5%BD%9504%20start%20building%20UI/</loc>
-    <lastmod>2018-01-02T13:49:05.000Z</lastmod>
-    <data>
-        <display>
-        <title>Swift 记录04 start building UI</title>
-        <pubTime>2016-08-08T16:00:00.000Z</pubTime>
-        
-        <tag>Swift</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="http://www.lydsnm.top/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.lydsnm.top/2016/08/08/Swift%E5%9F%BA%E7%A1%80%E8%AE%B0%E5%BD%9503%20%E6%9E%9A%E4%B8%BE%E7%BB%93%E6%9E%84%E4%BD%93%E5%8D%8F%E8%AE%AE/</loc>
-    <lastmod>2018-01-02T13:48:55.000Z</lastmod>
-    <data>
-        <display>
-        <title>Swift 基础记录 03 [枚举&结构体&协议]</title>
-        <pubTime>2016-08-07T16:00:00.000Z</pubTime>
-        
-        <tag>Swift</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="http://www.lydsnm.top/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.lydsnm.top/2016/08/07/Swift%E5%9F%BA%E7%A1%80%E8%AE%B0%E5%BD%9502%20%E5%8A%9F%E8%83%BD%E5%92%8C%E6%96%B9%E6%B3%95/</loc>
-    <lastmod>2018-01-02T13:48:46.000Z</lastmod>
-    <data>
-        <display>
-        <title>Swift 基础记录 02 [函数和方法 类&初始化]</title>
-        <pubTime>2016-08-06T16:00:00.000Z</pubTime>
-        
-        <tag>Swift</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="http://www.lydsnm.top/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.lydsnm.top/2016/08/07/Swift%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B001%20%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%8E%A7%E5%88%B6%E6%B5%81/</loc>
-    <lastmod>2018-01-02T13:48:36.000Z</lastmod>
-    <data>
-        <display>
-        <title>Swift 基础记录 01 [基础类型和控制流]</title>
-        <pubTime>2016-08-06T16:00:00.000Z</pubTime>
         
         <tag>Swift</tag>
          
@@ -328,26 +249,6 @@
         <pubTime>2015-11-06T16:00:00.000Z</pubTime>
         
         <tag>动画</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="http://www.lydsnm.top/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.lydsnm.top/2015/11/06/iOS%E4%B8%89%E6%96%B9%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/</loc>
-    <lastmod>2016-11-20T02:37:12.000Z</lastmod>
-    <data>
-        <display>
-        <title>iOS三方轮子整理</title>
-        <pubTime>2015-11-05T16:00:00.000Z</pubTime>
-        
-        <tag>资源 干货</tag>
          
          
            
@@ -565,26 +466,6 @@
     </url>
 
     
-    
-  <url>
-    <loc>http://www.lydsnm.top/2015/10/25/UIButton%E4%B8%8A%E5%9B%BE%E4%B8%8B%E6%96%87%E5%B1%85%E4%B8%AD%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F/</loc>
-    <lastmod>2016-05-14T15:51:17.000Z</lastmod>
-    <data>
-        <display>
-        <title>UIButton上图下文居中对齐方式</title>
-        <pubTime>2015-10-24T16:00:00.000Z</pubTime>
-        
-        <tag>UIButton</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="http://www.lydsnm.top/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
   <url>
     <loc>http://www.lydsnm.top/2016/03/25/%E6%88%91%E7%9A%84mvp_mvvm%E7%90%86%E8%A7%A3/</loc>
