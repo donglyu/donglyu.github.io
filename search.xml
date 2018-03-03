@@ -1170,26 +1170,22 @@
     </entry>
     
     <entry>
-      <title><![CDATA[4种延时方法]]></title>
+      <title><![CDATA[Objective 4种延时方法简单记录]]></title>
       <url>http://www.lydsnm.top/2015/10/09/%E5%9B%9B%E7%A7%8D%E5%BB%B6%E6%97%B6%E6%89%A7%E8%A1%8C%E6%9F%90%E5%87%BD%E6%95%B0%E7%9A%84%E6%96%B9%E6%B3%95%E5%8F%8A%E5%85%B6%E4%B8%80%E4%BA%9B%E5%8C%BA%E5%88%AB/</url>
-      <content type="html"><![CDATA[<p>列举了四种延时执行某函数的方法及其一些区别。<br>假如延时1秒时间执行下面的方法。</p>
+      <content type="html"><![CDATA[<p>作为备忘列举了四种延时执行某函数的方法及其一些区别。<br>假如延时1秒时间执行下面的方法。</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)delayMethod &#123; <span class="built_in">NSLog</span>(<span class="string">@"execute"</span>); &#125;</span><br></pre></td></tr></table></figure>
-<p>1.performSelector方法</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">self</span> performSelector:<span class="keyword">@selector</span>(delayMethod) withObject:<span class="literal">nil</span> afterDelay:<span class="number">1.0</span>f];</span><br></pre></td></tr></table></figure>
+<h5 id="1-performSelector方法"><a href="#1-performSelector方法" class="headerlink" title="1.performSelector方法"></a>1.<code>performSelector</code>方法</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">self</span> performSelector:<span class="keyword">@selector</span>(delayMethod) withObject:<span class="literal">nil</span> afterDelay:<span class="number">1.0</span>f];</span><br></pre></td></tr></table></figure>
 <p>此方式要求必须在主线程中执行，否则无效。</p>
 <p>是一种非阻塞的执行方式，</p>
-<p>2.定时器:NSTimer</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="built_in">NSTimer</span> scheduledTimerWithTimeInterval:<span class="number">1.0</span>f target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(delayMethod) userInfo:<span class="literal">nil</span> repeats:<span class="literal">NO</span>];</span><br></pre></td></tr></table></figure>
+<h5 id="2-定时器-NSTimer"><a href="#2-定时器-NSTimer" class="headerlink" title="2.定时器:NSTimer"></a>2.定时器:<code>NSTimer</code></h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="built_in">NSTimer</span> scheduledTimerWithTimeInterval:<span class="number">1.0</span>f target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(delayMethod) userInfo:<span class="literal">nil</span> repeats:<span class="literal">NO</span>];</span><br></pre></td></tr></table></figure>
 <p>此方式要求必须在主线程中执行，否则无效。</p>
 <p>是一种非阻塞的执行方式，</p>
 <p>可以通过NSTimer类的- (void)invalidate;取消执行。</p>
-<p>3.sleep方式</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">1.0</span>f]; </span><br><span class="line">[<span class="keyword">self</span> delayMethod];</span><br></pre></td></tr></table></figure>
+<h5 id="3-sleep方式"><a href="#3-sleep方式" class="headerlink" title="3.sleep方式"></a>3.<code>sleep</code>方式</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">1.0</span>f]; </span><br><span class="line">[<span class="keyword">self</span> delayMethod];</span><br></pre></td></tr></table></figure>
 <p>此方式在主线程和子线程中均可执行。</p>
 <p>是一种阻塞的执行方式，建方放到子线程中，以免卡住界面</p>
 <p>没有找到取消执行的方法。</p>
-<p>4.GCD方式</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> delayInSeconds = <span class="number">1.0</span>; </span><br><span class="line"> __block ViewController* bself = <span class="keyword">self</span>; </span><br><span class="line"> dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * <span class="built_in">NSEC_PER_SEC</span>));</span><br><span class="line">dispatch_after(popTime, dispatch_get_main_queue(), ^(<span class="keyword">void</span>)&#123; </span><br><span class="line"> [bself delayMethod]; &#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="4-GCD方式"><a href="#4-GCD方式" class="headerlink" title="4.GCD方式"></a>4.GCD方式</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> delayInSeconds = <span class="number">1.0</span>; </span><br><span class="line"> __block ViewController* bself = <span class="keyword">self</span>; </span><br><span class="line"> dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * <span class="built_in">NSEC_PER_SEC</span>));</span><br><span class="line">dispatch_after(popTime, dispatch_get_main_queue(), ^(<span class="keyword">void</span>)&#123; </span><br><span class="line"> [bself delayMethod]; &#125;);</span><br></pre></td></tr></table></figure>
 <p>此方式在可以在参数中选择执行的线程。</p>
 <p>是一种非阻塞的执行方式，</p>
 <p>没有找到取消执行的方法。</p>
