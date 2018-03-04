@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> OC开发相关注意事项 · lydsnm</title><meta name="description" content="OC开发相关注意事项 - lydsnm"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://www.lydsnm.top/atom.xml" title="lydsnm"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://life.lydsnm.top" target="_blank" class="nav-list-link">LYDSNM'S LIFE</a></li><li class="nav-list-item"><a href="https://weibo.com/u/2453162147" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/donglyu" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">OC开发相关注意事项</h1><div class="post-info">2016年8月24日</div><div class="post-content"><h2 id="一些基本信息"><a href="#一些基本信息" class="headerlink" title="一些基本信息"></a>一些基本信息</h2><h3 id="1-内存相关"><a href="#1-内存相关" class="headerlink" title="1. 内存相关"></a>1. 内存相关</h3><p>分配在堆中的内存必须直接管理, 而分配在栈中的用于保存变量的内存则会在其栈弹出时自动清理.<br>    Objective-C将堆内存管理抽象出来了. 不需要用malloc及free来分配或释放对象所占内存. Objective-C运行期环境把这部分工作抽象为一套内存管理框架-“引用计数”</p>
+<p>在OC中, 有时会遇到定义里不含*的变量, 可能会使用<code>栈空间</code>. 这些变量所保存的不是Objective-C对象, 比如CoreGraphics中的CGRect.</p>
+<hr>
+<h3 id="2-在类的头文件中尽量少引入其他头文件"><a href="#2-在类的头文件中尽量少引入其他头文件" class="headerlink" title="2. 在类的头文件中尽量少引入其他头文件"></a>2. 在类的头文件中尽量少引入其他头文件</h3><p>而是采用向前声明(forward declaring)<br>减少类的使用者, 所需引入的头文件数量,减少编译时间.<br>也能解决两个类互相引用的问题</p>
+<a id="more"></a>
+<hr>
+<h3 id="3-多用字面量语法-少用与之等价的方法"><a href="#3-多用字面量语法-少用与之等价的方法" class="headerlink" title="3. 多用字面量语法, 少用与之等价的方法"></a>3. 多用字面量语法, 少用与之等价的方法</h3><p>字面量语法,比如:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *something = <span class="string">@"Effective Objective-C 2.0"</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//字面数值</span></span><br><span class="line"><span class="built_in">NSNumber</span> *someNumber = [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">1</span>]; -&gt; <span class="built_in">NSNUmber</span> *someNumber = @<span class="number">1</span>;</span><br><span class="line"><span class="comment">//字面量数组</span></span><br><span class="line"><span class="built_in">NSArray</span> *animals = @[<span class="string">@"cat"</span>, <span class="string">@"dog"</span>];<span class="comment">// 数组中若有nil会 抛出异常.</span></span><br><span class="line"><span class="comment">//字面量字典</span></span><br><span class="line"><span class="built_in">NSDictionary</span> *personData = @&#123;</span><br><span class="line"><span class="string">@"firstName"</span> : <span class="string">@"Matt"</span>,</span><br><span class="line"><span class="string">@"lastName"</span> : <span class="string">@"za"</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//可变数组</span></span><br><span class="line">mutableArray[<span class="number">1</span>] = <span class="string">@"dog"</span>;<span class="comment">// 尽量通过下标操作来访问数组, 或者字典中的所对应的元素.</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="4-多用类型常量-少用-define-预处理指令"><a href="#4-多用类型常量-少用-define-预处理指令" class="headerlink" title="4. 多用类型常量, 少用#define 预处理指令"></a>4. 多用类型常量, 少用#define 预处理指令</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">NSTimeInterval</span> kAnimationDuration = <span class="number">0.3</span>;</span><br></pre></td></tr></table></figure>
+<p>命名, 若常量局限于某”编译单元”(也就是实现文件中, implementation中),则在前面加字母k; 若常量在类之外可见, 则通常以类名为前缀.<br>尽量不要在头文件中声明预处理指令或定义常量 static const.</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">AnimatedView</span>: <span class="title">UIView</span></span></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">NSTimeInterval</span> kAnimationDuration = <span class="number">0.3</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">AnimatedView</span></span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="comment">// static修饰意味着, 该变量仅局限于此变量的编译单元(在OC语境下, 一般通常指每个类的实现文件(.m))中.</span></span><br><span class="line">如不加<span class="keyword">static</span>, 在另一.m文件中也声明了同名变量, 会抛出常见的duplicate_symbol错误</span><br></pre></td></tr></table></figure>
+<p>实际上, 如果一个变量既声明为static, 有声明为const, 那么编译器根本不会创建符号, 而是想#define预处理指令一样, 把所有遇到的变量都替换成常值. 不过这种方式定义的常量是带有类型信息的, 这点也相当关键.</p>
+<ul>
+<li>通知, 发送者和接受者都需要个外界可见的常量变量(即通知的名称).</li>
+</ul>
+<p>这时,此类变量需放在”全局符号表”(global symbol table)中, 以便可以在定义该变量的编译单元之外使用.</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// In the header file</span></span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> *<span class="keyword">const</span> EOCStringConstant;</span><br><span class="line"></span><br><span class="line"><span class="comment">// In the implementation file</span></span><br><span class="line"><span class="built_in">NSString</span> *<span class="keyword">const</span> EOCStringConstant = <span class="string">@"VALUENOTIFICATION"</span>;</span><br></pre></td></tr></table></figure>
+<p>常量定义从右至左解读,这里是”一个常量, 而这个常量是个指针, 指向一个NSString对象”<br>这里面的命名要注意谨慎, 避免名称冲突, 最好用与值相关的类名做前缀.</p>
+<h3 id="5-用枚举表示状态、选项、状态码"><a href="#5-用枚举表示状态、选项、状态码" class="headerlink" title="5. 用枚举表示状态、选项、状态码"></a>5. 用枚举表示状态、选项、状态码</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> EOCConnectionStateConnectionState&#123;</span><br><span class="line">	EOCConnectionStateDisconnected = <span class="number">1</span>,</span><br><span class="line">	EOCConnectionStateConnecting,</span><br><span class="line">	EOCConnectionStateConnected,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>定义可以彼此组合的枚举. 定义的对后, 各选项之间就可通过”按位或操作符”(bitwise OR operator)来组合.</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="built_in">UIViewAutoresizing</span> &#123;</span><br><span class="line">	<span class="built_in">UIViewAutoresizingNone</span>						= <span class="number">0</span>,</span><br><span class="line">	<span class="built_in">UIViewAutoresizingFlexbleLeftMargin</span>		= <span class="number">1</span> &lt;&lt; <span class="number">0</span>,</span><br><span class="line">	<span class="built_in">UIViewAutoresizingFlexbleWidth</span>				= <span class="number">1</span> &lt;&lt; <span class="number">1</span>,</span><br><span class="line">	<span class="built_in">UIViewAutoresizingFlexbleRighMargin</span> 		= <span class="number">1</span> &lt;&lt; <span class="number">2</span>,</span><br><span class="line">	.....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在处理枚举类型的switch语句中不要实现default分支. 这样的话, 加入新枚举之后, 编译器就会提示开发者. switch语句并未处理所有枚举.</li>
+</ul>
+<hr>
+<h2 id="对象、消息、运行期"><a href="#对象、消息、运行期" class="headerlink" title="对象、消息、运行期"></a>对象、消息、运行期</h2><h3 id="6-理解属性这一概念"><a href="#6-理解属性这一概念" class="headerlink" title="6.理解属性这一概念"></a>6.理解属性这一概念</h3><p>属性用来通过存取放方法来访问实例变量, 是OC提供的一个简洁方便管理的抽象机制. @property语法. 如果用了这些属性了, 编译器会自动编写访问这些属性所需的方法, 次过程叫”自动合成”(autosynthesis),并添加对应的实例变量. 也可以在类的实现代码里通过<code>@synthesize</code>语法来指定实例变量的名字</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@implementaion EOCPerson</span><br><span class="line"><span class="keyword">@synthesize</span> fireName = _myFirstname;</span><br><span class="line"><span class="keyword">@synthesize</span> lastName = _myLastName;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>可通过<code>@dynamic</code>关键字来告诉编译器不要自动创建实现属性所用的实例变量和存取方法.</p>
+<p>修饰属性的特质关键字</p>
+<ul>
+<li>weak 表明定义了一种”非拥有关系”. 为这种属性设置新值时, 设置方法既不保留新值, 也不释放旧值. 当属性所指的对象遭到销毁时, 属性值也会清空(nil).</li>
+<li>unsafe_unretained 该特质的语义表达一种”非拥有关系”, 当目标对象遭到销毁时, 属性值不会自动清空(unsafe), 这一点和weak不同.</li>
+<li>在iOS程序是, 应用nonatomic属性, 避免影响性能</li>
+</ul>
+<p><br></p>
+<hr>
+<h3 id="7-在对对象内部尽量直接访问实例变量"><a href="#7-在对对象内部尽量直接访问实例变量" class="headerlink" title="7. 在对对象内部尽量直接访问实例变量"></a>7. 在对对象内部尽量直接访问实例变量</h3><p>直接访问实例变量, 速度会快一点, 但是对一个声明的copy的属性, 那么并不会拷贝该属性, 只会保留新值并释放旧值. 也不能触发”键值观察”(KVO), 一般比较折中的方式是写入实例变量时, 通过其”设置方法”来做, 而在读取实例变量是, 则直接访问.<br>注意的地方:<br>在初始化方法中应该如何设置属性值, 这种情况总是应该直接访问实例变量, 因为子类可能overide重写了设置方法.</p>
+<p>对于懒加载或者说惰性初始化(lazy initialization)来说,就必须通过存取方法来访问属性.</p>
+<p><br></p>
+<hr>
+<h3 id="8-理解”对象等同性”"><a href="#8-理解”对象等同性”" class="headerlink" title="8. 理解”对象等同性”"></a>8. 理解”对象等同性”</h3><p>有时,按照==操作符比较出来的结果未必是我们想要的, 该操作比较的是两个指针本身, 而不是所指的对象. 应该使用NSObject协议中声明的<code>isEqual</code><br>NSObject协议中有两个用于判断等同性的关键方法:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)isEqual:(<span class="keyword">id</span>)object;</span><br><span class="line">- (<span class="built_in">NSUInteger</span>)hash;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>若想检测对象的等同性, 请提供<code>isEqual:</code>与<code>hash</code>方法.</p>
+</li>
+<li><p>相同的对象必须具有相同的哈希码, 但两个哈希码相同的对象却未必相同.</p>
+</li>
+<li><p>编写hash方法时, 应该使用计算速度快而且哈希码碰撞几率低的算法.</p>
+</li>
+</ul>
+<p><br></p>
+<hr>
+<h3 id="9-以”类族模式”隐藏实现细节"><a href="#9-以”类族模式”隐藏实现细节" class="headerlink" title="9.以”类族模式”隐藏实现细节."></a>9.以”类族模式”隐藏实现细节.</h3><p>类方法(也叫类别方法)<br>类族模式可以把实现细节隐藏在一套简单的公共接口后面.</p>
+<p>系统框架中经常使用类族(NSArray)</p>
+<p><br></p>
+<hr>
+<h3 id="11-理解objc-msgSend的作用"><a href="#11-理解objc-msgSend的作用" class="headerlink" title="11. 理解objc_msgSend的作用"></a>11. 理解objc_msgSend的作用</h3><p>传递消息, C语言使用静态绑定(static binding), 在编译期内就能决定运行时所应调用的函数.函数地址实际上是硬编码在指令之中的.</p>
+<p>so 对应的有动态绑定, 在OC中, 如果向某对象传递消息, 那就会使用动态绑定机制来决定需要调用的方法.</p>
+<ul>
+<li>给某对象”发送消息”(invoke a message)也就相当于在该对象上”调用方法”(call a method)</li>
+<li>发给某对象的全部消息都要由”动态消息派发系统”(dynamic message dispatch system)来处理, 该系统会查处对应的方法, 并执行其代码.</li>
+</ul>
+<p><br></p>
+<hr>
+<h3 id="12-理解消息转发机制"><a href="#12-理解消息转发机制" class="headerlink" title="12. 理解消息转发机制"></a>12. 理解消息转发机制</h3><ul>
+<li>若对象无法响应某个选择子, 则进入消息转发流程.</li>
+<li>通过运行期的动态方法解析功能, 我们可以在需要用到某个方法时再讲其加入类中.</li>
+<li>对象可以把其无法解读的某些选择子转交给其他对象来处理.</li>
+<li>经过上述两步后, 如果还是没有办法处理选择子, 那就启动完整的消息转发机制.</li>
+</ul>
+<p><br></p>
+<hr>
+<h3 id="14-理解”类对象”的用意"><a href="#14-理解”类对象”的用意" class="headerlink" title="14. 理解”类对象”的用意"></a>14. 理解”类对象”的用意</h3><p>OC 有个特殊类型 <font color="#00fffff">id</font> 指代任意的 OC 对象类型. 一般情况下,消息转发给了 此 id 的对象, 但不知其具体类型是否能响应. 我们知道如果向某明确类型发送了无法解读的消息, 那么就会产生警告信息, 而 <font color="#00fffff">id</font>类型让编译器假定其能响应所有消息, 留待后续”在运行期检视对象类型”,看是否能够响应其方法.</p>
+<ul>
+<li>每个实例都有一个指向 Class 对象的指针, 用以表明其类型, 而这些 Class 对象则构成了类的继承体系.</li>
+<li>如果对象类型无法在编译期确定,那么久应该实用类型信息查询方法来判断 <code>isKindOfClass</code>…</li>
+<li>尽量实用类型信息查询方法来确定对象类型, 而不要直接比较类对象, 因为某些对象可能实现了消息转发功能.</li>
+</ul>
+<hr>
+<p><br></p>
+<p>本篇文章参考摘自 <font color="#B8860B">Effective Objective-C 2.0 编写高质量 iOS 与 OS X 代码的52个有效方法</font></p>
+</div></article></div></main><footer><div class="paginator"><a href="/2016/09/20/OC开发相关注意事项二/" class="prev">PREV</a><a href="/2016/08/23/阶段总结/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="http://www.lydsnm.top">lydsnm</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>

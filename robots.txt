@@ -5,5 +5,5 @@ Allow: /archives/
 Disallow: /js/
 Disallow: /css/
 Disallow: /lib/
-Sitemap: http://www.lydsnm.top/sitemap.xml
-Sitemap: http://www.lydsnm.top/baidusitemap.xml
+Sitemap: http://www.donglyu.com/sitemap.xml
+Sitemap: http://http://www.donglyu.com/baidusitemap.xml

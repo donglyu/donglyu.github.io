@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> OC开发相关注意事项二 · lydsnm</title><meta name="description" content="OC开发相关注意事项二 - lydsnm"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://www.lydsnm.top/atom.xml" title="lydsnm"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://life.lydsnm.top" target="_blank" class="nav-list-link">LYDSNM'S LIFE</a></li><li class="nav-list-item"><a href="https://weibo.com/u/2453162147" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/donglyu" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">OC开发相关注意事项二</h1><div class="post-info">2016年9月20日</div><div class="post-content"><h2 id="接口与-API-设计"><a href="#接口与-API-设计" class="headerlink" title="接口与 API 设计"></a>接口与 API 设计</h2><p>我们在构建应用程序编写接口应考虑将其设计成易于复用的形式, 方便后续项目复用或其他模块使用. 这就需要遵守一定的编程范式, 遵守一些约定俗成的”规则”.</p>
+<h3 id="1-用前缀避免命名空间冲突"><a href="#1-用前缀避免命名空间冲突" class="headerlink" title="1. 用前缀避免命名空间冲突"></a>1. 用前缀避免命名空间冲突</h3><p>OC 没有其他语言内置的命名空间机制. 因此在命名时设法避免潜在的命名冲突, 否则容易就重名.否则会出现类似错误:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">duplicate symbol _OBJC_METACLASS_$_EOCTHECLASS <span class="keyword">in</span>:</span><br><span class="line">build/something.o</span><br><span class="line">build/something_else.o</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>苹果宣称其保留使用所有”两字母前缀”(two-letter prefix)的权利,因此我们的命名前缀最好避免使用两个字母当前缀.</p>
+<a id="more"></a>
+<hr>
+<h3 id="2-提供”全能初始方法”"><a href="#2-提供”全能初始方法”" class="headerlink" title="2. 提供”全能初始方法”"></a>2. 提供”全能初始方法”</h3><ul>
+<li>在类中提供一个全能初始化方法, 并于文档中指名. 其他初始化方法均应调用此方法.</li>
+<li>若全能初始化方法与超类不同, 则需要覆写超类中的对应方法.</li>
+<li>如果超类的初始化方法不适用于之类, 那么应该覆写这个超类方法, 并在其中抛出异常.</li>
+</ul>
+<hr>
+<h3 id="3-实现-description-方法"><a href="#3-实现-description-方法" class="headerlink" title="3. 实现 description 方法"></a>3. 实现 description 方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSLog(@&quot;object = %@&quot;, object);</span><br></pre></td></tr></table></figure>
+<p>实现 object 的 description 方法, 打印 object 中用户关心的信息.</p>
+<ul>
+<li>若想在调试时打印更详尽的对象描述信息, 则应实现 debugDescription 方法.</li>
+</ul>
+<hr>
+<h3 id="4-尽量使用不可变对象"><a href="#4-尽量使用不可变对象" class="headerlink" title="4. 尽量使用不可变对象"></a>4. 尽量使用不可变对象</h3><p>若属性仅可以用于对象内部修改, 则在”class-continuation 分类”中将其由<code>readonly</code>属性扩展为 readwirte.<br>不要把可变的 <code>collection</code>作为属性公开, 而应时提供相关方法, 以此修改对象中的可变 <code>collection</code>.</p>
+<hr>
+<h3 id="5-命名方式"><a href="#5-命名方式" class="headerlink" title="5.命名方式"></a>5.命名方式</h3><p>用<code>p_</code>开头来命名私有方法. 而苹果公司用的是拿一个下划线作为前缀, 而我们最好不要用, 不然可能因为<font color="#A52A2A">动态方法派发系统(dynamic method dispatch system)</font>可能在子类中无意覆盖了方法.</p>
+<h3 id="6-NSCopying协议"><a href="#6-NSCopying协议" class="headerlink" title="6. NSCopying协议"></a>6. NSCopying协议</h3><p>要想让自定义类支持拷贝操作, 就需要实现<font color="#A52A2A"> NSCopying</font>协议, 该协议只有一个方法:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span>*)zone</span><br></pre></td></tr></table></figure>
+<p>为何会出现 <code>NSZone</code> 呢? 因为以前开发程序时, 会据此把内存分成不同的”区”(<code>zone</code>), 而对象会创建在某个区里面, 而现在不用了, 每个程序只有一个<code>default zone</code></p>
+<p>对于不可变的 <code>NSArray</code> 与可变的 <code>NSMutableArray</code> 来说, 下列关系总是成立的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- (NSMutableArray copy] =&gt; NSArray</span><br><span class="line">- (NSArray mutableCopy] =&gt; NSMutableArray</span><br></pre></td></tr></table></figure>
+<p>另外, 在可变对象上调用 <code>copy</code> 方法则是会返回另外一个不可变类的实例.</p>
+<p><br></p>
+<hr>
+<h2 id="协议与分类"><a href="#协议与分类" class="headerlink" title="协议与分类"></a>协议与分类</h2><p>OC 不支持多重继承, 因而我们把某个类应该实现的一系列方法定义在协议里面. 协议最为常见的用途时实现委托模式.</p>
+<h3 id="1-委托"><a href="#1-委托" class="headerlink" title="1. 委托"></a>1. 委托</h3><p>对于需要频繁通过数据源协议从数据源中获取多份相互独立的数据, 下面的这种优化方式, 值得使用.</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">EOCNetworkFetcher</span>()</span>&#123;</span><br><span class="line">	<span class="keyword">struct</span> &#123;</span><br><span class="line">		<span class="keyword">unsigned</span> <span class="keyword">int</span> didReceiveData	: <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">unsigned</span> <span class="keyword">int</span> didFailWithError	: <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">unsigned</span> <span class="keyword">int</span> didUpdateProgressTo : <span class="number">1</span>;</span><br><span class="line">		&#125; _delegateFlags;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// set Flag</span></span><br><span class="line">_delegateFlags.didReceiveData = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)setDelegate:(<span class="keyword">id</span>&lt;EOCNetworkFetcher&gt;)delegate&#123;</span><br><span class="line">	_delegate = delegate;</span><br><span class="line">	_delegateFlags.didReceiveData = [delegate respondsToSelector:<span class="keyword">@selector</span>(networkFetcher:didReceiveData:)]	;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样就不用, 每次都去检测委托对象是否能响应给定的选择子了.</p>
+<hr>
+<h3 id="2-分类"><a href="#2-分类" class="headerlink" title="2. 分类"></a>2. 分类</h3><p>当类的实现文件过于膨胀而无法管理时, 将类分类, 提取到分别的不同的文件中区.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">XXX+Friendship(.h/.m)</span><br><span class="line">XXX+Work(.h/.m)</span><br><span class="line">// ...</span><br></pre></td></tr></table></figure>
+<p>另外可以创建名为<code>Private</code>的分类.一般这个类中的方法只在类或框架内部使用.以隐藏实现细节.</p>
+<hr>
+<h3 id="3-通过协议提供匿名对象"><a href="#3-通过协议提供匿名对象" class="headerlink" title="3. 通过协议提供匿名对象"></a>3. 通过协议提供匿名对象</h3><p>委托就使用的了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@property (nonatomic, weak) id &lt;EOCDelegate&gt; delegate;</span><br></pre></td></tr></table></figure>
+<p>该属性的类型是<code>id&lt;EOCDelegate&gt;</code>, 所以实际上任何类的对象都能充当这一属性, 即便该类不继承自 <code>NSObject</code>, 只要遵循 <font color="#A52A2A">EOCDelegate</font> 就可以了</p>
+<p><br></p>
+<hr>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><ol>
+<li><p>OC 中无法将某个类标识为<font color="#A52A2A">抽象类</font>. 要想达成类似效果, 最好的方法时在那些子类必须覆写的超类方法中抛出异常.</p>
+</li>
+<li><p>遵循使用属性的 <code>setter</code> 方法，或通过 <code>key-path</code> 来设置：<br><code>[target setAge:30];</code> <code>[target setValue:[NSNumber numberWithInt:30] forKey:@&quot;age&quot;];</code> <font color="#A52A2A">KVO</font> 键值观察才能正确获得变化.</p>
+</li>
+</ol>
+<hr>
+<p><br></p>
+<p>本篇文章参考摘自 <font color="#B8860B">Effective Objective-C 2.0 编写高质量 iOS 与 OS X 代码的52个有效方法</font></p>
+</div></article></div></main><footer><div class="paginator"><a href="/2016/10/08/简单明了搞定iOS10推送适配/" class="prev">PREV</a><a href="/2016/08/24/OC开发相关注意事项/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="http://www.lydsnm.top">lydsnm</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
