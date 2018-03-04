@@ -4,6 +4,46 @@
 
     
   <url>
+    <loc>http://www.lydsnm.top/2017/04/20/iOS%E5%AE%9E%E7%8E%B0%E5%AE%9E%E6%97%B6%E9%80%9A%E4%BF%A1%E6%88%96%E6%8E%A8%E9%80%81%E7%9A%84%E5%B8%B8%E7%94%A8%E7%AD%96%E7%95%A5/</loc>
+    <lastmod>2018-03-04T15:42:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS实现实时通信或推送的常用策略</title>
+        <pubTime>2017-04-19T16:00:00.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="http://www.lydsnm.top/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.lydsnm.top/2017/02/06/%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%AE%9A%E4%B9%89UIWebView%20%E7%9A%84UIMenuController%E9%80%89%E9%A1%B9/</loc>
+    <lastmod>2018-03-04T15:42:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>对UIMenuController菜单自定义</title>
+        <pubTime>2017-02-05T16:00:00.000Z</pubTime>
+        
+        <tag>-runtime -运行时</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="http://www.lydsnm.top/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.lydsnm.top/2015/12/07/iOS-GCD%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2018-03-04T15:41:33.000Z</lastmod>
     <data>
@@ -52,26 +92,6 @@
         <pubTime>2015-12-05T16:00:00.000Z</pubTime>
         
         <tag>coredata</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="http://www.lydsnm.top/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.lydsnm.top/2017/04/20/iOS%E5%AE%9E%E7%8E%B0%E5%AE%9E%E6%97%B6%E9%80%9A%E4%BF%A1%E6%88%96%E6%8E%A8%E9%80%81%E7%9A%84%E5%B8%B8%E7%94%A8%E7%AD%96%E7%95%A5/</loc>
-    <lastmod>2018-03-04T15:40:38.000Z</lastmod>
-    <data>
-        <display>
-        <title>iOS实现实时通信或推送的常用策略</title>
-        <pubTime>2017-04-19T16:00:00.000Z</pubTime>
-        
-        <tag>iOS</tag>
          
          
            
@@ -319,26 +339,6 @@
            
              
               <breadCrumb title="工具" url="http://www.lydsnm.top/categories/%E5%B7%A5%E5%85%B7/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.lydsnm.top/2017/02/06/%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%AE%9A%E4%B9%89UIWebView%20%E7%9A%84UIMenuController%E9%80%89%E9%A1%B9/</loc>
-    <lastmod>2018-03-04T05:24:56.000Z</lastmod>
-    <data>
-        <display>
-        <title>对UIMenuController菜单自定义</title>
-        <pubTime>2017-02-05T16:00:00.000Z</pubTime>
-        
-        <tag>-runtime -运行时</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="http://www.lydsnm.top/categories/iOS/"/>
           
         </display>
     </data>
