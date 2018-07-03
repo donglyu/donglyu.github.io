@@ -4,6 +4,26 @@
   
     
     <entry>
+      <title><![CDATA[应用审核通过，但是内购项目一直处于正在审核中]]></title>
+      <url>http://www.lydsnm.top/2018/07/03/2018-07-03%E5%BA%94%E7%94%A8%E5%AE%A1%E6%A0%B8%E9%80%9A%E8%BF%87%EF%BC%8C%E4%BD%86%E6%98%AF%E5%86%85%E8%B4%AD%E9%A1%B9%E7%9B%AE%E4%B8%80%E7%9B%B4%E5%A4%84%E4%BA%8E%E6%AD%A3%E5%9C%A8%E5%AE%A1%E6%A0%B8%E4%B8%AD/</url>
+      <content type="html"><![CDATA[<p>&emsp;&emsp;近期应用上架会员功能，新增了几个内购项目，按部就班，应用测试通过后，提交应用商店审核。自信的勾选上审核通过后自动发布，可是应用通过审核并自动释放了，内购项目没有通过，导致线上用户版本，点击购买会员获取不到商品信息，没有任何反应，特难受。现在记录一下我的解决过程，希望对其他有遇到这个问题的朋友有所帮助。</p>
+<a id="more"></a>
+<p>&emsp;&emsp;尝试过重新修改下判断没有商店信息给出提醒，按照一些网友的解决方法：重新提交一个新版本审核，并改成了手动发布。然而事实告诉我，这样并没有用。审核员再次遗漏了我的内购项目。无奈之下，尝试了邮件申诉反馈。</p>
+<p>附：<a href="https://developer.apple.com/" target="_blank" rel="noopener">https://developer.apple.com/</a> -&gt; Contact Us -&gt; App Review -&gt; Other App Review questions -&gt; I would like to <code>get the status of my app</code>。这是我的选择步骤。</p>
+<p>&emsp;&emsp;第二天，早上8点多邮件有通知，内购通过了，线上版本不用更新可以直接用了（PS：服务器同步要时间，等到下午的时候，会员才可以正常购买）。</p>
+<h2 id="结语："><a href="#结语：" class="headerlink" title="结语："></a>结语：</h2><p>&emsp;&emsp;如果一个版本有新增的内购项，那么这个版本还是改成<code>手动释放</code>比较好。点击发布前要检查你的内购项是否是处于<code>已批准</code>状态。如果发现应用通过后，内购审核没有红点（也就说没有按要求填写而打回）处于正在审核中，请联系苹果客服，不要重新发包了，至少我这里的经验是这样的。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> iOS </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[私有API检测系统中是否安装了某款指定的软件]]></title>
       <url>http://www.lydsnm.top/2018/06/25/2018-06-25%E7%A7%81%E6%9C%89API%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E4%BA%86%E6%9F%90%E6%AC%BE%E6%8C%87%E5%AE%9A%E7%9A%84%E8%BD%AF%E4%BB%B6/</url>
       <content type="html"><![CDATA[<p>&emsp;&emsp;前段时间，在一个积分任务墙的项目，需要跳转到市场去安装App，了需要检测iOS设备已安装应用列表的需求，要能获取到安装情况（包括安装进度啊，完成回调等）。经过一段时间的了解，还算完成了既定任务。</p>
@@ -32,7 +52,7 @@
     <entry>
       <title><![CDATA[记一则iOS封装SDK的开发过程之WebView和JS交互]]></title>
       <url>http://www.lydsnm.top/2018/05/20/%E8%AE%B0%E4%B8%80%E5%88%99iOS%E5%B0%81%E8%A3%85SDK%E7%9A%84%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B9%8BWebView%E5%92%8CJS%E4%BA%A4%E4%BA%92/</url>
-      <content type="html"><![CDATA[<h1 id="记一则iOS封装SDK的开发过程之WebView和JS交互"><a href="#记一则iOS封装SDK的开发过程之WebView和JS交互" class="headerlink" title="记一则iOS封装SDK的开发过程之WebView和JS交互"></a>记一则iOS封装SDK的开发过程之WebView和JS交互</h1><p>&emsp;&emsp;近来接触了一个封装sdk的项目，过程中遇到了一些问题，现在空了下来，将这个过程记录一下。<br>项目主要由<u>iOS封装一个framework静态库，库里面引入由甲方提供的js方法库（一个js文件），原生调用js中的方法，将方法返回值通过原生方法回调会去</u>。相当于一个中间件的功能。</p>
+      <content type="html"><![CDATA[<p>&emsp;&emsp;近来接触了一个封装sdk的项目，过程中遇到了一些问题，现在空了下来，将这个过程记录一下。<br>项目主要由<u>iOS封装一个framework静态库，库里面引入由甲方提供的js方法库（一个js文件），原生调用js中的方法，将方法返回值通过原生方法回调会去</u>。相当于一个中间件的功能。</p>
 <p>&emsp;&emsp;我首先想到的是通过 <font color="a52a2a"><b>UIWebView</b></font> 或 <font color="a52a2a"><b>WKWebView</b></font> 来加载js，然后通过javascriptCore和WKWebView自带的方法来处理。这个甲方要求又不要显示html页面，所以使用WebView有点用了牛刀的感觉。查了查资料，没有找到直接能和js文件交互的方法，无奈还是采用了WKWebView。</p>
 <a id="more"></a>
 <p>&emsp;&emsp;由于wkwebView是iOS8以后推出的新框架，故而一开始就使用使用了wkwebview。当对应的html、js到位后，发现js中的回调很奇怪，原生偶尔可以得到回调，猜测可能js方法库中方法太过繁忙，从而导致消息堵塞进而丢失掉。经过延时的操作，发现并不是这个问题。</p>
@@ -63,7 +83,7 @@
     <entry>
       <title><![CDATA[Slice 一个小而简的Mac计时软件.拖延症神器.倒计时小工具]]></title>
       <url>http://www.lydsnm.top/2017/05/30/Slice%E4%B8%80%E4%B8%AA%E5%B0%8F%E8%80%8C%E7%B2%BE%E7%AE%80%E7%9A%84Mac%E8%AE%A1%E6%97%B6%E8%BD%AF%E4%BB%B6%EF%BC%8C%E6%8B%96%E5%BB%B6%E7%97%87%E7%A5%9E%E5%99%A8%EF%BC%8C%E5%80%92%E8%AE%A1%E6%97%B6%E5%B0%8F%E5%B7%A5%E5%85%B7/</url>
-      <content type="html"><![CDATA[<h3 id="Slice-一个小而精简的Mac计时软件-拖延症神器-倒计时小工具"><a href="#Slice-一个小而精简的Mac计时软件-拖延症神器-倒计时小工具" class="headerlink" title="Slice 一个小而精简的Mac计时软件. 拖延症神器.倒计时小工具"></a>Slice 一个小而精简的Mac计时软件. 拖延症神器.倒计时小工具</h3><p>&emsp;&emsp;对于常年和电脑打交道的人群来说，在很多时候, 人往往变得浮躁, 坐在电脑旁不到几分钟就像打开网页看视频啊, 打开游戏, 干些不相关的东西，专注力不够，从而导致工作效率低，工作质量不高的效果，进而影响到我们的生活，心情等。<br>        现在你试试这个小工具：<br><img src="http://ocs32tleq.bkt.clouddn.com/14961482427792.jpg" alt=""></p>
+      <content type="html"><![CDATA[<p>&emsp;&emsp;对于常年和电脑打交道的人群来说，在很多时候, 人往往变得浮躁, 坐在电脑旁不到几分钟就像打开网页看视频啊, 打开游戏, 干些不相关的东西，专注力不够，从而导致工作效率低，工作质量不高的效果，进而影响到我们的生活，心情等。<br>        现在你试试这个小工具：<br><img src="http://ocs32tleq.bkt.clouddn.com/14961482427792.jpg" alt=""></p>
 <p>&emsp;&emsp;有研究表明，合理的运用人的精力，松紧有弛，能够最大限度的发挥人的能力。自然界本身有它的脉动，一种在活动和休息之间周期性的像波浪一样的运动。想想潮涨潮落、季节变化，以及每天的日出日落。同样，所有的机体都遵循一种维持生命的有规则的变化。就像运动员，我们发现那些成绩好的运动员往往更懂得如何放松和规划自己的精力，在高强度，长时间，高压力的比赛中，很难保持长时间的高水准，因此这些人通常会抓紧一切时间储存精力，等到需要的爆发的时候，集中全部的注意力，更能发挥出好的运动水平，对于普通人，这也同样适用。</p>
 <a id="more"></a>
 <p><img src="http://ocs32tleq.bkt.clouddn.com/%E5%92%96%E5%95%A1.jpg" alt="咖啡"></p>
