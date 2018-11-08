@@ -4,51 +4,6 @@
   
     
     <entry>
-      <title><![CDATA[iOS WebView修改userAgent的问题与解决]]></title>
-      <url>http://www.lydsnm.top/2018/11/08/2018-03-22iOS-WebView%E4%BF%AE%E6%94%B9userAgent%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3/</url>
-      <content type="html"><![CDATA[<p>&emsp;&emsp;前阵子做一个阅读应用，需要嵌入H5页面，要让网页检测到是App的webView访问。网页有个loading数据过程，这个loading效果比较复杂，于是乎由客户端实现，需要网页告诉客户端什么时候该关掉Loading动画遮罩层（还有一些其他交互效果）。这就涉及到了网页和原生的交互了。客户端使用的是<font color="a52a2a">WKWebView</font>。</p>
-<p>&emsp;&emsp;在UIWebView上修改全局userAgent就使用：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIWebView</span> *webView = [[<span class="built_in">UIWebView</span> alloc] initWithFrame:<span class="built_in">CGRectZero</span>];</span><br><span class="line">    <span class="built_in">NSString</span> *userAgent = [webView stringByEvaluatingJavaScriptFromString:<span class="string">@"navigator.userAgent"</span>];</span><br><span class="line">    <span class="built_in">NSString</span> *newUserAgent = [userAgent stringByAppendingString:<span class="string">@" AppFlag"</span>];</span><br><span class="line">        newUserAgent = [newUserAgent stringByAppendingString:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@" token/%@"</span>, token]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">NSDictionary</span> *dictionary = [<span class="built_in">NSDictionary</span> dictionaryWithObjectsAndKeys:newUserAgent, <span class="string">@"UserAgent"</span>, <span class="literal">nil</span>];</span><br><span class="line">    [[<span class="built_in">NSUserDefaults</span> standardUserDefaults] registerDefaults:dictionary];</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;在UIWebView上获取userAgent的方法是同步的(Synchronous)。</p>
-<p>&emsp;&emsp;如果实在WKWebView上则使用：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">WKWebView</span> *wkWebView = [[<span class="built_in">WKWebView</span> alloc] initWithFrame:<span class="built_in">CGRectZero</span>];</span><br><span class="line">    <span class="keyword">self</span>.wkWebView = wkWebView;</span><br><span class="line">    [wkWebView evaluateJavaScript:<span class="string">@"navigator.userAgent"</span> completionHandler:^(<span class="keyword">id</span> result, <span class="built_in">NSError</span> *error) &#123;</span><br><span class="line">        <span class="built_in">NSString</span> *userAgent = result;</span><br><span class="line">        <span class="built_in">NSString</span> *newUserAgent = [userAgent stringByAppendingString:<span class="string">@" AppFlag"</span>];</span><br><span class="line">      </span><br><span class="line">    newUserAgent = [newUserAgent stringByAppendingString:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@" token/%@"</span>, token]];</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">NSDictionary</span> *dictionary = [<span class="built_in">NSDictionary</span> dictionaryWithObjectsAndKeys:newUserAgent, <span class="string">@"UserAgent"</span>, <span class="literal">nil</span>];</span><br><span class="line">        [[<span class="built_in">NSUserDefaults</span> standardUserDefaults] registerDefaults:dictionary];</span><br><span class="line">         [<span class="keyword">self</span>.wkWebView setCustomUserAgent:customUserAgent]</span><br><span class="line">    &#125;];</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;在WKWebView上获取userAgent就是异步的(Asynchronous)。</p>
-<p>&emsp;&emsp;如果在webView loadRequest之前使用WKWebView的方式修改了userAgent之后，在Safari中调试发现userAgent实际上可能并没有成功修改。其实是因为异步修改没有修改成功，如果再次load了一个新页面，再在Safari中控制台输入<code>navigator.userAgent</code>就可以查看到修改后的内容，这就是很多其他朋友说遇到的要第二次才能显示自定义的值。<strong><font color="10d3c4">这里建议使用UIWebView的方式修改全局userAgent，然后再使用WKWebView取加载内容，最简单最通用</font></strong>。如果使用WKWebView修改后再用WKWebView加载页面，需要注意获取并修改 userAgent 的 webView 对象，跟加载网页的 webView 不能是同一个对象，也就说在获取到当前的userAgent的回调里需要重新初始化 wKWebView来加载页面。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIWebView</span> *webView = [[<span class="built_in">UIWebView</span> alloc] initWithFrame:<span class="built_in">CGRectZero</span>];</span><br><span class="line"><span class="built_in">NSString</span> *userAgent = [webView stringByEvaluatingJavaScriptFromString:<span class="string">@"navigator.userAgent"</span>];</span><br><span class="line"><span class="built_in">NSString</span> *newUserAgent = [userAgent stringByAppendingString:<span class="string">@" native_iOS"</span>];<span class="comment">//自定义需要拼接的字符串</span></span><br><span class="line"><span class="built_in">NSDictionary</span> *dictionary = [<span class="built_in">NSDictionary</span> dictionaryWithObjectsAndKeys:newUserAgent, <span class="string">@"UserAgent"</span>, <span class="literal">nil</span>];</span><br><span class="line">[[<span class="built_in">NSUserDefaults</span> standardUserDefaults] registerDefaults:dictionary];</span><br><span class="line">[<span class="keyword">self</span>.wkWebView setCustomUserAgent:customUserAgent]</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;<strong>参考链接：</strong></p>
-<p><a href="https://stackoverflow.com/questions/26994491/set-useragent-in-wkwebview" target="_blank" rel="noopener">https://stackoverflow.com/questions/26994491/set-useragent-in-wkwebview</a><br><a href="https://cloud.tencent.com/developer/article/1158832" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1158832</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> OC </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Swift中常见的`$0` `$1`有什么用？]]></title>
-      <url>http://www.lydsnm.top/2018/11/08/2017-09-08Swift%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84-0%E4%BD%9C%E7%94%A8/</url>
-      <content type="html"><![CDATA[<p><code>$0</code>，<code>$1</code>… 是对闭包中参数的简化写法</p>
-<p>&emsp;&emsp;swift自动为 <b><font color="red">闭包</font></b> 提供参数名缩写功能，可以直接通过<code>$0</code>和<code>$1</code>等来表示闭包中的第一个第二个参数，并且对应的参数类型会根据函数类型来进行判断。如下代码：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不使用`$0` `$1`这些来代替</span></span><br><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">7</span>]</span><br><span class="line">        sortNumbers = numbers.sorted(by: &#123; (a, b) -&gt; <span class="type">Bool</span> <span class="keyword">in</span></span><br><span class="line">            <span class="keyword">return</span> a &lt; b</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"numbers -"</span> + <span class="string">"\(sortNumbers)"</span>)</span><br><span class="line"><span class="comment">// 使用$0,$1</span></span><br><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">7</span>]</span><br><span class="line"> <span class="keyword">var</span> sortNumbers = numbers.sorted(by: &#123;$<span class="number">0</span> &lt; $<span class="number">1</span>&#125;)</span><br><span class="line"> <span class="built_in">print</span>(<span class="string">"numbers -"</span> + <span class="string">"\(sortNumbers)"</span>)</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;使用<code>$0</code>、<code>$1</code>的话，参数类型可以自动判断，并且<code>in</code>关键字也可以省略，也就是只用写函数体就可以了。来看看另外个例子：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> add = &#123; (arg1: <span class="type">Int</span>, arg2: <span class="type">Int</span>) -&gt; <span class="type">Int</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">return</span> arg1 + arg2</span><br><span class="line">&#125;</span><br><span class="line">add = &#123; (arg1, arg2) -&gt; <span class="type">Int</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">return</span> arg1 + arg2</span><br><span class="line">&#125;</span><br><span class="line">add = &#123; arg1, arg2 <span class="keyword">in</span></span><br><span class="line">    arg1 + arg2</span><br><span class="line">&#125;</span><br><span class="line">add = &#123;</span><br><span class="line">    $<span class="number">0</span> + $<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> result = add(<span class="number">10</span>, <span class="number">10</span>) <span class="comment">// 20</span></span><br></pre></td></tr></table></figure>
-<p>—– 完 —–</p>
-]]></content>
-      
-        <categories>
-            
-            <category> swift </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[Slice 1.0.1 —— Mac提升个人效率的一个小工具]]></title>
       <url>http://www.lydsnm.top/2018/08/30/Slice%E6%9B%B4%E6%96%B01.0.1/</url>
       <content type="html"><![CDATA[<h2 id="一、Slice更新："><a href="#一、Slice更新：" class="headerlink" title="一、Slice更新："></a>一、Slice更新：</h2><p><img src="http://ocs32tleq.bkt.clouddn.com/2018-08-30-SlicePreview.png" alt="SlicePrevie"></p>
@@ -165,6 +120,53 @@
         <categories>
             
             <category> iOS </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[iOS WebView修改userAgent的问题与解决]]></title>
+      <url>http://www.lydsnm.top/2018/03/22/iOS%20WebView%E4%BF%AE%E6%94%B9userAgent%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3/</url>
+      <content type="html"><![CDATA[<p>&emsp;&emsp;前阵子做一个阅读应用，需要嵌入H5页面，要让网页检测到是App的webView访问。网页有个loading数据过程，这个loading效果比较复杂，于是乎由客户端实现，需要网页告诉客户端什么时候该关掉Loading动画遮罩层（还有一些其他交互效果）。这就涉及到了网页和原生的交互了。客户端使用的是<font color="a52a2a">WKWebView</font>。</p>
+<a id="more"></a>
+<p>&emsp;&emsp;在UIWebView上修改全局userAgent就使用：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIWebView</span> *webView = [[<span class="built_in">UIWebView</span> alloc] initWithFrame:<span class="built_in">CGRectZero</span>];</span><br><span class="line">    <span class="built_in">NSString</span> *userAgent = [webView stringByEvaluatingJavaScriptFromString:<span class="string">@"navigator.userAgent"</span>];</span><br><span class="line">    <span class="built_in">NSString</span> *newUserAgent = [userAgent stringByAppendingString:<span class="string">@" AppFlag"</span>];</span><br><span class="line">        newUserAgent = [newUserAgent stringByAppendingString:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@" token/%@"</span>, token]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">NSDictionary</span> *dictionary = [<span class="built_in">NSDictionary</span> dictionaryWithObjectsAndKeys:newUserAgent, <span class="string">@"UserAgent"</span>, <span class="literal">nil</span>];</span><br><span class="line">    [[<span class="built_in">NSUserDefaults</span> standardUserDefaults] registerDefaults:dictionary];</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;在UIWebView上获取userAgent的方法是同步的(Synchronous)。</p>
+<p>&emsp;&emsp;如果实在WKWebView上则使用：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">WKWebView</span> *wkWebView = [[<span class="built_in">WKWebView</span> alloc] initWithFrame:<span class="built_in">CGRectZero</span>];</span><br><span class="line">    <span class="keyword">self</span>.wkWebView = wkWebView;</span><br><span class="line">    [wkWebView evaluateJavaScript:<span class="string">@"navigator.userAgent"</span> completionHandler:^(<span class="keyword">id</span> result, <span class="built_in">NSError</span> *error) &#123;</span><br><span class="line">        <span class="built_in">NSString</span> *userAgent = result;</span><br><span class="line">        <span class="built_in">NSString</span> *newUserAgent = [userAgent stringByAppendingString:<span class="string">@" AppFlag"</span>];</span><br><span class="line">      </span><br><span class="line">    newUserAgent = [newUserAgent stringByAppendingString:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@" token/%@"</span>, token]];</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">NSDictionary</span> *dictionary = [<span class="built_in">NSDictionary</span> dictionaryWithObjectsAndKeys:newUserAgent, <span class="string">@"UserAgent"</span>, <span class="literal">nil</span>];</span><br><span class="line">        [[<span class="built_in">NSUserDefaults</span> standardUserDefaults] registerDefaults:dictionary];</span><br><span class="line">         [<span class="keyword">self</span>.wkWebView setCustomUserAgent:customUserAgent]</span><br><span class="line">    &#125;];</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;在WKWebView上获取userAgent就是异步的(Asynchronous)。</p>
+<p>&emsp;&emsp;如果在webView loadRequest之前使用WKWebView的方式修改了userAgent之后，在Safari中调试发现userAgent实际上可能并没有成功修改。其实是因为异步修改没有修改成功，如果再次load了一个新页面，再在Safari中控制台输入<code>navigator.userAgent</code>就可以查看到修改后的内容，这就是很多其他朋友说遇到的要第二次才能显示自定义的值。<strong><font color="10d3c4">这里建议使用UIWebView的方式修改全局userAgent，然后再使用WKWebView取加载内容，最简单最通用</font></strong>。如果使用WKWebView修改后再用WKWebView加载页面，需要注意获取并修改 userAgent 的 webView 对象，跟加载网页的 webView 不能是同一个对象，也就说在获取到当前的userAgent的回调里需要重新初始化 wKWebView来加载页面。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIWebView</span> *webView = [[<span class="built_in">UIWebView</span> alloc] initWithFrame:<span class="built_in">CGRectZero</span>];</span><br><span class="line"><span class="built_in">NSString</span> *userAgent = [webView stringByEvaluatingJavaScriptFromString:<span class="string">@"navigator.userAgent"</span>];</span><br><span class="line"><span class="built_in">NSString</span> *newUserAgent = [userAgent stringByAppendingString:<span class="string">@" native_iOS"</span>];<span class="comment">//自定义需要拼接的字符串</span></span><br><span class="line"><span class="built_in">NSDictionary</span> *dictionary = [<span class="built_in">NSDictionary</span> dictionaryWithObjectsAndKeys:newUserAgent, <span class="string">@"UserAgent"</span>, <span class="literal">nil</span>];</span><br><span class="line">[[<span class="built_in">NSUserDefaults</span> standardUserDefaults] registerDefaults:dictionary];</span><br><span class="line">[<span class="keyword">self</span>.wkWebView setCustomUserAgent:customUserAgent]</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;<strong>参考链接：</strong></p>
+<p><a href="https://stackoverflow.com/questions/26994491/set-useragent-in-wkwebview" target="_blank" rel="noopener">https://stackoverflow.com/questions/26994491/set-useragent-in-wkwebview</a><br><a href="https://cloud.tencent.com/developer/article/1158832" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1158832</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> OC </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Swift中常见的`$0` `$1`有什么用？]]></title>
+      <url>http://www.lydsnm.top/2017/09/08/Swift%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84$0%E4%BD%9C%E7%94%A8/</url>
+      <content type="html"><![CDATA[<p><code>$0</code>，<code>$1</code>… 是对闭包中参数的简化写法</p>
+<p>&emsp;&emsp;swift自动为 <b><font color="red">闭包</font></b> 提供参数名缩写功能，可以直接通过<code>$0</code>和<code>$1</code>等来表示闭包中的第一个第二个参数，并且对应的参数类型会根据函数类型来进行判断。如下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不使用`$0` `$1`这些来代替</span></span><br><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">7</span>]</span><br><span class="line">        sortNumbers = numbers.sorted(by: &#123; (a, b) -&gt; <span class="type">Bool</span> <span class="keyword">in</span></span><br><span class="line">            <span class="keyword">return</span> a &lt; b</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"numbers -"</span> + <span class="string">"\(sortNumbers)"</span>)</span><br><span class="line"><span class="comment">// 使用$0,$1</span></span><br><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">7</span>]</span><br><span class="line"> <span class="keyword">var</span> sortNumbers = numbers.sorted(by: &#123;$<span class="number">0</span> &lt; $<span class="number">1</span>&#125;)</span><br><span class="line"> <span class="built_in">print</span>(<span class="string">"numbers -"</span> + <span class="string">"\(sortNumbers)"</span>)</span><br></pre></td></tr></table></figure>
+ <a id="more"></a>
+<p>&emsp;&emsp;使用<code>$0</code>、<code>$1</code>的话，参数类型可以自动判断，并且<code>in</code>关键字也可以省略，也就是只用写函数体就可以了。来看看另外个例子：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> add = &#123; (arg1: <span class="type">Int</span>, arg2: <span class="type">Int</span>) -&gt; <span class="type">Int</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">return</span> arg1 + arg2</span><br><span class="line">&#125;</span><br><span class="line">add = &#123; (arg1, arg2) -&gt; <span class="type">Int</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">return</span> arg1 + arg2</span><br><span class="line">&#125;</span><br><span class="line">add = &#123; arg1, arg2 <span class="keyword">in</span></span><br><span class="line">    arg1 + arg2</span><br><span class="line">&#125;</span><br><span class="line">add = &#123;</span><br><span class="line">    $<span class="number">0</span> + $<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> result = add(<span class="number">10</span>, <span class="number">10</span>) <span class="comment">// 20</span></span><br></pre></td></tr></table></figure>
+<p>—– 完 —–</p>
+]]></content>
+      
+        <categories>
+            
+            <category> swift </category>
             
         </categories>
         
@@ -683,31 +685,6 @@
     </entry>
     
     <entry>
-      <title><![CDATA[阶段总结]]></title>
-      <url>http://www.lydsnm.top/2016/08/23/%E9%98%B6%E6%AE%B5%E6%80%BB%E7%BB%93/</url>
-      <content type="html"><![CDATA[<p>8月</p>
-<p>Swift还是在学习中,可能会搁置一段时间. 基本语法是了解了, 在了解过程也发现某些语法确实和看到的资料不同, 有人开玩笑说, 每过一段时间就好像是学一门新的语言.😁</p>
-<a id="more"></a>
-<p>但是以目前的Swift语言的状态来说, 确实不太适合作为某些公司的主力开发语言<br>因此之后的比例会减少, 继续OC.</p>
-<p>Swift包括网络库等等, 都要熟悉, 头疼.<br>后续会抽空更新Swift语言的相关知识整理, 也是方便自己之后的查阅~~. </p>
-]]></content>
-      
-        <categories>
-            
-            <category> iOS </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 计划 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[整理下Swift与Objective-C的一些不同]]></title>
       <url>http://www.lydsnm.top/2016/08/23/%E7%AE%80%E5%8D%95%E6%95%B4%E7%90%86Swift%E4%B8%8EObjective-C%E7%9A%84%E4%B8%8D%E5%90%8C/</url>
       <content type="html"><![CDATA[<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><ul>
@@ -734,6 +711,31 @@
         <tags>
             
             <tag> Swift </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[阶段总结]]></title>
+      <url>http://www.lydsnm.top/2016/08/23/%E9%98%B6%E6%AE%B5%E6%80%BB%E7%BB%93/</url>
+      <content type="html"><![CDATA[<p>8月</p>
+<p>Swift还是在学习中,可能会搁置一段时间. 基本语法是了解了, 在了解过程也发现某些语法确实和看到的资料不同, 有人开玩笑说, 每过一段时间就好像是学一门新的语言.😁</p>
+<a id="more"></a>
+<p>但是以目前的Swift语言的状态来说, 确实不太适合作为某些公司的主力开发语言<br>因此之后的比例会减少, 继续OC.</p>
+<p>Swift包括网络库等等, 都要熟悉, 头疼.<br>后续会抽空更新Swift语言的相关知识整理, 也是方便自己之后的查阅~~. </p>
+]]></content>
+      
+        <categories>
+            
+            <category> iOS </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 计划 </tag>
             
         </tags>
         
