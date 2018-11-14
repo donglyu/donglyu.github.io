@@ -153,11 +153,90 @@
     </entry>
     
     <entry>
+      <title><![CDATA[苹果的Marzipan]]></title>
+      <url>http://www.lydsnm.top/2017/12/27/%E8%8B%B9%E6%9E%9C%E7%9A%84Marzipan/</url>
+      <content type="html"><![CDATA[<p>&emsp;&emsp;听说有个新的东西：为了增强Mac上的软件产品，苹果正在计划模糊macOS和iOS平台之间的界限，允许iOS App Store上的iPhone和iPad应用程序在Mac上运行：</p>
+<p>&emsp;&emsp;<code>Marzipan</code>  <a href="https://baijiahao.baidu.com/s?id=1587358985291753758&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">新闻来源</a>    <em>一个App适配所有设备。</em></p>
+<a id="more"></a>
+<p>&emsp;&emsp;一方面，熟悉苹果生态的人都比较清楚，iOS上软件质量一向很高，数量也很多，几乎能够找到所有功能的App。而对应的MAC OS平台上相比较iOS，软件上数量上就少很多了（软件质量上我个人认为是不差的。）。<br>如果iOS上的App能够跨在MAC OS上使用就好了。</p>
+<p>&emsp;&emsp;另一方面，如果苹果能将这条通道打通的话，那么iPad的用武之地就大许多了，随之而来iPad的销量也将会大幅上升。毕竟现阶段iPad还是处于一个尴尬的处境，处理复杂事物时，还是需要Mac的文件管理系统，能够更加灵活的处理。处理文档、简单任务时，iPad还是有优势的。</p>
+<p>&emsp;&emsp;期待一下吧。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Apple </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Swift中的值类型引用类型相关内容]]></title>
+      <url>http://www.lydsnm.top/2017/10/14/Swift%E4%B8%AD%E7%9A%84%E5%80%BC%E7%B1%BB%E5%9E%8B%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/</url>
+      <content type="html"><![CDATA[<h2 id="一、Swift中的值类型和引用类型"><a href="#一、Swift中的值类型和引用类型" class="headerlink" title="一、Swift中的值类型和引用类型"></a>一、Swift中的值类型和引用类型</h2><h3 id="值类型和引用类型是啥"><a href="#值类型和引用类型是啥" class="headerlink" title="值类型和引用类型是啥"></a>值类型和引用类型是啥</h3><p>&emsp;&emsp;最近在用Swift写代码，发现Swift中的值类型和引用类型好像有些奇怪，包括之前了解到的NSArray和Array之间的关系，有些混淆了。现在静下来来学习下，记录一下，防止后面防错。</p>
+<p>&emsp;&emsp;首先来回顾一下基础概念：什么是值类型和引用类型。</p>
+<blockquote>
+<ul>
+<li>值类型：每个实例都拥有数据的一份副本。当被赋值给一个变量或常量，或传递给一个函数时，它都会拷贝一份新的副本。</li>
+<li>引用类型：所有实例共享一个数据副本。当被赋值给一个变量或常量，或传递给一个函数时候，一个引用类型一旦被初始化，会返回一个指向已存在实例的引用。</li>
+</ul>
+</blockquote>
+<p>&emsp;&emsp;类(class)是一个引用类型，复制一个引用，即表示建立一个共享的实例。复制之后，两个变量都使用数据中同一份实例。<br>&emsp;&emsp;类(Class)是一个引用类型，意味着类中的变量不会存储实例，而是一个向内存(堆)中存储该实例位置的引用。</p>
+<a id="more"></a>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">"张三"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> badStudent = <span class="type">People</span>()</span><br><span class="line"><span class="keyword">var</span> goodStudent = badStudent</span><br><span class="line"></span><br><span class="line">goodStudent.name = <span class="string">"李四"</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"badStudent's name:<span class="subst">\(badStudent)</span>"</span>) <span class="comment">// 李四</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"goodStudent's name:<span class="subst">\(goodStudent)</span>"</span>) <span class="comment">// 李四</span></span><br><span class="line"><span class="comment">// 修改goodStudent中的内容就相当于修改badStudent。它们所代表的是同一个东西。</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;但除了Class外，Swift还有一种常用的类型：结构体。而结构体就是一个值类型。而Swift中用Struct的场景变多了。<br>类似<code>Array</code>、<code>Dictonary</code>。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">People</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">"张三"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> firstStudent = <span class="type">People</span>()</span><br><span class="line"><span class="keyword">var</span> secondStudent = firstStudent</span><br><span class="line"></span><br><span class="line">firstStudent.name = <span class="string">"李四"</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"firstStudent's name:<span class="subst">\(firstStudent)</span>"</span>) <span class="comment">// 李四</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"secondStudent's name:<span class="subst">\(secondStudent)</span>"</span>) <span class="comment">// 张三</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// secondStudent用firstStudent赋值后，就是一个独立的数据实例了。</span></span><br></pre></td></tr></table></figure>
+<p>当然，Swift中值类型和引用类型还有很多：</p>
+<p><img src="http://cc.cocimg.com/api/uploads//20180503/1525333385999865.png" alt="Swift中值类型和引用类型表"></p>
+<blockquote>
+<p>Swift把一个引用类型看成一个类，这和Objective-C中很像。Objective-C中一切继承于NSObject都被按照引用类型存储。</p>
+</blockquote>
+<h3 id="什么时候用值引用和引用类型好"><a href="#什么时候用值引用和引用类型好" class="headerlink" title="什么时候用值引用和引用类型好"></a>什么时候用值引用和引用类型好</h3><ul>
+<li>以下时候使用值类型：</li>
+</ul>
+<p>想要用==比较实例数据。一个双等号(==)用于比较值。</p>
+<p>你想复制来建立独立数据。</p>
+<p>数据要在多线程的代码中使用，那么你就不用担心数据会被其他线程改变。</p>
+<ul>
+<li>以下时候使用引用类型(比如一个类)：</li>
+</ul>
+<p>想要用==比较实例一致性。==会检查两个对象是否完全一致，包括存储数据的内存地址。</p>
+<p>你想要创建用于共享，可改变的数据。</p>
+<hr>
+<h3 id="值类型和引用类型的存储"><a href="#值类型和引用类型的存储" class="headerlink" title="值类型和引用类型的存储"></a>值类型和引用类型的存储</h3><blockquote>
+<p>值类型-在栈内存中存储、而引用类型-在托管堆内存中存储。</p>
+</blockquote>
+<p>像前面说的，引用类型实例存在堆中，值类型实例比如结构存在于一个称为栈的内存区域中。如果值类型实例是一个类的一部分，值会和类一起存在堆中。</p>
+<p>栈被用于静态存储分配，栈用于动态存储分配，它们都存在计算机的RAM中。</p>
+<p>栈被CPU紧密管理并优化，当一个函数创建一个变量，栈会存储这个变量，并在函数退出时候被毁掉。被分配到栈的变量直接存储在内存上，访问这段内存非常快。当一个函数或者方法调用另一个函数，另一个函数再依次调用其他函数等等，直到最后一个函数返回它的值之前，其他所有函数都会保持暂停执行。</p>
+<p>栈总是按照LIFO顺序保留，最新保留的区块总是会下一个释放。这使得跟踪记录栈非常简单，释放一个栈上的区块不过是调整一个指针。因为栈非常组织有序，所以它快捷高效。</p>
+<p>系统使用堆存储被其他对象引用的数据，堆是一大片内存，系统可以从中请求并动态分配内存区块。堆并不会像栈一样自动毁掉它的对象，需要外部工作来处理这些。在苹果设备中ARC就做这个工作。引用数量会被ARC追踪，当它变为0时对象会被释放。因此整个过程(分配，追踪引用，释放)会比栈要慢。所以值类型要快于引用类型。</p>
+<h2 id="二、Swift中的Array"><a href="#二、Swift中的Array" class="headerlink" title="二、Swift中的Array"></a>二、Swift中的Array</h2><p>&emsp;&emsp;在OC中数组可以copy或者mutablecopy，可变数组和不可变数组可以来回拷贝数据。NSArray、NSMutableArray之间是不同点实例，来回处理过后，内部存储的元素其实指针所指向内容都是同一个。</p>
+<p>而在Swift中常用的数组对象<code>Array</code>。跳转到其定义处：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">struct</span> <span class="title">Array</span>&lt;<span class="title">Element</span>&gt; </span>&#123;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;发现其实Array是一个结构体，是一个值类型，且不自带copy方法的方法，数组分成:可变数组和不可变数组，分别使用let修饰的数组是不可变数组，使用var修饰的数组是可变数组。如果想要实现拷贝方法，则需要对对象实现拷贝方法。即遵守NSCopying协议和实现copyWithZone方法<br>eg:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现NSCopying协议。</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> : <span class="title">NSObject</span>, <span class="title">NSCopying</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name: <span class="type">String</span>?</span><br><span class="line">    <span class="keyword">var</span> age: <span class="type">Int</span>?</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">copyWithZone</span><span class="params">(zone: NSZone)</span></span> -&gt; <span class="type">AnyObject</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> person = <span class="type">Person</span>()</span><br><span class="line">        person.name = <span class="keyword">self</span>.name</span><br><span class="line">        person.age = <span class="keyword">self</span>.age</span><br><span class="line">        <span class="keyword">return</span> person</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;所以在Swift中，像Array、Dictinary和Set这样的值类型集合，注意和OC中的NSArray、NSDictionary和NSSet有区别了。当被传递后，将会拷贝一份副本，之前那份数据的变更后面并不会同步更新过来，这点需要注意点。刚开始在这儿按照OC的惯性思维遇到了数据不一致的问题。另外提一句，像Array、Dictionary和Set这些是通过一个叫写时复制 (copy-on-write)的技术实现。<br>（简单提一下：就是为了提供高效的写时复制特性，我们需要知道一个对象 (比如这里的 NSMutableData) 是否是唯一的。如果它是唯一引用，那么我们就可以直接原地修改对象。否则，我们需要在修改前创建对象的复制。）。</p>
+<p>—- 完 —-</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Swift </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Swift中常见的`$0` `$1`有什么用？]]></title>
       <url>http://www.lydsnm.top/2017/09/08/Swift%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84$0%E4%BD%9C%E7%94%A8/</url>
       <content type="html"><![CDATA[<p><code>$0</code>，<code>$1</code>… 是对闭包中参数的简化写法</p>
 <p>&emsp;&emsp;swift自动为 <b><font color="red">闭包</font></b> 提供参数名缩写功能，可以直接通过<code>$0</code>和<code>$1</code>等来表示闭包中的第一个第二个参数，并且对应的参数类型会根据函数类型来进行判断。如下代码：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不使用`$0` `$1`这些来代替</span></span><br><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">7</span>]</span><br><span class="line">        sortNumbers = numbers.sorted(by: &#123; (a, b) -&gt; <span class="type">Bool</span> <span class="keyword">in</span></span><br><span class="line">            <span class="keyword">return</span> a &lt; b</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"numbers -"</span> + <span class="string">"\(sortNumbers)"</span>)</span><br><span class="line"><span class="comment">// 使用$0,$1</span></span><br><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">7</span>]</span><br><span class="line"> <span class="keyword">var</span> sortNumbers = numbers.sorted(by: &#123;$<span class="number">0</span> &lt; $<span class="number">1</span>&#125;)</span><br><span class="line"> <span class="built_in">print</span>(<span class="string">"numbers -"</span> + <span class="string">"\(sortNumbers)"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不使用`$0` `$1`这些来代替</span></span><br><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">7</span>]</span><br><span class="line">        sortNumbers = numbers.sorted(by: &#123; (a, b) -&gt; <span class="type">Bool</span> <span class="keyword">in</span></span><br><span class="line">            <span class="keyword">return</span> a &lt; b</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"numbers -"</span> + <span class="string">"<span class="subst">\(sortNumbers)</span>"</span>)</span><br><span class="line"><span class="comment">// 使用$0,$1</span></span><br><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">7</span>]</span><br><span class="line"> <span class="keyword">var</span> sortNumbers = numbers.sorted(by: &#123;$<span class="number">0</span> &lt; $<span class="number">1</span>&#125;)</span><br><span class="line"> <span class="built_in">print</span>(<span class="string">"numbers -"</span> + <span class="string">"<span class="subst">\(sortNumbers)</span>"</span>)</span><br></pre></td></tr></table></figure>
  <a id="more"></a>
 <p>&emsp;&emsp;使用<code>$0</code>、<code>$1</code>的话，参数类型可以自动判断，并且<code>in</code>关键字也可以省略，也就是只用写函数体就可以了。来看看另外个例子：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> add = &#123; (arg1: <span class="type">Int</span>, arg2: <span class="type">Int</span>) -&gt; <span class="type">Int</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">return</span> arg1 + arg2</span><br><span class="line">&#125;</span><br><span class="line">add = &#123; (arg1, arg2) -&gt; <span class="type">Int</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">return</span> arg1 + arg2</span><br><span class="line">&#125;</span><br><span class="line">add = &#123; arg1, arg2 <span class="keyword">in</span></span><br><span class="line">    arg1 + arg2</span><br><span class="line">&#125;</span><br><span class="line">add = &#123;</span><br><span class="line">    $<span class="number">0</span> + $<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> result = add(<span class="number">10</span>, <span class="number">10</span>) <span class="comment">// 20</span></span><br></pre></td></tr></table></figure>
@@ -167,6 +246,24 @@
         <categories>
             
             <category> swift </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[关于术业有专攻的小小感悟]]></title>
+      <url>http://www.lydsnm.top/2017/09/01/%E4%B8%80%E4%B8%AA%E5%B0%8F%E5%B0%8F%E7%9A%84%E7%BB%8F%E9%AA%8C/</url>
+      <content type="html"><![CDATA[<p>那就是 <b><font color="a52a2a" size="5">写些小工具如果要发布，还是和其他专业的人合作比较好一些。</font></b></p>
+<a id="more"></a>
+<p>&emsp;&emsp;最近在做一个项目，在APP的菜单结构犯了难，不知道该用这种比较符合。我的目的是尽量精致而简洁，没有一些花里胡哨的设计内容。<br>&emsp;&emsp;今天突然就想记录一下。也贴出来一些，我觉得还可以的设计。就算不在现在在做的sideProject中用，以后也有用的到的。</p>
+<p>&emsp;&emsp;以前只是了解术业有专攻，每个人都不可能每个方面都擅长。跑道上领先的都是很懂的合作的人<del>~</del>~~</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Swift </category>
             
         </categories>
         
