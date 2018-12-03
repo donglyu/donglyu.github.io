@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.lydsnm.top/"/>
-  <updated>2018-11-26T07:31:46.928Z</updated>
+  <updated>2018-12-03T10:31:43.519Z</updated>
   <id>http://www.lydsnm.top/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>近期换工作了</title>
+    <link href="http://www.lydsnm.top/2018/12/03/%E8%BF%91%E6%9C%9F%E9%9D%A2%E8%AF%95%E4%BD%93%E9%AA%8C/"/>
+    <id>http://www.lydsnm.top/2018/12/03/近期面试体验/</id>
+    <published>2018-12-02T16:00:00.000Z</published>
+    <updated>2018-12-03T10:31:43.519Z</updated>
+    
+    <content type="html"><![CDATA[<p>&emsp;&emsp;近期换工作，面试了很多家。突发发现我的很多表述能力还有“很大的潜力”。上家公司呆久了，没用到的基础性的知识，模糊的很，趁这个时候好好看了下，捡起来不少。</p><a id="more"></a><p>&emsp;&emsp;还是要保持竞争力才行啊。blog最好不要随心发布，还是经常学习，把笔记里的东西整理下发出来吧，满足一下~。</p><p>&emsp;&emsp;近期会更新一下面试的心得还有一些题。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;emsp;&amp;emsp;近期换工作，面试了很多家。突发发现我的很多表述能力还有“很大的潜力”。上家公司呆久了，没用到的基础性的知识，模糊的很，趁这个时候好好看了下，捡起来不少。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="杂想" scheme="http://www.lydsnm.top/categories/%E6%9D%82%E6%83%B3/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Slice 1.0.1 —— Mac提升个人效率的一个小工具</title>
@@ -456,30 +476,6 @@
     
     
       <category term="计划" scheme="http://www.lydsnm.top/tags/%E8%AE%A1%E5%88%92/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>整理下Swift与Objective-C的一些不同</title>
-    <link href="http://www.lydsnm.top/2016/08/23/%E7%AE%80%E5%8D%95%E6%95%B4%E7%90%86Swift%E4%B8%8EObjective-C%E7%9A%84%E4%B8%8D%E5%90%8C/"/>
-    <id>http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/</id>
-    <published>2016-08-22T16:00:00.000Z</published>
-    <updated>2018-03-04T15:40:14.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><ul><li>在OC中对代码进行逻辑组织用的是#pragma mark - , 生成分割线<br>而在swift中有了一些新的语法<br>如: <code>//MARK:</code> <code>//FIXME</code> <code>TODO:</code></li></ul><a id="more"></a><p><code>//MARK: -</code> 生成分割线</p><p><code>//MARK:</code> 说明</p><ul><li>Swift中对类进行扩展<br>OC中采用的是分类, 而Swift中没有分类, 相对应的只有扩展(<code>Extensions</code>)<br>以UIView为例 , 新建UIView+Ext.swift</li></ul><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import Foundation</span><br><span class="line">import <span class="built_in">UIKit</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">extension <span class="built_in">UIView</span> &#123;</span><br><span class="line">    public var x: <span class="built_in">CGFloat</span>&#123;</span><br><span class="line">        get&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">self</span>.frame.origin.x</span><br><span class="line">        &#125;</span><br><span class="line">        set&#123;</span><br><span class="line">            var r = <span class="keyword">self</span>.frame</span><br><span class="line">            r.origin.x = newValue</span><br><span class="line">            <span class="keyword">self</span>.frame = r</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ....</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><h2 id="ChangeLog"><a href="#ChangeLog" class="headerlink" title="ChangeLog"></a>ChangeLog</h2><p>2016-12-3 区别太多，放弃，当新学一门语言吧，感觉还快些，😄。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;区别&quot;&gt;&lt;a href=&quot;#区别&quot; class=&quot;headerlink&quot; title=&quot;区别&quot;&gt;&lt;/a&gt;区别&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;在OC中对代码进行逻辑组织用的是#pragma mark - , 生成分割线&lt;br&gt;而在swift中有了一些新的语法&lt;br&gt;如: &lt;code&gt;//MARK:&lt;/code&gt; &lt;code&gt;//FIXME&lt;/code&gt; &lt;code&gt;TODO:&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="iOS" scheme="http://www.lydsnm.top/categories/iOS/"/>
-    
-    
-      <category term="Swift" scheme="http://www.lydsnm.top/tags/Swift/"/>
     
   </entry>
   
