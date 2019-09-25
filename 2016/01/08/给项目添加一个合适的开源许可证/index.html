@@ -1,19 +1,177 @@
-<!DOCTYPE html><html lang="zh-Hans™"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="给项目添加一个合适的开源许可证"><meta name="keywords" content="许可证, 开源"><meta name="author" content="lydsnm"><meta name="copyright" content="lydsnm"><title>给项目添加一个合适的开源许可证 | lydsnm的工作记录</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><link rel="dns-prefetch" href="https://www.google-analytics.com"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<!DOCTYPE html>
+<html lang="zh-Hans™">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
+<meta name="baidu-site-verification" content="hkLiBHH93D">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
-ga('create', 'UA-65933410-1', 'auto');
-ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  copy: {
-    success: 'Copy successfully',
-    error: 'Copy error',
-    noSupport: 'The browser does not support'
-  }
-} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#开源许可证是什么"><span class="toc-number">1.</span> <span class="toc-text">开源许可证是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何选择开源许可证"><span class="toc-number">2.</span> <span class="toc-text">如何选择开源许可证</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GNU-Lesser-General-Public-License-LGPL"><span class="toc-number">2.1.</span> <span class="toc-text">GNU Lesser General Public License (LGPL)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Mozilla-Public-License-MPL"><span class="toc-number">2.2.</span> <span class="toc-text">Mozilla Public License (MPL)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GNU-General-Public-License-GPL"><span class="toc-number">2.3.</span> <span class="toc-text">GNU General Public License (GPL)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BSD"><span class="toc-number">2.4.</span> <span class="toc-text">BSD</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MIT"><span class="toc-number">2.5.</span> <span class="toc-text">MIT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Licence"><span class="toc-number">2.6.</span> <span class="toc-text">Apache Licence</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">lydsnm</div><div class="author-info__description text-center">行远自迩，登高自卑。</div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">37</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">13</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://woolni.oss-cn-chengdu.aliyuncs.com/Blog/tech_backgroud.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">lydsnm的工作记录</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">归档</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="http://life.lydsnm.top">生活</a></span></div><div id="post-info"><div id="post-title">给项目添加一个合适的开源许可证</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2016-01-08</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/开发/">开发</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>将项目与代码开源，可以让更多的人与你共享代码，协同合作，让产品质量更高，更加适应社会的需求。然而，这并不代表该项目是可以被随意甚至是滥用的，想要成为真正的开源项目，不是单单把源代码开放在网上即可，必须在释出的项目当中说明，其代码是以某个开源许可证 (Open Source License) 来进行许可，将特定权利赋予给用户的同时，也规范公众的利用行为，让人们正确的享受开源所带来的好处与乐趣。</p>
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="给项目添加一个合适的开源许可证">
+
+
+
+
+  <meta name="keywords" content="许可证, 开源,">
+
+
+
+
+  <link rel="alternate" href="/default" title="LYDSNM'S WORK">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://www.lydsnm.top/2016/01/08/给项目添加一个合适的开源许可证/">
+
+
+<meta name="description" content="将项目与代码开源，可以让更多的人与你共享代码，协同合作，让产品质量更高，更加适应社会的需求。然而，这并不代表该项目是可以被随意甚至是滥用的，想要成为真正的开源项目，不是单单把源代码开放在网上即可，必须在释出的项目当中说明，其代码是以某个开源许可证 (Open Source License) 来进行许可，将特定权利赋予给用户的同时，也规范公众的利用行为，让人们正确的享受开源所带来的好处与乐趣。 开源">
+<meta name="keywords" content="许可证, 开源">
+<meta property="og:type" content="article">
+<meta property="og:title" content="给项目添加一个合适的开源许可证">
+<meta property="og:url" content="http://www.lydsnm.top/2016/01/08/给项目添加一个合适的开源许可证/index.html">
+<meta property="og:site_name" content="LYDSNM&#39;S WORK">
+<meta property="og:description" content="将项目与代码开源，可以让更多的人与你共享代码，协同合作，让产品质量更高，更加适应社会的需求。然而，这并不代表该项目是可以被随意甚至是滥用的，想要成为真正的开源项目，不是单单把源代码开放在网上即可，必须在释出的项目当中说明，其代码是以某个开源许可证 (Open Source License) 来进行许可，将特定权利赋予给用户的同时，也规范公众的利用行为，让人们正确的享受开源所带来的好处与乐趣。 开源">
+<meta property="og:locale" content="zh-Hans™">
+<meta property="og:image" content="http://blog.gitcafe.com/wp-content/uploads/2015/07/bg2011050101.png">
+<meta property="og:updated_time" content="2018-01-02T13:48:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="给项目添加一个合适的开源许可证">
+<meta name="twitter:description" content="将项目与代码开源，可以让更多的人与你共享代码，协同合作，让产品质量更高，更加适应社会的需求。然而，这并不代表该项目是可以被随意甚至是滥用的，想要成为真正的开源项目，不是单单把源代码开放在网上即可，必须在释出的项目当中说明，其代码是以某个开源许可证 (Open Source License) 来进行许可，将特定权利赋予给用户的同时，也规范公众的利用行为，让人们正确的享受开源所带来的好处与乐趣。 开源">
+<meta name="twitter:image" content="http://blog.gitcafe.com/wp-content/uploads/2015/07/bg2011050101.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+
+  <link href="/plugins/prettify/prettify.css" rel="stylesheet">
+
+
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b733e1eaeacbf8f87d3be047f28c3973";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    <title> 给项目添加一个合适的开源许可证 - LYDSNM'S WORK </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">LYDSNM'S WORK</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="/">
+                            
+                            
+                                首页
+                            
+                        </a>
+                    </li>
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="/archives">
+                            
+                            
+                                归档
+                            
+                        </a>
+                    </li>
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="http://life.lydsnm.top">
+                            
+                            
+                                生活
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          给项目添加一个合适的开源许可证
+        
+      </h1>
+
+      <time class="post-time">
+          2016-01-08
+      </time>
+    </header>
+
+
+
+    
+            
+  <div class="toc-container">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#开源许可证是什么"><span class="toc-text">开源许可证是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何选择开源许可证"><span class="toc-text">如何选择开源许可证</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GNU-Lesser-General-Public-License-LGPL"><span class="toc-text">GNU Lesser General Public License (LGPL)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Mozilla-Public-License-MPL"><span class="toc-text">Mozilla Public License (MPL)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GNU-General-Public-License-GPL"><span class="toc-text">GNU General Public License (GPL)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BSD"><span class="toc-text">BSD</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MIT"><span class="toc-text">MIT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Licence"><span class="toc-text">Apache Licence</span></a></li></ol></li></ol>
+  </div> 
+
+
+            <div class="post-content">
+                <p>将项目与代码开源，可以让更多的人与你共享代码，协同合作，让产品质量更高，更加适应社会的需求。然而，这并不代表该项目是可以被随意甚至是滥用的，想要成为真正的开源项目，不是单单把源代码开放在网上即可，必须在释出的项目当中说明，其代码是以某个开源许可证 (Open Source License) 来进行许可，将特定权利赋予给用户的同时，也规范公众的利用行为，让人们正确的享受开源所带来的好处与乐趣。</p>
 <h3 id="开源许可证是什么"><a href="#开源许可证是什么" class="headerlink" title="开源许可证是什么"></a><strong>开源许可证是什么</strong></h3><p>为了维护作者和贡献者的合法权利，保证这些软件不被一些商业机构或个人窃取，影响软件的发展，开源社区开发出了各种的开源许可协议。许可证是具有法律效应的协议，目前已有超过 70 种被开放源代码促进会 (Open Source Initiative, OSI) 通过，其中 GPL、LGPL、Apache、BSD、MIT 等是最常见的。</p>
 <h3 id="如何选择开源许可证"><a href="#如何选择开源许可证" class="headerlink" title="如何选择开源许可证"></a><strong>如何选择开源许可证</strong></h3><p>如何在这么多的许可证中选取一个适合自己项目的呢？我们可以通过下面这张图清晰地了解：</p>
 <p><a href="http://blog.gitcafe.com/wp-content/uploads/2015/07/bg2011050101.png" target="_blank" rel="noopener"><img src="http://blog.gitcafe.com/wp-content/uploads/2015/07/bg2011050101.png" alt="bg201105010\"></a></p>
@@ -26,14 +184,150 @@ ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = {
 <h4 id="MIT"><a href="#MIT" class="headerlink" title="MIT"></a><strong>MIT</strong></h4><p>你必须在你的发行版里包含原许可协议的声明，无论你是以二进制发布的还是以源代码发布的。</p>
 <h4 id="Apache-Licence"><a href="#Apache-Licence" class="headerlink" title="Apache Licence"></a><strong>Apache Licence</strong></h4><p>著名的非盈利开源组织 Apache 基金会采用的协议。该协议鼓励代码共享和尊重原作者的著作权，同样允许代码修改，作为开源或者商业软件再发布。</p>
 <p>如果要在GitHub &amp; GitCafe等平台上发布开源代码就需要添加开源许可.</p>
-</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">lydsnm</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://www.lydsnm.top/2016/01/08/给项目添加一个合适的开源许可证/">http://www.lydsnm.top/2016/01/08/给项目添加一个合适的开源许可证/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/许可证-开源/">许可证, 开源</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2016/02/01/UITextView,UITextField记录/"><i class="fa fa-chevron-left">  </i><span>UITextView,UITextField记录</span></a></div><div class="next-post pull-right"><a href="/2015/12/31/2015停滞, 行进, 停滞, 行进,快步行进的一年/"><span>2015, 停滞, 行进, 停滞, 行进, 快步行进的一年</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="lv-container" data-id="city" data-uid="MTAyMC80MzM3My8xOTkxNA=="><script>(function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-})(document, 'script');</script></div></div></div><footer class="footer-bg" style="background-image: url(https://woolni.oss-cn-chengdu.aliyuncs.com/Blog/tech_backgroud.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2015 - 2019 By lydsnm</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-  $('#nav').addClass('is-mobile')
-  $('footer').addClass('is-mobile')
-}</script></body></html>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+     
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/许可证-开源/">许可证, 开源</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/02/01/UITextView,UITextField记录/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">UITextView,UITextField记录</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/12/31/2015停滞, 行进, 停滞, 行进,快步行进的一年/">
+        <span class="next-text nav-default">2015, 停滞, 行进, 停滞, 行进, 快步行进的一年</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+      
+        
+
+<script type="text/javascript">
+  var disqus_shortname = 'donglyu';
+  var disqus_identifier = '2016/01/08/给项目添加一个合适的开源许可证/';
+
+  var disqus_title = "给项目添加一个合适的开源许可证";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+
+
+      
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">lydsnm.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+<!--prettify代码高亮脚本引入-->
+
+    <script src="/plugins/prettify/prettify.js"></script>
+    <script type="text/javascript">
+    jQuery(function($){
+        $('pre').addClass('prettyprint');
+        prettyPrint();
+    });
+    </script>
+
+
+  </body>
+</html>

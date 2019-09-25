@@ -1,43 +1,339 @@
-<!DOCTYPE html><html lang="zh-Hans™"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Objective 4种延时方法简单记录"><meta name="keywords" content="iOS"><meta name="author" content="lydsnm"><meta name="copyright" content="lydsnm"><title>Objective 4种延时方法简单记录 | lydsnm的工作记录</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><link rel="dns-prefetch" href="https://www.google-analytics.com"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<!DOCTYPE html>
+<html lang="zh-Hans™">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
+<meta name="baidu-site-verification" content="hkLiBHH93D">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
-ga('create', 'UA-65933410-1', 'auto');
-ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  copy: {
-    success: 'Copy successfully',
-    error: 'Copy error',
-    noSupport: 'The browser does not support'
-  }
-} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-performSelector方法"><span class="toc-number">1.</span> <span class="toc-text">1.performSelector方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-定时器-NSTimer"><span class="toc-number">2.</span> <span class="toc-text">2.定时器:NSTimer</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-sleep方式"><span class="toc-number">3.</span> <span class="toc-text">3.sleep方式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-GCD方式"><span class="toc-number">4.</span> <span class="toc-text">4.GCD方式</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">lydsnm</div><div class="author-info__description text-center">行远自迩，登高自卑。</div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">37</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">13</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://woolni.oss-cn-chengdu.aliyuncs.com/Blog/tech_backgroud.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">lydsnm的工作记录</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">归档</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="http://life.lydsnm.top">生活</a></span></div><div id="post-info"><div id="post-title">Objective 4种延时方法简单记录</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2015-10-09</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/iOS/">iOS</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>&emsp;OC开发相关注意事项四作为备忘列举了四种延时执行某函数的方法及其一些区别。<br>假如延时1秒时间执行下面的方法。</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)delayMethod &#123; <span class="built_in">NSLog</span>(<span class="string">@"execute"</span>); &#125;</span><br></pre></td></tr></table></figure>
-<h5 id="1-performSelector方法"><a href="#1-performSelector方法" class="headerlink" title="1.performSelector方法"></a>1.<code>performSelector</code>方法</h5><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="keyword">self</span> performSelector:<span class="keyword">@selector</span>(delayMethod) withObject:<span class="literal">nil</span> afterDelay:<span class="number">1.0</span>f];</span><br></pre></td></tr></table></figure>
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Objective 4种延时方法简单记录">
+
+
+
+
+  <meta name="keywords" content="iOS,">
+
+
+
+
+  <link rel="alternate" href="/default" title="LYDSNM'S WORK">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://www.lydsnm.top/2015/10/09/四种延时执行某函数的方法及其一些区别/">
+
+
+<meta name="description" content="&amp;emsp;OC开发相关注意事项四作为备忘列举了四种延时执行某函数的方法及其一些区别。假如延时1秒时间执行下面的方法。 - (void)delayMethod { NSLog(@&amp;quot;execute&amp;quot;); }  1.performSelector方法[self performSelector:@selector(delayMethod) withObject:nil afterDe">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Objective 4种延时方法简单记录">
+<meta property="og:url" content="http://www.lydsnm.top/2015/10/09/四种延时执行某函数的方法及其一些区别/index.html">
+<meta property="og:site_name" content="LYDSNM&#39;S WORK">
+<meta property="og:description" content="&amp;emsp;OC开发相关注意事项四作为备忘列举了四种延时执行某函数的方法及其一些区别。假如延时1秒时间执行下面的方法。 - (void)delayMethod { NSLog(@&amp;quot;execute&amp;quot;); }  1.performSelector方法[self performSelector:@selector(delayMethod) withObject:nil afterDe">
+<meta property="og:locale" content="zh-Hans™">
+<meta property="og:updated_time" content="2018-03-04T15:38:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Objective 4种延时方法简单记录">
+<meta name="twitter:description" content="&amp;emsp;OC开发相关注意事项四作为备忘列举了四种延时执行某函数的方法及其一些区别。假如延时1秒时间执行下面的方法。 - (void)delayMethod { NSLog(@&amp;quot;execute&amp;quot;); }  1.performSelector方法[self performSelector:@selector(delayMethod) withObject:nil afterDe">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+
+  <link href="/plugins/prettify/prettify.css" rel="stylesheet">
+
+
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b733e1eaeacbf8f87d3be047f28c3973";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    <title> Objective 4种延时方法简单记录 - LYDSNM'S WORK </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">LYDSNM'S WORK</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="/">
+                            
+                            
+                                首页
+                            
+                        </a>
+                    </li>
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="/archives">
+                            
+                            
+                                归档
+                            
+                        </a>
+                    </li>
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="http://life.lydsnm.top">
+                            
+                            
+                                生活
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Objective 4种延时方法简单记录
+        
+      </h1>
+
+      <time class="post-time">
+          2015-10-09
+      </time>
+    </header>
+
+
+
+    
+            
+  <div class="toc-container">
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-performSelector方法"><span class="toc-text">1.performSelector方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-定时器-NSTimer"><span class="toc-text">2.定时器:NSTimer</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-sleep方式"><span class="toc-text">3.sleep方式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-GCD方式"><span class="toc-text">4.GCD方式</span></a></li></ol>
+  </div> 
+
+
+            <div class="post-content">
+                <p>&emsp;OC开发相关注意事项四作为备忘列举了四种延时执行某函数的方法及其一些区别。<br>假如延时1秒时间执行下面的方法。</p>
+<pre><code class="objc">- (void)delayMethod { NSLog(@&quot;execute&quot;); }
+</code></pre>
+<h5 id="1-performSelector方法"><a href="#1-performSelector方法" class="headerlink" title="1.performSelector方法"></a>1.<code>performSelector</code>方法</h5><pre><code class="objc">[self performSelector:@selector(delayMethod) withObject:nil afterDelay:1.0f];
+</code></pre>
 <p>此方式要求必须在主线程中执行，否则无效。</p>
 <p>是一种非阻塞的执行方式，</p>
-<h5 id="2-定时器-NSTimer"><a href="#2-定时器-NSTimer" class="headerlink" title="2.定时器:NSTimer"></a>2.定时器:<code>NSTimer</code></h5><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="built_in">NSTimer</span> scheduledTimerWithTimeInterval:<span class="number">1.0</span>f target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(delayMethod) userInfo:<span class="literal">nil</span> repeats:<span class="literal">NO</span>];</span><br></pre></td></tr></table></figure>
+<h5 id="2-定时器-NSTimer"><a href="#2-定时器-NSTimer" class="headerlink" title="2.定时器:NSTimer"></a>2.定时器:<code>NSTimer</code></h5><pre><code class="objc">[NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(delayMethod) userInfo:nil repeats:NO];
+</code></pre>
 <p>此方式要求必须在主线程中执行，否则无效。</p>
 <p>是一种非阻塞的执行方式，</p>
 <p>可以通过NSTimer类的- (void)invalidate;取消执行。</p>
-<h5 id="3-sleep方式"><a href="#3-sleep方式" class="headerlink" title="3.sleep方式"></a>3.<code>sleep</code>方式</h5><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">1.0</span>f]; </span><br><span class="line">[<span class="keyword">self</span> delayMethod];</span><br></pre></td></tr></table></figure>
+<h5 id="3-sleep方式"><a href="#3-sleep方式" class="headerlink" title="3.sleep方式"></a>3.<code>sleep</code>方式</h5><pre><code class="objc">[NSThread sleepForTimeInterval:1.0f]; 
+[self delayMethod];
+</code></pre>
 <p>此方式在主线程和子线程中均可执行。</p>
 <p>是一种阻塞的执行方式，建方放到子线程中，以免卡住界面</p>
 <p>没有找到取消执行的方法。</p>
-<h5 id="4-GCD方式"><a href="#4-GCD方式" class="headerlink" title="4.GCD方式"></a>4.GCD方式</h5><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">double</span> delayInSeconds = <span class="number">1.0</span>; </span><br><span class="line"> __block ViewController* bself = <span class="keyword">self</span>; </span><br><span class="line"> dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * <span class="built_in">NSEC_PER_SEC</span>));</span><br><span class="line">dispatch_after(popTime, dispatch_get_main_queue(), ^(<span class="keyword">void</span>)&#123; </span><br><span class="line"> [bself delayMethod]; &#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="4-GCD方式"><a href="#4-GCD方式" class="headerlink" title="4.GCD方式"></a>4.GCD方式</h5><pre><code class="objc">double delayInSeconds = 1.0; 
+ __block ViewController* bself = self; 
+ dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+dispatch_after(popTime, dispatch_get_main_queue(), ^(void){ 
+ [bself delayMethod]; });
+</code></pre>
 <p>此方式在可以在参数中选择执行的线程。</p>
 <p>是一种非阻塞的执行方式，</p>
 <p>没有找到取消执行的方法。</p>
-</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">lydsnm</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://www.lydsnm.top/2015/10/09/四种延时执行某函数的方法及其一些区别/">http://www.lydsnm.top/2015/10/09/四种延时执行某函数的方法及其一些区别/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/iOS/">iOS</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2015/11/06/Git简易指南/"><i class="fa fa-chevron-left">  </i><span>Git简易指南</span></a></div></nav><div id="lv-container" data-id="city" data-uid="MTAyMC80MzM3My8xOTkxNA=="><script>(function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-})(document, 'script');</script></div></div></div><footer class="footer-bg" style="background-image: url(https://woolni.oss-cn-chengdu.aliyuncs.com/Blog/tech_backgroud.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2015 - 2019 By lydsnm</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-  $('#nav').addClass('is-mobile')
-  $('footer').addClass('is-mobile')
-}</script></body></html>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+     
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/iOS/">iOS</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/11/06/Git简易指南/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Git简易指南</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+      
+        
+
+<script type="text/javascript">
+  var disqus_shortname = 'donglyu';
+  var disqus_identifier = '2015/10/09/四种延时执行某函数的方法及其一些区别/';
+
+  var disqus_title = "Objective 4种延时方法简单记录";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+
+
+      
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">lydsnm.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+<!--prettify代码高亮脚本引入-->
+
+    <script src="/plugins/prettify/prettify.js"></script>
+    <script type="text/javascript">
+    jQuery(function($){
+        $('pre').addClass('prettyprint');
+        prettyPrint();
+    });
+    </script>
+
+
+  </body>
+</html>

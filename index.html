@@ -1,58 +1,517 @@
-<!DOCTYPE html><html lang="zh-Hans™"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="行远自迩，登高自卑。"><meta name="keywords" content><meta name="author" content="lydsnm"><meta name="copyright" content="lydsnm"><title>行远自迩，登高自卑。 | lydsnm的工作记录</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><link rel="dns-prefetch" href="https://www.google-analytics.com"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<!DOCTYPE html>
+<html lang="zh-Hans™">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
+<meta name="baidu-site-verification" content="hkLiBHH93D">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
-ga('create', 'UA-65933410-1', 'auto');
-ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  copy: {
-    success: 'Copy successfully',
-    error: 'Copy error',
-    noSupport: 'The browser does not support'
-  }
-} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">lydsnm</div><div class="author-info__description text-center">行远自迩，登高自卑。</div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">37</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">13</span></a></div></div></div><nav id="nav" style="background-image: url(https://woolni.oss-cn-chengdu.aliyuncs.com/Blog/tech_backgroud.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">lydsnm的工作记录</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">归档</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="http://life.lydsnm.top">生活</a></span></div><div id="site-info"><div id="site-title">lydsnm的工作记录</div><div id="site-sub-title">行远自迩，登高自卑。</div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2019/09/19/2019-09-19-Android开发过程的中概念点/">Android开发过程的中概念点梳理</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-09-19</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Android/">Android</a></span><div class="content"><ul>
-<li>EventBus和RxJava的区别</li>
-</ul>
-<p>EventBus是一个<strong>发布 / 订阅的事件总线</strong>。简单点说，就是两人约定好怎么通信，一人发布消息，另外一个约定好的人立马接收到你发的消息。<br>Rx：<strong>函数响应式编程</strong> ，响应式代码的基本组成部分是Observables和Subscribers（事实上Observer才是最小的构建块，但实践中使用最多的是Subscriber，因为Subscriber才是和Observables的对应的。）。Observable发送消息，而Subscriber则用于消费消息。</p>
-<p>主要区别是，rx里面当建立起订阅关系时，你可以用操作符做任何处理（比如转换数据，更改数据等等），而且他能处理异步的操作。 eventbus 就相当于广播，发送了，总能接收到，他在发送后是不能做任何的数据改变，如果要改变，又要重新post一次。</p>
-<p>EventBus有个缺点就是凡是使用了EventBus的类都不能进行混淆了，否则Evnetbus就找不到OnEvent方法了。</p>
-<ul>
-<li>synchronized</li>
-</ul>
-<p>使用synchronized修饰代码块时，每个类又且仅有一个锁（针对静态方法），每个类的示例也是有且仅有一个锁。</p>
-<p>synchronized具有有两种使用方法，第一种是修饰方法，第二种修饰代码块。无论哪种方法，被修饰的内容都会同步执行。这也是synchronized的作用。关于两种方法的使用：对于修饰方法常常会发生不必要的代码块被同步，同时锁不可以选择，但是使用简单。对于修饰代码块方法用起来更精确，需要自己制定锁，用起来稍微麻烦一点。</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/09/18/2019-08-28-Rxjava梳理学习/">RxJava梳理学习</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-09-18</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Android/">Android</a></span><div class="content"><p>Rxjava就是实现<code>异步操作</code>的库。</p>
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="行远自迩，登高自卑。">
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="LYDSNM'S WORK">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://www.lydsnm.top/">
+
+
+<meta name="description" content="行远自迩，登高自卑。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="LYDSNM&#39;S WORK">
+<meta property="og:url" content="http://www.lydsnm.top/index.html">
+<meta property="og:site_name" content="LYDSNM&#39;S WORK">
+<meta property="og:description" content="行远自迩，登高自卑。">
+<meta property="og:locale" content="zh-Hans™">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LYDSNM&#39;S WORK">
+<meta name="twitter:description" content="行远自迩，登高自卑。">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+
+  <link href="/plugins/prettify/prettify.css" rel="stylesheet">
+
+
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b733e1eaeacbf8f87d3be047f28c3973";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    <title> LYDSNM'S WORK </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">LYDSNM'S WORK</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="/">
+                            
+                            
+                                首页
+                            
+                        </a>
+                    </li>
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="/archives">
+                            
+                            
+                                归档
+                            
+                        </a>
+                    </li>
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="http://life.lydsnm.top">
+                            
+                            
+                                生活
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary" class="home">
+        
+            
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2019/09/19/2019-09-19-Android开发过程的中概念点/">Android开发过程的中概念点梳理</a>
+        
+      </h1>
+
+      <time class="post-time">
+          2019-09-19
+      </time>
+    </header>
+
+
+
+    
+        <div class="post-excerpt">
+            
+            
+              
+            
+
+            
+              <p>太南了，因业务需求需求，不得不开始学习 Android 开发，这篇文章来记录一些基础概念。<br>后续持续添加，防止遗忘也能偶尔翻来看看~</p>
+        </div>
+            
+          
+
+    
+  </article>
+
+        
+            
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2019/09/18/2019-08-28-Rxjava梳理学习/">RxJava梳理学习</a>
+        
+      </h1>
+
+      <time class="post-time">
+          2019-09-18
+      </time>
+    </header>
+
+
+
+    
+        <div class="post-excerpt">
+            
+            
+              
+            
+
+            
+              <p>Rxjava就是实现<code>异步操作</code>的库。</p>
 <p>RxJava 的优势也是简洁，随着程序逻辑变得越来越复杂，它依然能够保持简洁。</p>
-<h2 id="Observer-Subscriber-：观察者"><a href="#Observer-Subscriber-：观察者" class="headerlink" title="Observer(Subscriber)：观察者"></a>Observer(Subscriber)：观察者</h2><p>Observer 决定事件触发的时候将有怎样的行为。<br>RxJava 中的 Observer 接口的实现方式:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Observer&lt;String&gt; observer = <span class="keyword">new</span> Observer&lt;String&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        Log.d(tag, <span class="string">"Item: "</span> + s);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCompleted</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Log.d(tag, <span class="string">"Completed!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable e)</span> </span>&#123;</span><br><span class="line">        Log.d(tag, <span class="string">"Error!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div><a class="more" href="/2019/09/18/2019-08-28-Rxjava梳理学习/#more">Read more</a><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/05/22/2019-05-22-收集的有意思的开发相关/">收集的有意思的开发相关</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-05-22</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/工具/">工具</a></span><div class="content"><p>持续更新….</p>
-<h2 id="网页前端"><a href="#网页前端" class="headerlink" title="网页前端"></a>网页前端</h2><ul>
+<p>这篇文章记录一下最核心的内容，不包含更进阶的用法~</p>
+        </div>
+            
+          
+
+    
+  </article>
+
+        
+            
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2019/05/22/2019-05-22-收集的有意思的开发相关/">工作中收集的有用工具（持续更新）</a>
+        
+      </h1>
+
+      <time class="post-time">
+          2019-05-22
+      </time>
+    </header>
+
+
+
+    
+        <div class="post-excerpt">
+            
+            
+              
+            
+
+            
+              <p>工作中遇到了很多的工具，很多都一股脑门的保存在浏览器书签里了，没事儿翻翻很多还是很有用的。翻出来贴在这儿，说不一定就对你有用了呢。</p>
+<h2 id="网页"><a href="#网页" class="headerlink" title="网页"></a>网页</h2><ul>
 <li><p><a href="https://cssfx.dev/" target="_blank" rel="noopener">Beautifully simple click-to-copy CSS effects</a><br>它提供了一些优雅、酷炫的 CSS 动画效果，让你轻点鼠标便能直接复制样式，非常方便。做 Web 开发的同学可以收藏备用一下。 ​​​​</p>
 </li>
 <li><p><a href="https://chrome.google.com/webstore/detail/沙拉查词-聚合词典划词翻译/cdonnmffkdaoajfknoeeecmchibpmkmg?hl=en" target="_blank" rel="noopener">谷歌浏览器插件——沙拉查词</a><br>很好用的一款浏览器上用的查词插件，因为有了这个，我把有道词典都卸载了。查看英文文档很方便，支持英英翻译、划词等等很多功能，强烈推荐。</p>
 </li>
 </ul>
-<p><img src="https://woolni.oss-cn-chengdu.aliyuncs.com/Blog/沙拉查词预览.png" width="320"></p></div><a class="more" href="/2019/05/22/2019-05-22-收集的有意思的开发相关/#more">Read more</a><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/12/09/面试问题实记/">面试问题实记</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-09</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/职业生涯/">职业生涯</a></span><div class="content"><p>整理一下这期面试部分问题点，记录一下，时刻督促自己，保持警惕~</p>
-<h2 id="layer层，还有哪些layer子类，有些什么作用。"><a href="#layer层，还有哪些layer子类，有些什么作用。" class="headerlink" title="layer层，还有哪些layer子类，有些什么作用。"></a>layer层，还有哪些layer子类，有些什么作用。</h2><blockquote>
-<p>CATextLayer（CALayer的一个子类，专门用来显示文字）<br>CAGradientLayer(渐变图层）<br>CAShapeLayer（波浪）<br>CATiledLayer（专为加载超大图.eg:地图资源）<br>CATransformLayer（3D变换、3D动画）<br>CAGradientLayer （渐变色Layer）<br>CAReplicatorLayer （<a href="https://www.cnblogs.com/xianfeng-zhang/p/7759919.html" target="_blank" rel="noopener">复制图层（多个相同图层组合起来动画）</a>）<br>CAScrollLayer  （滚动图层：for scrollView负责显示）<br>CAEmitterLayer （粒子发生器系统。用来创建实时的粒子动画：烟雾，火，雨，雪等。）<br>CAEAGLLayer （用来显示任意的OpenGL图形。OpenGL由近350个不同的函数调用组成，用来从简单的图元绘制复杂的三维景象，主要用途是CAD、科学可视化程序、虚拟现实、游戏程序设计。）<br>AVPlayerLayer （视频图层：本地网络视频播放AVPlayer）</p>
-</blockquote>
-<p>CATextLayer使用CoreText进行绘制，渲染速度比使用WebKit的UILabel快很多。而且UILabel主要是管理内容，CATextLayer则是绘制内容、渲染文本。</p></div><a class="more" href="/2018/12/09/面试问题实记/#more">Read more</a><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/12/03/近期面试体验/">近期换工作了</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-03</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/杂想/">杂想</a></span><div class="content"><p>&emsp;&emsp;近期换工作，面试了很多家。突发发现我的很多表述能力还有“很大的潜力”。上家公司呆久了，没用到的基础性的知识，模糊的很，趁这个时候好好看了下，捡起来不少。</p></div><a class="more" href="/2018/12/03/近期面试体验/#more">Read more</a><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/08/30/Slice更新1.0.1/">Slice 1.0.1 —— Mac提升个人效率的一个小工具</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-08-30</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/tools/">tools</a></span><div class="content"><h2 id="一、Slice更新："><a href="#一、Slice更新：" class="headerlink" title="一、Slice更新："></a>一、Slice更新：</h2><p><img src="https://woolni.oss-cn-chengdu.aliyuncs.com/Blog/slice_preview.webp" alt="SlicePreview"></p>
-<h2 id="2019-3-26-更新"><a href="#2019-3-26-更新" class="headerlink" title="2019-3-26 更新"></a>2019-3-26 更新</h2><p>&emsp;&emsp;现开源在<a href="https://github.com/donglyu/DDNotice" target="_blank" rel="noopener">Github</a>，有兴趣的朋友可自行修改编译。<br>后续我可能会缩小占用的区域，只在状态栏上显示倒计时时间。</p>
-<hr>
-<p>&emsp;&emsp;你是否有这样的体验，如果给你一上午的周末时间，可能会想着反正时间也多，打扫个卫生，刷刷微博一上午就过去，但如果是把这些时间划分成15分钟的片段，每个片段做一件事，一上午能做的事绝对超出你的想象。</p>
-<p>&emsp;&emsp;在短暂的片刻时间内，指定一个几十分钟内要完成的任务。这几十分钟内只专做这件事，不要被其他打扰。只有倒计时才会给人紧迫感。与其在期望未来虚幻的成就，不如着眼现在，把握即将到来的一小段时间。</p>
-<p>&emsp;&emsp;我个人也在用这个软件，使用下来，确实提升了不少效率。</p></div><a class="more" href="/2018/08/30/Slice更新1.0.1/#more">Read more</a><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/07/03/2018-07-03应用审核通过，但是内购项目一直处于正在审核中/">应用审核通过，但是内购项目一直处于正在审核中</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-07-03</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/iOS/">iOS</a></span><div class="content"><p>&emsp;&emsp;近期应用上架会员功能，新增了几个内购项目，按部就班，应用测试通过后，提交应用商店审核。自信的勾选上审核通过后自动发布，可是应用通过审核并自动释放了，内购项目没有通过，导致线上用户版本，点击购买会员获取不到商品信息，没有任何反应，特难受。现在记录一下我的解决过程，希望对其他有遇到这个问题的朋友有所帮助。</p>
-<p>&emsp;&emsp;尝试过重新修改下判断没有商店信息给出提醒，按照一些网友的解决方法：重新提交一个新版本审核，并改成了手动发布。然而事实告诉我，这样并没有用。审核员再次遗漏了我的内购项目。无奈之下，尝试了邮件申诉反馈。</p>
-<p>附：</p>
-<blockquote>
-<p><a href="https://developer.apple.com/" target="_blank" rel="noopener">https://developer.apple.com/</a> -&gt; Contact Us -&gt; App Review -&gt; Other App Review questions -&gt; I would like to <code>get the status of my app</code>。</p>
-</blockquote>
-<p>这是我的选择步骤。</p>
-<p>&emsp;&emsp;第二天，早上8点多邮件有通知，内购通过了，线上版本不用更新可以直接用了（PS：服务器同步要时间，等到下午的时候，会员才可以正常购买）。</p></div><a class="more" href="/2018/07/03/2018-07-03应用审核通过，但是内购项目一直处于正在审核中/#more">Read more</a><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/06/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/">私有API检测系统中是否安装了某款指定的软件</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-06-25</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/iOS/">iOS</a></span><div class="content"><p>&emsp;&emsp;前段时间，在一个积分任务墙的项目，需要跳转到市场去安装App，了需要检测iOS设备已安装应用列表的需求，要能获取到安装情况（包括安装进度啊，完成回调等）。经过一段时间的了解，还算完成了既定任务。</p>
-<h2 id="URL-Scheme"><a href="#URL-Scheme" class="headerlink" title="URL Scheme"></a>URL Scheme</h2><p>&emsp;&emsp;前期考虑过<code>URL Scheme</code>来判断是否安装了某个应用，但是每个app是否设置了URL scheme不知道，而且iOS9上  <code>[[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:url]]</code>的能判断的上限是50个，因此这个实际情况下无法使用。但是我们可能在其他场景下使用到URL Scheme(比如打开系统应用)，可以下面的方法列出所有的URL Scheme，但是哪个scheme是哪个应用就得靠猜了，一个应用也可能有多个URL Scheme。</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">NSArray</span>*)privateURLSchemes&#123;</span><br><span class="line">    <span class="keyword">return</span> [_workspace privateURLSchemes];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">NSArray</span>*)publicURLSchemes&#123;</span><br><span class="line">    <span class="keyword">return</span> [_workspace publicURLSchemes];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><a class="more" href="/2018/06/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/#more">Read more</a><hr></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer class="footer-bg" style="background-image: url(https://woolni.oss-cn-chengdu.aliyuncs.com/Blog/tech_backgroud.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2015 - 2019 By lydsnm</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-  $('#nav').addClass('is-mobile')
-  $('footer').addClass('is-mobile')
-}</script></body></html>
+<p><img src="https://woolni.oss-cn-chengdu.aliyuncs.com/Blog/沙拉查词预览.png" width="320"></p>
+        </div>
+            
+          
+
+    
+  </article>
+
+        
+            
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2018/12/09/面试问题实记/">iOS面试问题实记</a>
+        
+      </h1>
+
+      <time class="post-time">
+          2018-12-09
+      </time>
+    </header>
+
+
+
+    
+        <div class="post-excerpt">
+            
+            
+              
+            
+
+            
+              <p>整理一下这期iOS面试部分问题点，记录一下，时刻督促自己，保持警惕~</p>
+        </div>
+            
+          
+
+    
+  </article>
+
+        
+            
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2018/12/03/近期面试体验/">近期换工作了</a>
+        
+      </h1>
+
+      <time class="post-time">
+          2018-12-03
+      </time>
+    </header>
+
+
+
+    
+        <div class="post-excerpt">
+            
+            
+              
+            
+
+            
+              <p>近期换工作，面试了很多家。突发发现我的很多表述能力还有“很大的潜力”。上家公司呆久了，没用到的基础性的知识，模糊的很，趁这个时候好好看了下，捡起来不少。</p>
+        </div>
+            
+          
+
+    
+  </article>
+
+        
+            
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2018/08/30/Slice更新1.0.1/">Slice 1.0.1 Mac上简约计时工具</a>
+        
+      </h1>
+
+      <time class="post-time">
+          2018-08-30
+      </time>
+    </header>
+
+
+
+    
+        <div class="post-excerpt">
+            
+            
+              
+            
+
+            
+              <h2 id="一、Slice更新："><a href="#一、Slice更新：" class="headerlink" title="一、Slice更新："></a>一、Slice更新：</h2><p><img src="https://woolni.oss-cn-chengdu.aliyuncs.com/Blog/slice_preview.webp" alt="SlicePreview"></p>
+<p>Mac提升个人效率的一个小工具</p>
+<h3 id="2019-3-26-更新"><a href="#2019-3-26-更新" class="headerlink" title="2019-3-26 更新"></a>2019-3-26 更新</h3><p>现开源在<a href="https://github.com/donglyu/DDNotice" target="_blank" rel="noopener">Github</a>，有兴趣的朋友可自行修改编译。<br>后续我可能会缩小占用的区域，只在状态栏上显示倒计时时间。</p>
+<p>你是否有这样的体验，如果给你一上午的周末时间，可能会想着反正时间也多，打扫个卫生，刷刷微博一上午就过去，但如果是把这些时间划分成15分钟的片段，每个片段做一件事，一上午能做的事绝对超出你的想象。</p>
+<p>在短暂的片刻时间内，指定一个几十分钟内要完成的任务。这几十分钟内只专做这件事，不要被其他打扰。只有倒计时才会给人紧迫感。与其在期望未来虚幻的成就，不如着眼现在，把握即将到来的一小段时间。</p>
+<p>我个人也在用这个软件，使用下来，确实提升了不少效率。</p>
+        </div>
+            
+          
+
+    
+  </article>
+
+        
+            
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2018/07/03/2018-07-03应用审核通过，但是内购项目一直处于正在审核中/">iOS应用审核通过，但是内购项目一直处于正在审核中</a>
+        
+      </h1>
+
+      <time class="post-time">
+          2018-07-03
+      </time>
+    </header>
+
+
+
+    
+        <div class="post-excerpt">
+            
+            
+              
+            
+
+            
+              <p>近期应用上架会员功能，新增了几个内购项目，按部就班，应用测试通过后，提交应用商店审核。自信的勾选上审核通过后自动发布，可是应用通过审核并自动释放了，内购项目没有通过，导致线上用户版本，点击购买会员获取不到商品信息，没有任何反应，特难受。现在记录一下我的解决过程，希望对其他有遇到这个问题的朋友有所帮助。</p>
+<p>尝试过重新修改下判断没有商店信息给出提醒，按照一些网友的解决方法：重新提交一个新版本审核，并改成了手动发布。然而事实告诉我，这样并没有用。审核员再次遗漏了我的内购项目。无奈之下，尝试了邮件申诉反馈。</p>
+        </div>
+            
+          
+
+    
+  </article>
+
+        
+            
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2018/06/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/">iOS私有API检测系统中是否安装了某款指定的软件</a>
+        
+      </h1>
+
+      <time class="post-time">
+          2018-06-25
+      </time>
+    </header>
+
+
+
+    
+        <div class="post-excerpt">
+            
+            
+              
+            
+
+            
+              <p>前段时间，在一个积分任务墙的项目，需要跳转到市场去安装App，需要检测iOS设备已安装应用列表的需求，要能获取到安装情况（包括安装进度啊，完成回调等）。经过一段时间的了解，还算完成了既定任务。这篇记录下使用和尝试过程。</p>
+        </div>
+            
+          
+
+    
+  </article>
+
+        
+        
+  <nav class="pagination">
+    
+    
+      <a class="next" href="/page/2/">
+        <span class="next-text">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+    </div>
+    <div id="secondary">
+    
+
+    
+
+    
+    <section id="tags" class="widget-area widget_tags">
+        <h3 class="widget-title">Tags</h3>
+        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/mvp-mvvm/">mvp mvvm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/up/">up</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coredata/">coredata</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCD/">GCD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/许可证-开源/">许可证, 开源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UITextView-UITextField/">UITextView UITextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCD-同步异步/">GCD 同步异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoaPods/">cocoaPods</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">3</span></li></ul>
+    </section>
+
+
+    
+    <section id="friends" class="widget-area widget_friends">
+        <h3 class="widget-title">友链</h3>
+        <ul class="friend-list">
+        
+            <li class="friend-list-item">
+                <a href="http://life.lydsnm.top" target="_blank" class="friend-list-link">lydsnm生活</a>
+            </li>
+        
+        </ul>
+    </section>
+
+
+</div>
+
+
+      </div>
+      
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">lydsnm.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+<!--prettify代码高亮脚本引入-->
+
+    <script src="/plugins/prettify/prettify.js"></script>
+    <script type="text/javascript">
+    jQuery(function($){
+        $('pre').addClass('prettyprint');
+        prettyPrint();
+    });
+    </script>
+
+
+  </body>
+</html>

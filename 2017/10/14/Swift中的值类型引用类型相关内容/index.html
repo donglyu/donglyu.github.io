@@ -1,31 +1,213 @@
-<!DOCTYPE html><html lang="zh-Hans™"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Swift中的值类型引用类型相关内容"><meta name="keywords" content><meta name="author" content="lydsnm"><meta name="copyright" content="lydsnm"><title>Swift中的值类型引用类型相关内容 | lydsnm的工作记录</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><link rel="dns-prefetch" href="https://www.google-analytics.com"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<!DOCTYPE html>
+<html lang="zh-Hans™">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
+<meta name="baidu-site-verification" content="hkLiBHH93D">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
-ga('create', 'UA-65933410-1', 'auto');
-ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  copy: {
-    success: 'Copy successfully',
-    error: 'Copy error',
-    noSupport: 'The browser does not support'
-  }
-} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Swift中的值类型和引用类型"><span class="toc-number">1.</span> <span class="toc-text">一、Swift中的值类型和引用类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-值类型和引用类型是啥"><span class="toc-number">1.1.</span> <span class="toc-text">1.值类型和引用类型是啥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-什么时候用值引用和引用类型好"><span class="toc-number">1.2.</span> <span class="toc-text">2.什么时候用值引用和引用类型好</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-值类型和引用类型的存储"><span class="toc-number">1.3.</span> <span class="toc-text">3.值类型和引用类型的存储</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Swift中的Array"><span class="toc-number">2.</span> <span class="toc-text">二、Swift中的Array</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">lydsnm</div><div class="author-info__description text-center">行远自迩，登高自卑。</div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">37</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">13</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://woolni.oss-cn-chengdu.aliyuncs.com/Blog/tech_backgroud.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">lydsnm的工作记录</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">归档</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="http://life.lydsnm.top">生活</a></span></div><div id="post-info"><div id="post-title">Swift中的值类型引用类型相关内容</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2017-10-14</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Swift/">Swift</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="一、Swift中的值类型和引用类型"><a href="#一、Swift中的值类型和引用类型" class="headerlink" title="一、Swift中的值类型和引用类型"></a>一、Swift中的值类型和引用类型</h2><h3 id="1-值类型和引用类型是啥"><a href="#1-值类型和引用类型是啥" class="headerlink" title="1.值类型和引用类型是啥"></a>1.值类型和引用类型是啥</h3><p>&emsp;&emsp;最近在用Swift写些小东西，发现Swift中的值类型和引用类型好像有些奇怪，包括之前了解到的NSArray和Array之间的关系，有些混淆了。现在静下来来学习下，记录一下，防止后面犯错。</p>
-<p>&emsp;&emsp;首先来过一下基础概念：什么是值类型和引用类型。</p>
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Swift中的值类型引用类型相关内容">
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="LYDSNM'S WORK">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://www.lydsnm.top/2017/10/14/Swift中的值类型引用类型相关内容/">
+
+
+<meta name="description" content="一、Swift中的值类型和引用类型1.值类型和引用类型是啥最近在用Swift写些小东西，发现Swift中的值类型和引用类型好像有些奇怪，包括之前了解到的NSArray和Array之间的关系，有些混淆了。现在静下来来学习下，记录一下，防止后面犯错。 首先来过一下基础概念：什么是值类型和引用类型。   值类型：每个实例都拥有数据的一份副本。当被赋值给一个变量或常量，或传递给一个函数时，它都会拷贝一份新">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift中的值类型引用类型相关内容">
+<meta property="og:url" content="http://www.lydsnm.top/2017/10/14/Swift中的值类型引用类型相关内容/index.html">
+<meta property="og:site_name" content="LYDSNM&#39;S WORK">
+<meta property="og:description" content="一、Swift中的值类型和引用类型1.值类型和引用类型是啥最近在用Swift写些小东西，发现Swift中的值类型和引用类型好像有些奇怪，包括之前了解到的NSArray和Array之间的关系，有些混淆了。现在静下来来学习下，记录一下，防止后面犯错。 首先来过一下基础概念：什么是值类型和引用类型。   值类型：每个实例都拥有数据的一份副本。当被赋值给一个变量或常量，或传递给一个函数时，它都会拷贝一份新">
+<meta property="og:locale" content="zh-Hans™">
+<meta property="og:image" content="http://cc.cocimg.com/api/uploads//20180503/1525333385999865.png">
+<meta property="og:updated_time" content="2019-09-25T14:57:14.903Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift中的值类型引用类型相关内容">
+<meta name="twitter:description" content="一、Swift中的值类型和引用类型1.值类型和引用类型是啥最近在用Swift写些小东西，发现Swift中的值类型和引用类型好像有些奇怪，包括之前了解到的NSArray和Array之间的关系，有些混淆了。现在静下来来学习下，记录一下，防止后面犯错。 首先来过一下基础概念：什么是值类型和引用类型。   值类型：每个实例都拥有数据的一份副本。当被赋值给一个变量或常量，或传递给一个函数时，它都会拷贝一份新">
+<meta name="twitter:image" content="http://cc.cocimg.com/api/uploads//20180503/1525333385999865.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+
+  <link href="/plugins/prettify/prettify.css" rel="stylesheet">
+
+
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b733e1eaeacbf8f87d3be047f28c3973";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    <title> Swift中的值类型引用类型相关内容 - LYDSNM'S WORK </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">LYDSNM'S WORK</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="/">
+                            
+                            
+                                首页
+                            
+                        </a>
+                    </li>
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="/archives">
+                            
+                            
+                                归档
+                            
+                        </a>
+                    </li>
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="http://life.lydsnm.top">
+                            
+                            
+                                生活
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Swift中的值类型引用类型相关内容
+        
+      </h1>
+
+      <time class="post-time">
+          2017-10-14
+      </time>
+    </header>
+
+
+
+    
+            
+  <div class="toc-container">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Swift中的值类型和引用类型"><span class="toc-text">一、Swift中的值类型和引用类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-值类型和引用类型是啥"><span class="toc-text">1.值类型和引用类型是啥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-什么时候用值引用和引用类型好"><span class="toc-text">2.什么时候用值引用和引用类型好</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-值类型和引用类型的存储"><span class="toc-text">3.值类型和引用类型的存储</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Swift中的Array"><span class="toc-text">二、Swift中的Array</span></a></li></ol>
+  </div> 
+
+
+            <div class="post-content">
+                <h2 id="一、Swift中的值类型和引用类型"><a href="#一、Swift中的值类型和引用类型" class="headerlink" title="一、Swift中的值类型和引用类型"></a>一、Swift中的值类型和引用类型</h2><h3 id="1-值类型和引用类型是啥"><a href="#1-值类型和引用类型是啥" class="headerlink" title="1.值类型和引用类型是啥"></a>1.值类型和引用类型是啥</h3><p>最近在用Swift写些小东西，发现Swift中的值类型和引用类型好像有些奇怪，包括之前了解到的NSArray和Array之间的关系，有些混淆了。现在静下来来学习下，记录一下，防止后面犯错。</p>
+<p>首先来过一下基础概念：什么是值类型和引用类型。</p>
 <blockquote>
 <ul>
 <li>值类型：每个实例都拥有数据的一份副本。当被赋值给一个变量或常量，或传递给一个函数时，它都会拷贝一份新的副本。</li>
 <li>引用类型：所有实例共享一个数据副本。当被赋值给一个变量或常量，或传递给一个函数时候，一个引用类型一旦被初始化，会返回一个指向已存在实例的引用。</li>
 </ul>
 </blockquote>
-<p>&emsp;&emsp;类(class)是一个引用类型，复制一个引用，即表示建立一个共享的实例。复制之后，两个变量都使用数据中同一份实例。<br>&emsp;&emsp;类(Class)是一个引用类型，意味着类中的变量不会存储实例，而是一个向内存(堆)中存储该实例位置的引用。</p>
+<p>类(class)是一个引用类型，复制一个引用，即表示建立一个共享的实例。复制之后，两个变量都使用数据中同一份实例。</p>
+<p>类(Class)是一个引用类型，意味着类中的变量不会存储实例，而是一个向内存(堆)中存储该实例位置的引用。</p>
 <a id="more"></a>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">"张三"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> badStudent = <span class="type">People</span>()</span><br><span class="line"><span class="keyword">var</span> goodStudent = badStudent</span><br><span class="line"></span><br><span class="line">goodStudent.name = <span class="string">"李四"</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"badStudent's name:\(badStudent)"</span>) <span class="comment">// 李四</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"goodStudent's name:\(goodStudent)"</span>) <span class="comment">// 李四</span></span><br><span class="line"><span class="comment">// 修改goodStudent中的内容就相当于修改badStudent。它们所代表的是同一个东西。</span></span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;但除了Class外，Swift还有一种常用的类型：结构体。而结构体就是一个值类型。而Swift中用Struct的场景变多了。<br>类似<code>Array</code>、<code>Dictonary</code>。</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">People</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">"张三"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> firstStudent = <span class="type">People</span>()</span><br><span class="line"><span class="keyword">var</span> secondStudent = firstStudent</span><br><span class="line"></span><br><span class="line">firstStudent.name = <span class="string">"李四"</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"firstStudent's name:\(firstStudent)"</span>) <span class="comment">// 李四</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"secondStudent's name:\(secondStudent)"</span>) <span class="comment">// 张三</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// secondStudent用firstStudent赋值后，就是一个独立的数据实例了。</span></span><br></pre></td></tr></table></figure>
+<pre><code class="swift">class People{
+    var name = &quot;张三&quot;
+}
+
+var badStudent = People()
+var goodStudent = badStudent
+
+goodStudent.name = &quot;李四&quot;
+
+print(&quot;badStudent&#39;s name:\(badStudent)&quot;) // 李四
+print(&quot;goodStudent&#39;s name:\(goodStudent)&quot;) // 李四
+// 修改goodStudent中的内容就相当于修改badStudent。它们所代表的是同一个东西。
+
+</code></pre>
+<p>但除了Class外，Swift还有一种常用的类型：结构体。而结构体就是一个值类型。而Swift中用Struct的场景变多了。<br>类似<code>Array</code>、<code>Dictonary</code>。</p>
+<pre><code class="swift">struct People{
+    var name = &quot;张三&quot;
+}
+
+var firstStudent = People()
+var secondStudent = firstStudent
+
+firstStudent.name = &quot;李四&quot;
+print(&quot;firstStudent&#39;s name:\(firstStudent)&quot;) // 李四
+print(&quot;secondStudent&#39;s name:\(secondStudent)&quot;) // 张三
+
+// secondStudent用firstStudent赋值后，就是一个独立的数据实例了。
+
+</code></pre>
 <p>当然，Swift中值类型和引用类型还有很多：</p>
 <p><img src="http://cc.cocimg.com/api/uploads//20180503/1525333385999865.png" alt="Swift中值类型和引用类型表"></p>
 <blockquote>
@@ -46,26 +228,171 @@ ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = {
 <h3 id="3-值类型和引用类型的存储"><a href="#3-值类型和引用类型的存储" class="headerlink" title="3.值类型和引用类型的存储"></a>3.值类型和引用类型的存储</h3><blockquote>
 <p>值类型-在栈内存中存储、而引用类型-在托管堆内存中存储。</p>
 </blockquote>
-<p>&emsp;&emsp;像前面说的，引用类型实例存在堆中，值类型实例比如结构存在于一个称为栈的内存区域中。如果值类型实例是一个类的一部分，值会和类一起存在堆中。</p>
-<p>&emsp;&emsp;栈被用于静态存储分配，栈用于动态存储分配，它们都存在计算机的RAM中。</p>
-<p>&emsp;&emsp;栈被CPU紧密管理并优化，当一个函数创建一个变量，栈会存储这个变量，并在函数退出时候被毁掉。被分配到栈的变量直接存储在内存上，访问这段内存非常快。当一个函数或者方法调用另一个函数，另一个函数再依次调用其他函数等等，直到最后一个函数返回它的值之前，其他所有函数都会保持暂停执行。</p>
-<p>&emsp;&emsp;栈总是按照LIFO顺序保留，最新保留的区块总是会下一个释放。这使得跟踪记录栈非常简单，释放一个栈上的区块不过是调整一个指针。因为栈非常组织有序，所以它快捷高效。</p>
-<p>&emsp;&emsp;系统使用堆存储被其他对象引用的数据，堆是一大片内存，系统可以从中请求并动态分配内存区块。堆并不会像栈一样自动毁掉它的对象，需要外部工作来处理这些。在苹果设备中ARC就做这个工作。引用数量会被ARC追踪，当它变为0时对象会被释放。因此整个过程(分配，追踪引用，释放)会比栈要慢。所以值类型要快于引用类型。</p>
-<h2 id="二、Swift中的Array"><a href="#二、Swift中的Array" class="headerlink" title="二、Swift中的Array"></a>二、Swift中的Array</h2><p>&emsp;&emsp;在OC中数组可以copy或者mutablecopy，可变数组和不可变数组可以来回拷贝数据。NSArray、NSMutableArray之间是不同点实例，来回处理过后，内部存储的元素其实指针所指向内容都是同一个。</p>
+<p>像前面说的，引用类型实例存在堆中，值类型实例比如结构存在于一个称为栈的内存区域中。如果值类型实例是一个类的一部分，值会和类一起存在堆中。</p>
+<p>栈被用于静态存储分配，栈用于动态存储分配，它们都存在计算机的RAM中。</p>
+<p>栈被CPU紧密管理并优化，当一个函数创建一个变量，栈会存储这个变量，并在函数退出时候被毁掉。被分配到栈的变量直接存储在内存上，访问这段内存非常快。当一个函数或者方法调用另一个函数，另一个函数再依次调用其他函数等等，直到最后一个函数返回它的值之前，其他所有函数都会保持暂停执行。</p>
+<p>栈总是按照LIFO顺序保留，最新保留的区块总是会下一个释放。这使得跟踪记录栈非常简单，释放一个栈上的区块不过是调整一个指针。因为栈非常组织有序，所以它快捷高效。</p>
+<p>系统使用堆存储被其他对象引用的数据，堆是一大片内存，系统可以从中请求并动态分配内存区块。堆并不会像栈一样自动毁掉它的对象，需要外部工作来处理这些。在苹果设备中ARC就做这个工作。引用数量会被ARC追踪，当它变为0时对象会被释放。因此整个过程(分配，追踪引用，释放)会比栈要慢。所以值类型要快于引用类型。</p>
+<h2 id="二、Swift中的Array"><a href="#二、Swift中的Array" class="headerlink" title="二、Swift中的Array"></a>二、Swift中的Array</h2><p>在OC中数组可以copy或者mutablecopy，可变数组和不可变数组可以来回拷贝数据。NSArray、NSMutableArray之间是不同点实例，来回处理过后，内部存储的元素其实指针所指向内容都是同一个。</p>
 <p>而在Swift中常用的数组对象<code>Array</code>。跳转到其定义处：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">struct</span> <span class="title">Array</span>&lt;<span class="title">Element</span>&gt; </span>&#123;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;发现其实Array是一个结构体，是一个值类型，且不自带copy方法的方法，数组分成:可变数组和不可变数组，分别使用let修饰的数组是不可变数组，使用var修饰的数组是可变数组。如果想要实现拷贝方法，则需要对对象实现拷贝方法。即遵守NSCopying协议和实现copyWithZone方法<br>eg:</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 实现NSCopying协议。</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> : <span class="title">NSObject</span>, <span class="title">NSCopying</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name: <span class="type">String</span>?</span><br><span class="line">    <span class="keyword">var</span> age: <span class="type">Int</span>?</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">copyWithZone</span><span class="params">(zone: NSZone)</span></span> -&gt; <span class="type">AnyObject</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> person = <span class="type">Person</span>()</span><br><span class="line">        person.name = <span class="keyword">self</span>.name</span><br><span class="line">        person.age = <span class="keyword">self</span>.age</span><br><span class="line">        <span class="keyword">return</span> person</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;所以在Swift中，像Array、Dictinary和Set这样的值类型集合，注意和OC中的NSArray、NSDictionary和NSSet有区别了。当被传递后，将会拷贝一份副本，之前那份数据的变更后面并不会同步更新过来，这点需要注意点。刚开始在这儿按照OC的惯性思维遇到了数据不一致的问题。另外提一句，像Array、Dictionary和Set这些是通过一个叫写时复制 (copy-on-write)的技术实现。<br>（简单提一下：就是为了提供高效的写时复制特性，我们需要知道一个对象 (比如这里的 NSMutableData) 是否是唯一的。如果它是唯一引用，那么我们就可以直接原地修改对象。否则，我们需要在修改前创建对象的复制。）。</p>
+<pre><code class="swift">public struct Array&lt;Element&gt; {
+//...
+}
+</code></pre>
+<p>发现其实Array是一个结构体，是一个值类型，且不自带copy方法的方法，数组分成:可变数组和不可变数组，分别使用let修饰的数组是不可变数组，使用var修饰的数组是可变数组。如果想要实现拷贝方法，则需要对对象实现拷贝方法。即遵守NSCopying协议和实现copyWithZone方法<br>eg:</p>
+<pre><code class="swift">// 实现NSCopying协议。
+class Person : NSObject, NSCopying {
+    var name: String?
+    var age: Int?
+
+    func copyWithZone(zone: NSZone) -&gt; AnyObject {
+        let person = Person()
+        person.name = self.name
+        person.age = self.age
+        return person
+    }
+}
+</code></pre>
+<p>所以在Swift中，像Array、Dictinary和Set这样的值类型集合，注意和OC中的NSArray、NSDictionary和NSSet有区别了。当被传递后，将会拷贝一份副本，之前那份数据的变更后面并不会同步更新过来，这点需要注意点。刚开始在这儿按照OC的惯性思维遇到了数据不一致的问题。另外提一句，像Array、Dictionary和Set这些是通过一个叫写时复制 (copy-on-write)的技术实现。<br>（简单提一下：就是为了提供高效的写时复制特性，我们需要知道一个对象 (比如这里的 NSMutableData) 是否是唯一的。如果它是唯一引用，那么我们就可以直接原地修改对象。否则，我们需要在修改前创建对象的复制。）。</p>
 <p>—- 完 —-</p>
-</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">lydsnm</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://www.lydsnm.top/2017/10/14/Swift中的值类型引用类型相关内容/">http://www.lydsnm.top/2017/10/14/Swift中的值类型引用类型相关内容/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2017/12/27/苹果的Marzipan/"><i class="fa fa-chevron-left">  </i><span>苹果的Marzipan</span></a></div><div class="next-post pull-right"><a href="/2017/09/08/Swift中常见的$0作用/"><span>Swift中常见的`$0` `$1`有什么用？</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="lv-container" data-id="city" data-uid="MTAyMC80MzM3My8xOTkxNA=="><script>(function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-})(document, 'script');</script></div></div></div><footer class="footer-bg" style="background-image: url(https://woolni.oss-cn-chengdu.aliyuncs.com/Blog/tech_backgroud.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2015 - 2019 By lydsnm</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-  $('#nav').addClass('is-mobile')
-  $('footer').addClass('is-mobile')
-}</script></body></html>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+     
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/12/27/苹果的Marzipan/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">苹果的Marzipan</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/09/08/Swift中常见的$0作用/">
+        <span class="next-text nav-default">Swift中常见的$0和$1有什么用？</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+      
+        
+
+<script type="text/javascript">
+  var disqus_shortname = 'donglyu';
+  var disqus_identifier = '2017/10/14/Swift中的值类型引用类型相关内容/';
+
+  var disqus_title = "Swift中的值类型引用类型相关内容";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+
+
+      
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">lydsnm.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+<!--prettify代码高亮脚本引入-->
+
+    <script src="/plugins/prettify/prettify.js"></script>
+    <script type="text/javascript">
+    jQuery(function($){
+        $('pre').addClass('prettyprint');
+        prettyPrint();
+    });
+    </script>
+
+
+  </body>
+</html>

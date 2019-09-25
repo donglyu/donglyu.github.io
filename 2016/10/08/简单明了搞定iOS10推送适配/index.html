@@ -1,19 +1,175 @@
-<!DOCTYPE html><html lang="zh-Hans™"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="简单明了搞定 iOS 10推送适配"><meta name="keywords" content="iOS10适配,推送"><meta name="author" content="lydsnm"><meta name="copyright" content="lydsnm"><title>简单明了搞定 iOS 10推送适配 | lydsnm的工作记录</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><link rel="dns-prefetch" href="https://www.google-analytics.com"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<!DOCTYPE html>
+<html lang="zh-Hans™">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
+<meta name="baidu-site-verification" content="hkLiBHH93D">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
-ga('create', 'UA-65933410-1', 'auto');
-ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  copy: {
-    success: 'Copy successfully',
-    error: 'Copy error',
-    noSupport: 'The browser does not support'
-  }
-} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-导入头文件"><span class="toc-number">1.</span> <span class="toc-text">1. 导入头文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-遵守协议"><span class="toc-number">2.</span> <span class="toc-text">2. 遵守协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-在application-didFinishLaunchingWithOptions方法中注册推送。"><span class="toc-number">3.</span> <span class="toc-text">3. 在application: didFinishLaunchingWithOptions方法中注册推送。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-APP-未启动-iOS10中遗弃UIApplicationLaunchOptionsRemoteNotificationKey-采用统一的方式来处理-见下一条"><span class="toc-number">4.</span> <span class="toc-text">4. APP 未启动, iOS10中遗弃UIApplicationLaunchOptionsRemoteNotificationKey,采用统一的方式来处理, 见下一条.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-实现接收推送消息的回调方法"><span class="toc-number">5.</span> <span class="toc-text">5. 实现接收推送消息的回调方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-而对于本地推送回调-和以前没有变化"><span class="toc-number">6.</span> <span class="toc-text">6. 而对于本地推送回调, 和以前没有变化:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-其他补充"><span class="toc-number">7.</span> <span class="toc-text">7. 其他补充</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">lydsnm</div><div class="author-info__description text-center">行远自迩，登高自卑。</div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">37</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">13</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://woolni.oss-cn-chengdu.aliyuncs.com/Blog/tech_backgroud.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">lydsnm的工作记录</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">归档</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="http://life.lydsnm.top">生活</a></span></div><div id="post-info"><div id="post-title">简单明了搞定 iOS 10推送适配</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2016-10-08</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/iOS/">iOS</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>iOS 10 更新了后发现正式环境, 推送粗问题了.查了相关资料后, 整理了一下解决办法。 iOS 10后, 增加了<font color="#1E90FF">UNUserNotificationCenter</font>, 并且推送通知的处理要在代理方法</p>
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="简单明了搞定 iOS 10推送适配">
+
+
+
+
+  <meta name="keywords" content="iOS10适配,推送,">
+
+
+
+
+  <link rel="alternate" href="/default" title="LYDSNM'S WORK">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://www.lydsnm.top/2016/10/08/简单明了搞定iOS10推送适配/">
+
+
+<meta name="description" content="iOS 10 更新了后发现正式环境, 推送粗问题了.查了相关资料后, 整理了一下解决办法。 iOS 10后, 增加了UNUserNotificationCenter, 并且推送通知的处理要在代理方法  userNotificationCenter:didReceiveNotificationResponse 推送时 APP 在后台  userNotificationCenter:willPrese">
+<meta name="keywords" content="iOS10适配,推送">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单明了搞定 iOS 10推送适配">
+<meta property="og:url" content="http://www.lydsnm.top/2016/10/08/简单明了搞定iOS10推送适配/index.html">
+<meta property="og:site_name" content="LYDSNM&#39;S WORK">
+<meta property="og:description" content="iOS 10 更新了后发现正式环境, 推送粗问题了.查了相关资料后, 整理了一下解决办法。 iOS 10后, 增加了UNUserNotificationCenter, 并且推送通知的处理要在代理方法  userNotificationCenter:didReceiveNotificationResponse 推送时 APP 在后台  userNotificationCenter:willPrese">
+<meta property="og:locale" content="zh-Hans™">
+<meta property="og:updated_time" content="2018-03-04T05:50:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简单明了搞定 iOS 10推送适配">
+<meta name="twitter:description" content="iOS 10 更新了后发现正式环境, 推送粗问题了.查了相关资料后, 整理了一下解决办法。 iOS 10后, 增加了UNUserNotificationCenter, 并且推送通知的处理要在代理方法  userNotificationCenter:didReceiveNotificationResponse 推送时 APP 在后台  userNotificationCenter:willPrese">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+
+  <link href="/plugins/prettify/prettify.css" rel="stylesheet">
+
+
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b733e1eaeacbf8f87d3be047f28c3973";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    <title> 简单明了搞定 iOS 10推送适配 - LYDSNM'S WORK </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">LYDSNM'S WORK</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="/">
+                            
+                            
+                                首页
+                            
+                        </a>
+                    </li>
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="/archives">
+                            
+                            
+                                归档
+                            
+                        </a>
+                    </li>
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="http://life.lydsnm.top">
+                            
+                            
+                                生活
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          简单明了搞定 iOS 10推送适配
+        
+      </h1>
+
+      <time class="post-time">
+          2016-10-08
+      </time>
+    </header>
+
+
+
+    
+            
+  <div class="toc-container">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-导入头文件"><span class="toc-text">1. 导入头文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-遵守协议"><span class="toc-text">2. 遵守协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-在application-didFinishLaunchingWithOptions方法中注册推送。"><span class="toc-text">3. 在application: didFinishLaunchingWithOptions方法中注册推送。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-APP-未启动-iOS10中遗弃UIApplicationLaunchOptionsRemoteNotificationKey-采用统一的方式来处理-见下一条"><span class="toc-text">4. APP 未启动, iOS10中遗弃UIApplicationLaunchOptionsRemoteNotificationKey,采用统一的方式来处理, 见下一条.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-实现接收推送消息的回调方法"><span class="toc-text">5. 实现接收推送消息的回调方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-而对于本地推送回调-和以前没有变化"><span class="toc-text">6. 而对于本地推送回调, 和以前没有变化:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-其他补充"><span class="toc-text">7. 其他补充</span></a></li></ol>
+  </div> 
+
+
+            <div class="post-content">
+                <p>iOS 10 更新了后发现正式环境, 推送粗问题了.查了相关资料后, 整理了一下解决办法。 iOS 10后, 增加了<font color="#1E90FF">UNUserNotificationCenter</font>, 并且推送通知的处理要在代理方法</p>
 <ul>
 <li><p><font color="#A52A2A">userNotificationCenter:didReceiveNotificationResponse</font> 推送时 APP 在后台</p>
 </li>
@@ -22,10 +178,37 @@ ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = {
 </ul>
 <a id="more"></a>
 <p><br></p>
-<h4 id="1-导入头文件"><a href="#1-导入头文件" class="headerlink" title="1. 导入头文件"></a>1. 导入头文件</h4><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;UserNotifications/UserNotifications.h&gt;</span></span></span><br></pre></td></tr></table></figure>
-<h4 id="2-遵守协议"><a href="#2-遵守协议" class="headerlink" title="2. 遵守协议"></a>2. 遵守协议</h4><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">AppDelegate</span> ()&lt;<span class="title">UNUserNotificationCenterDelegate</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-在application-didFinishLaunchingWithOptions方法中注册推送。"><a href="#3-在application-didFinishLaunchingWithOptions方法中注册推送。" class="headerlink" title="3. 在application: didFinishLaunchingWithOptions方法中注册推送。"></a>3. 在<font color="#1E90FF">application: didFinishLaunchingWithOptions</font>方法中注册推送。</h4><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (kiOS10Later) &#123;  <span class="comment">//iOS10 之后用UNUserNotificationCenter注册通知</span></span><br><span class="line">        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];</span><br><span class="line">        center.delegate = <span class="keyword">self</span>;</span><br><span class="line">        [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(<span class="built_in">BOOL</span> granted, <span class="built_in">NSError</span> * _Nullable error) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!error) &#123;</span><br><span class="line">                [[<span class="built_in">UIApplication</span> sharedApplication] registerForRemoteNotifications];</span><br><span class="line">                <span class="built_in">NSLog</span>(<span class="string">@"OK!"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123; <span class="comment">//iOS10 之前的注册通知</span></span><br><span class="line">        <span class="keyword">if</span> ([[<span class="built_in">UIApplication</span> sharedApplication] respondsToSelector:<span class="keyword">@selector</span>(registerUserNotificationSettings:)]) &#123;</span><br><span class="line">        <span class="built_in">UIUserNotificationSettings</span> *settings = [<span class="built_in">UIUserNotificationSettings</span> settingsForTypes:(<span class="built_in">UIUserNotificationTypeBadge</span> |<span class="built_in">UIUserNotificationTypeSound</span> |<span class="built_in">UIUserNotificationTypeAlert</span>)</span><br><span class="line">                                                                                 categories:<span class="literal">nil</span>];</span><br><span class="line">        [[<span class="built_in">UIApplication</span> sharedApplication] registerUserNotificationSettings:settings];</span><br><span class="line">        [[<span class="built_in">UIApplication</span> sharedApplication] registerForRemoteNotifications];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="4-APP-未启动-iOS10中遗弃UIApplicationLaunchOptionsRemoteNotificationKey-采用统一的方式来处理-见下一条"><a href="#4-APP-未启动-iOS10中遗弃UIApplicationLaunchOptionsRemoteNotificationKey-采用统一的方式来处理-见下一条" class="headerlink" title="4. APP 未启动, iOS10中遗弃UIApplicationLaunchOptionsRemoteNotificationKey,采用统一的方式来处理, 见下一条."></a>4. APP 未启动, iOS10中遗弃<font color="#1E90FF">UIApplicationLaunchOptionsRemoteNotificationKey</font>,采用统一的方式来处理, 见下一条.</h4><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// application: didFinishLaunchingWithOptions 中 iOS 9及以下,还是要保留以下代码</span></span><br><span class="line"> <span class="built_in">NSDictionary</span> *remoteUserInfo = launchOptions[<span class="built_in">UIApplicationLaunchOptionsRemoteNotificationKey</span>];  </span><br><span class="line">    <span class="keyword">if</span> (remoteUserInfo) &#123;  </span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"remoteUserInfo:%@"</span>,remoteUserInfo);  </span><br><span class="line">        <span class="comment">//APP未启动，点击推送消息，iOS10下还是跟以前一样在此获取  </span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="1-导入头文件"><a href="#1-导入头文件" class="headerlink" title="1. 导入头文件"></a>1. 导入头文件</h4><pre><code class="objc">#import &lt;UserNotifications/UserNotifications.h&gt;
+</code></pre>
+<h4 id="2-遵守协议"><a href="#2-遵守协议" class="headerlink" title="2. 遵守协议"></a>2. 遵守协议</h4><pre><code class="objc">@interface AppDelegate ()&lt;UNUserNotificationCenterDelegate&gt;
+
+@end
+</code></pre>
+<h4 id="3-在application-didFinishLaunchingWithOptions方法中注册推送。"><a href="#3-在application-didFinishLaunchingWithOptions方法中注册推送。" class="headerlink" title="3. 在application: didFinishLaunchingWithOptions方法中注册推送。"></a>3. 在<font color="#1E90FF">application: didFinishLaunchingWithOptions</font>方法中注册推送。</h4><pre><code class="objc">if (kiOS10Later) {  //iOS10 之后用UNUserNotificationCenter注册通知
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        center.delegate = self;
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            if (!error) {
+                [[UIApplication sharedApplication] registerForRemoteNotifications];
+                NSLog(@&quot;OK!&quot;);
+            }
+        }];
+    }else{ //iOS10 之前的注册通知
+        if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge |UIUserNotificationTypeSound |UIUserNotificationTypeAlert)
+                                                                                 categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+        }
+    }
+</code></pre>
+<h4 id="4-APP-未启动-iOS10中遗弃UIApplicationLaunchOptionsRemoteNotificationKey-采用统一的方式来处理-见下一条"><a href="#4-APP-未启动-iOS10中遗弃UIApplicationLaunchOptionsRemoteNotificationKey-采用统一的方式来处理-见下一条" class="headerlink" title="4. APP 未启动, iOS10中遗弃UIApplicationLaunchOptionsRemoteNotificationKey,采用统一的方式来处理, 见下一条."></a>4. APP 未启动, iOS10中遗弃<font color="#1E90FF">UIApplicationLaunchOptionsRemoteNotificationKey</font>,采用统一的方式来处理, 见下一条.</h4><pre><code class="objc">// application: didFinishLaunchingWithOptions 中 iOS 9及以下,还是要保留以下代码
+ NSDictionary *remoteUserInfo = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];  
+    if (remoteUserInfo) {  
+        NSLog(@&quot;remoteUserInfo:%@&quot;,remoteUserInfo);  
+        //APP未启动，点击推送消息，iOS10下还是跟以前一样在此获取  
+    }  
+</code></pre>
 <h4 id="5-实现接收推送消息的回调方法"><a href="#5-实现接收推送消息的回调方法" class="headerlink" title="5. 实现接收推送消息的回调方法"></a>5. 实现接收推送消息的回调方法</h4><p>iOS10之前使用<font color="#1E90FF">application: didReceiveRemoteNotification</font> 来进行回调处理，而在iOS10里则要实现用<font color="1E90FF">UNUserNotificationCenterDelegate</font>的两个代理方法： </p>
 <blockquote>
 <ul>
@@ -34,8 +217,35 @@ ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = {
 </li>
 </ul>
 </blockquote>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//iOS10之前 接收推送消息</span></span><br><span class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didReceiveRemoteNotification:(<span class="built_in">NSDictionary</span> *)userInfo fetchCompletionHandler:(<span class="keyword">void</span> (^)(<span class="built_in">UIBackgroundFetchResult</span>))completionHandler &#123;</span><br><span class="line">    Log(<span class="string">@"userInfo: %@"</span>, userInfo);</span><br><span class="line">    <span class="keyword">if</span> ( application.applicationState == <span class="built_in">UIApplicationStateActive</span>) &#123;<span class="comment">// 程序在运行过程中受到推送通知</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">//在background状态受到推送通知</span></span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">    completionHandler(<span class="built_in">UIBackgroundFetchResultNewData</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// iOS 10之后 后台推送消息接收</span></span><br><span class="line">- (<span class="keyword">void</span>)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(<span class="keyword">void</span> (^)())completionHandler&#123;</span><br><span class="line">    <span class="built_in">NSDictionary</span> *userInfo = response.notification.request.content.userInfo;</span><br><span class="line">    <span class="comment">// TO DO</span></span><br><span class="line">    </span><br><span class="line">    completionHandler(<span class="built_in">UIBackgroundFetchResultNewData</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// iOS 10之后 前台推送消息处理.</span></span><br><span class="line">- (<span class="keyword">void</span>)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(<span class="keyword">nonnull</span> UNNotification *)notification withCompletionHandler:(<span class="keyword">nonnull</span> <span class="keyword">void</span> (^)(UNNotificationPresentationOptions))completionHandler&#123;</span><br><span class="line">    DLog(<span class="string">@"iOS 10 Receive Remote Notification in foreground! [willPresentNotification]"</span>);</span><br><span class="line">    <span class="comment">// 可在APP 前台状态下,弹出推送弹窗</span></span><br><span class="line">    completionHandler(UNNotificationPresentationOptionAlert);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="6-而对于本地推送回调-和以前没有变化"><a href="#6-而对于本地推送回调-和以前没有变化" class="headerlink" title="6. 而对于本地推送回调, 和以前没有变化:"></a>6. 而对于本地推送回调, 和以前没有变化:</h4><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didReceiveLocalNotification:(<span class="built_in">UILocalNotification</span> *)notification&#123;</span><br><span class="line">  <span class="comment">// TO DO</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">//iOS10之前 接收推送消息
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    Log(@&quot;userInfo: %@&quot;, userInfo);
+    if ( application.applicationState == UIApplicationStateActive) {// 程序在运行过程中受到推送通知
+    } else { //在background状态受到推送通知
+
+    }
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+// iOS 10之后 后台推送消息接收
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler{
+    NSDictionary *userInfo = response.notification.request.content.userInfo;
+    // TO DO
+
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+// iOS 10之后 前台推送消息处理.
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(nonnull UNNotification *)notification withCompletionHandler:(nonnull void (^)(UNNotificationPresentationOptions))completionHandler{
+    DLog(@&quot;iOS 10 Receive Remote Notification in foreground! [willPresentNotification]&quot;);
+    // 可在APP 前台状态下,弹出推送弹窗
+    completionHandler(UNNotificationPresentationOptionAlert);
+}
+</code></pre>
+<h4 id="6-而对于本地推送回调-和以前没有变化"><a href="#6-而对于本地推送回调-和以前没有变化" class="headerlink" title="6. 而对于本地推送回调, 和以前没有变化:"></a>6. 而对于本地推送回调, 和以前没有变化:</h4><pre><code class="objc">-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+  // TO DO
+}
+</code></pre>
 <p><br></p>
 <h4 id="7-其他补充"><a href="#7-其他补充" class="headerlink" title="7. 其他补充"></a>7. 其他补充</h4><ul>
 <li>对于<font color="#1E90FF">Xcode 8</font>, 默认生成的<font color="#1E90FF">XXX.entitlements</font>中的<font color="#1E90FF">APS Enviroment</font> 发布时,可以不用从development 改成 production. Xcode 在发布时会自动帮我们处理改好.</li>
@@ -43,14 +253,152 @@ ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = {
 <ul>
 <li>推送开关记得要打开;capabilities 里面<font color="#1E90FF">Background Modes–&gt;remote notification&amp;push notification</font></li>
 </ul>
-</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">lydsnm</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://www.lydsnm.top/2016/10/08/简单明了搞定iOS10推送适配/">http://www.lydsnm.top/2016/10/08/简单明了搞定iOS10推送适配/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/iOS10适配/">iOS10适配</a><a class="post-meta__tags" href="/tags/推送/">推送</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2016/10/18/本地推送之定时推送/"><i class="fa fa-chevron-left">  </i><span>本地推送之定时推送</span></a></div><div class="next-post pull-right"><a href="/2016/09/20/OC开发相关注意事项二/"><span>OC开发相关注意事项</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="lv-container" data-id="city" data-uid="MTAyMC80MzM3My8xOTkxNA=="><script>(function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-})(document, 'script');</script></div></div></div><footer class="footer-bg" style="background-image: url(https://woolni.oss-cn-chengdu.aliyuncs.com/Blog/tech_backgroud.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2015 - 2019 By lydsnm</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-  $('#nav').addClass('is-mobile')
-  $('footer').addClass('is-mobile')
-}</script></body></html>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+     
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/iOS10适配/">iOS10适配</a>
+		  
+			<a href="/tags/推送/">推送</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/10/18/本地推送之定时推送/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">本地推送之定时推送</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/09/20/OC开发相关注意事项二/">
+        <span class="next-text nav-default">OC开发相关注意事项</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+      
+        
+
+<script type="text/javascript">
+  var disqus_shortname = 'donglyu';
+  var disqus_identifier = '2016/10/08/简单明了搞定iOS10推送适配/';
+
+  var disqus_title = "简单明了搞定 iOS 10推送适配";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+
+
+      
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">lydsnm.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+<!--prettify代码高亮脚本引入-->
+
+    <script src="/plugins/prettify/prettify.js"></script>
+    <script type="text/javascript">
+    jQuery(function($){
+        $('pre').addClass('prettyprint');
+        prettyPrint();
+    });
+    </script>
+
+
+  </body>
+</html>

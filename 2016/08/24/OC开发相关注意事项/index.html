@@ -1,47 +1,249 @@
-<!DOCTYPE html><html lang="zh-Hans™"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="OC开发相关注意事项"><meta name="keywords" content="iOS"><meta name="author" content="lydsnm"><meta name="copyright" content="lydsnm"><title>OC开发相关注意事项 | lydsnm的工作记录</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><link rel="dns-prefetch" href="https://www.google-analytics.com"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<!DOCTYPE html>
+<html lang="zh-Hans™">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
+<meta name="baidu-site-verification" content="hkLiBHH93D">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
-ga('create', 'UA-65933410-1', 'auto');
-ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  copy: {
-    success: 'Copy successfully',
-    error: 'Copy error',
-    noSupport: 'The browser does not support'
-  }
-} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一些基本信息"><span class="toc-number">1.</span> <span class="toc-text">一些基本信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-内存相关"><span class="toc-number">1.1.</span> <span class="toc-text">1. 内存相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-在类的头文件中尽量少引入其他头文件"><span class="toc-number">1.2.</span> <span class="toc-text">2. 在类的头文件中尽量少引入其他头文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-多用字面量语法-少用与之等价的方法"><span class="toc-number">1.3.</span> <span class="toc-text">3. 多用字面量语法, 少用与之等价的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-多用类型常量-少用-define-预处理指令"><span class="toc-number">1.4.</span> <span class="toc-text">4. 多用类型常量, 少用#define 预处理指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-用枚举表示状态、选项、状态码"><span class="toc-number">1.5.</span> <span class="toc-text">5. 用枚举表示状态、选项、状态码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象、消息、运行期"><span class="toc-number">2.</span> <span class="toc-text">对象、消息、运行期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-理解属性这一概念"><span class="toc-number">2.1.</span> <span class="toc-text">6.理解属性这一概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-在对对象内部尽量直接访问实例变量"><span class="toc-number">2.2.</span> <span class="toc-text">7. 在对对象内部尽量直接访问实例变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-理解”对象等同性”"><span class="toc-number">2.3.</span> <span class="toc-text">8. 理解”对象等同性”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-以”类族模式”隐藏实现细节"><span class="toc-number">2.4.</span> <span class="toc-text">9.以”类族模式”隐藏实现细节.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-理解objc-msgSend的作用"><span class="toc-number">2.5.</span> <span class="toc-text">11. 理解objc_msgSend的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-理解消息转发机制"><span class="toc-number">2.6.</span> <span class="toc-text">12. 理解消息转发机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-理解”类对象”的用意"><span class="toc-number">2.7.</span> <span class="toc-text">14. 理解”类对象”的用意</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">lydsnm</div><div class="author-info__description text-center">行远自迩，登高自卑。</div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">37</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">13</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://woolni.oss-cn-chengdu.aliyuncs.com/Blog/tech_backgroud.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">lydsnm的工作记录</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">归档</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="http://life.lydsnm.top">生活</a></span></div><div id="post-info"><div id="post-title">OC开发相关注意事项</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2016-08-24</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/iOS/">iOS</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="一些基本信息"><a href="#一些基本信息" class="headerlink" title="一些基本信息"></a>一些基本信息</h2><h3 id="1-内存相关"><a href="#1-内存相关" class="headerlink" title="1. 内存相关"></a>1. 内存相关</h3><p>分配在堆中的内存必须直接管理, 而分配在栈中的用于保存变量的内存则会在其栈弹出时自动清理.<br>    Objective-C将堆内存管理抽象出来了. 不需要用malloc及free来分配或释放对象所占内存. Objective-C运行期环境把这部分工作抽象为一套内存管理框架-“引用计数”</p>
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="OC开发相关注意事项">
+
+
+
+
+  <meta name="keywords" content="iOS,">
+
+
+
+
+  <link rel="alternate" href="/default" title="LYDSNM'S WORK">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://www.lydsnm.top/2016/08/24/OC开发相关注意事项/">
+
+
+<meta name="description" content="一些基本信息1. 内存相关分配在堆中的内存必须直接管理, 而分配在栈中的用于保存变量的内存则会在其栈弹出时自动清理.    Objective-C将堆内存管理抽象出来了. 不需要用malloc及free来分配或释放对象所占内存. Objective-C运行期环境把这部分工作抽象为一套内存管理框架-“引用计数” 在OC中, 有时会遇到定义里不含*的变量, 可能会使用栈空间. 这些变量所保存的不是Ob">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OC开发相关注意事项">
+<meta property="og:url" content="http://www.lydsnm.top/2016/08/24/OC开发相关注意事项/index.html">
+<meta property="og:site_name" content="LYDSNM&#39;S WORK">
+<meta property="og:description" content="一些基本信息1. 内存相关分配在堆中的内存必须直接管理, 而分配在栈中的用于保存变量的内存则会在其栈弹出时自动清理.    Objective-C将堆内存管理抽象出来了. 不需要用malloc及free来分配或释放对象所占内存. Objective-C运行期环境把这部分工作抽象为一套内存管理框架-“引用计数” 在OC中, 有时会遇到定义里不含*的变量, 可能会使用栈空间. 这些变量所保存的不是Ob">
+<meta property="og:locale" content="zh-Hans™">
+<meta property="og:updated_time" content="2018-08-30T14:37:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OC开发相关注意事项">
+<meta name="twitter:description" content="一些基本信息1. 内存相关分配在堆中的内存必须直接管理, 而分配在栈中的用于保存变量的内存则会在其栈弹出时自动清理.    Objective-C将堆内存管理抽象出来了. 不需要用malloc及free来分配或释放对象所占内存. Objective-C运行期环境把这部分工作抽象为一套内存管理框架-“引用计数” 在OC中, 有时会遇到定义里不含*的变量, 可能会使用栈空间. 这些变量所保存的不是Ob">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+
+  <link href="/plugins/prettify/prettify.css" rel="stylesheet">
+
+
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b733e1eaeacbf8f87d3be047f28c3973";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    <title> OC开发相关注意事项 - LYDSNM'S WORK </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">LYDSNM'S WORK</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="/">
+                            
+                            
+                                首页
+                            
+                        </a>
+                    </li>
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="/archives">
+                            
+                            
+                                归档
+                            
+                        </a>
+                    </li>
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="http://life.lydsnm.top">
+                            
+                            
+                                生活
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          OC开发相关注意事项
+        
+      </h1>
+
+      <time class="post-time">
+          2016-08-24
+      </time>
+    </header>
+
+
+
+    
+            
+  <div class="toc-container">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一些基本信息"><span class="toc-text">一些基本信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-内存相关"><span class="toc-text">1. 内存相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-在类的头文件中尽量少引入其他头文件"><span class="toc-text">2. 在类的头文件中尽量少引入其他头文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-多用字面量语法-少用与之等价的方法"><span class="toc-text">3. 多用字面量语法, 少用与之等价的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-多用类型常量-少用-define-预处理指令"><span class="toc-text">4. 多用类型常量, 少用#define 预处理指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-用枚举表示状态、选项、状态码"><span class="toc-text">5. 用枚举表示状态、选项、状态码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象、消息、运行期"><span class="toc-text">对象、消息、运行期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-理解属性这一概念"><span class="toc-text">6.理解属性这一概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-在对对象内部尽量直接访问实例变量"><span class="toc-text">7. 在对对象内部尽量直接访问实例变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-理解”对象等同性”"><span class="toc-text">8. 理解”对象等同性”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-以”类族模式”隐藏实现细节"><span class="toc-text">9.以”类族模式”隐藏实现细节.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-理解objc-msgSend的作用"><span class="toc-text">11. 理解objc_msgSend的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-理解消息转发机制"><span class="toc-text">12. 理解消息转发机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-理解”类对象”的用意"><span class="toc-text">14. 理解”类对象”的用意</span></a></li></ol></li></ol>
+  </div> 
+
+
+            <div class="post-content">
+                <h2 id="一些基本信息"><a href="#一些基本信息" class="headerlink" title="一些基本信息"></a>一些基本信息</h2><h3 id="1-内存相关"><a href="#1-内存相关" class="headerlink" title="1. 内存相关"></a>1. 内存相关</h3><p>分配在堆中的内存必须直接管理, 而分配在栈中的用于保存变量的内存则会在其栈弹出时自动清理.<br>    Objective-C将堆内存管理抽象出来了. 不需要用malloc及free来分配或释放对象所占内存. Objective-C运行期环境把这部分工作抽象为一套内存管理框架-“引用计数”</p>
 <p>在OC中, 有时会遇到定义里不含*的变量, 可能会使用<code>栈空间</code>. 这些变量所保存的不是Objective-C对象, 比如CoreGraphics中的CGRect.</p>
 <hr>
 <h3 id="2-在类的头文件中尽量少引入其他头文件"><a href="#2-在类的头文件中尽量少引入其他头文件" class="headerlink" title="2. 在类的头文件中尽量少引入其他头文件"></a>2. 在类的头文件中尽量少引入其他头文件</h3><p>而是采用向前声明(forward declaring)<br>减少类的使用者, 所需引入的头文件数量,减少编译时间.<br>也能解决两个类互相引用的问题</p>
 <a id="more"></a>
 <hr>
 <h3 id="3-多用字面量语法-少用与之等价的方法"><a href="#3-多用字面量语法-少用与之等价的方法" class="headerlink" title="3. 多用字面量语法, 少用与之等价的方法"></a>3. 多用字面量语法, 少用与之等价的方法</h3><p>字面量语法,比如:</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *something = <span class="string">@"Effective Objective-C 2.0"</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//字面数值</span></span><br><span class="line"><span class="built_in">NSNumber</span> *someNumber = [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">1</span>]; -&gt; <span class="built_in">NSNUmber</span> *someNumber = @<span class="number">1</span>;</span><br><span class="line"><span class="comment">//字面量数组</span></span><br><span class="line"><span class="built_in">NSArray</span> *animals = @[<span class="string">@"cat"</span>, <span class="string">@"dog"</span>];<span class="comment">// 数组中若有nil会 抛出异常.</span></span><br><span class="line"><span class="comment">//字面量字典</span></span><br><span class="line"><span class="built_in">NSDictionary</span> *personData = @&#123;</span><br><span class="line"><span class="string">@"firstName"</span> : <span class="string">@"Matt"</span>,</span><br><span class="line"><span class="string">@"lastName"</span> : <span class="string">@"za"</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//可变数组</span></span><br><span class="line">mutableArray[<span class="number">1</span>] = <span class="string">@"dog"</span>;<span class="comment">// 尽量通过下标操作来访问数组, 或者字典中的所对应的元素.</span></span><br></pre></td></tr></table></figure>
+<pre><code class="objc">NSString *something = @&quot;Effective Objective-C 2.0&quot;;
+</code></pre>
+<pre><code class="objc">//字面数值
+NSNumber *someNumber = [NSNumber numberWithInt:1]; -&gt; NSNUmber *someNumber = @1;
+//字面量数组
+NSArray *animals = @[@&quot;cat&quot;, @&quot;dog&quot;];// 数组中若有nil会 抛出异常.
+//字面量字典
+NSDictionary *personData = @{
+@&quot;firstName&quot; : @&quot;Matt&quot;,
+@&quot;lastName&quot; : @&quot;za&quot;
+};
+//可变数组
+mutableArray[1] = @&quot;dog&quot;;// 尽量通过下标操作来访问数组, 或者字典中的所对应的元素.
+</code></pre>
 <hr>
-<h3 id="4-多用类型常量-少用-define-预处理指令"><a href="#4-多用类型常量-少用-define-预处理指令" class="headerlink" title="4. 多用类型常量, 少用#define 预处理指令"></a>4. 多用类型常量, 少用#define 预处理指令</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">NSTimeInterval</span> kAnimationDuration = <span class="number">0.3</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="4-多用类型常量-少用-define-预处理指令"><a href="#4-多用类型常量-少用-define-预处理指令" class="headerlink" title="4. 多用类型常量, 少用#define 预处理指令"></a>4. 多用类型常量, 少用#define 预处理指令</h3><pre><code class="objc">static const NSTimeInterval kAnimationDuration = 0.3;
+</code></pre>
 <p>命名, 若常量局限于某”编译单元”(也就是实现文件中, implementation中),则在前面加字母k; 若常量在类之外可见, 则通常以类名为前缀.<br>尽量不要在头文件中声明预处理指令或定义常量 static const.</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">AnimatedView</span>: <span class="title">UIView</span></span></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">NSTimeInterval</span> kAnimationDuration = <span class="number">0.3</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">AnimatedView</span></span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="comment">// static修饰意味着, 该变量仅局限于此变量的编译单元(在OC语境下, 一般通常指每个类的实现文件(.m))中.</span></span><br><span class="line">如不加<span class="keyword">static</span>, 在另一.m文件中也声明了同名变量, 会抛出常见的duplicate_symbol错误</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">@interface AnimatedView: UIView
+@end
+
+static const NSTimeInterval kAnimationDuration = 0.3;
+
+@implementation AnimatedView
+// ...
+@end
+// static修饰意味着, 该变量仅局限于此变量的编译单元(在OC语境下, 一般通常指每个类的实现文件(.m))中.
+如不加static, 在另一.m文件中也声明了同名变量, 会抛出常见的duplicate_symbol错误
+
+</code></pre>
 <p>实际上, 如果一个变量既声明为static, 有声明为const, 那么编译器根本不会创建符号, 而是想#define预处理指令一样, 把所有遇到的变量都替换成常值. 不过这种方式定义的常量是带有类型信息的, 这点也相当关键.</p>
 <ul>
 <li>通知, 发送者和接受者都需要个外界可见的常量变量(即通知的名称).</li>
 </ul>
 <p>这时,此类变量需放在”全局符号表”(global symbol table)中, 以便可以在定义该变量的编译单元之外使用.</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// In the header file</span></span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> *<span class="keyword">const</span> EOCStringConstant;</span><br><span class="line"></span><br><span class="line"><span class="comment">// In the implementation file</span></span><br><span class="line"><span class="built_in">NSString</span> *<span class="keyword">const</span> EOCStringConstant = <span class="string">@"VALUENOTIFICATION"</span>;</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">// In the header file
+extern NSString *const EOCStringConstant;
+
+// In the implementation file
+NSString *const EOCStringConstant = @&quot;VALUENOTIFICATION&quot;;
+</code></pre>
 <p>常量定义从右至左解读,这里是”一个常量, 而这个常量是个指针, 指向一个NSString对象”<br>这里面的命名要注意谨慎, 避免名称冲突, 最好用与值相关的类名做前缀.</p>
-<h3 id="5-用枚举表示状态、选项、状态码"><a href="#5-用枚举表示状态、选项、状态码" class="headerlink" title="5. 用枚举表示状态、选项、状态码"></a>5. 用枚举表示状态、选项、状态码</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> EOCConnectionStateConnectionState&#123;</span><br><span class="line">	EOCConnectionStateDisconnected = <span class="number">1</span>,</span><br><span class="line">	EOCConnectionStateConnecting,</span><br><span class="line">	EOCConnectionStateConnected,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="5-用枚举表示状态、选项、状态码"><a href="#5-用枚举表示状态、选项、状态码" class="headerlink" title="5. 用枚举表示状态、选项、状态码"></a>5. 用枚举表示状态、选项、状态码</h3><pre><code class="objc">enum EOCConnectionStateConnectionState{
+    EOCConnectionStateDisconnected = 1,
+    EOCConnectionStateConnecting,
+    EOCConnectionStateConnected,
+};
+</code></pre>
 <p>定义可以彼此组合的枚举. 定义的对后, 各选项之间就可通过”按位或操作符”(bitwise OR operator)来组合.</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="built_in">UIViewAutoresizing</span> &#123;</span><br><span class="line">	<span class="built_in">UIViewAutoresizingNone</span>						= <span class="number">0</span>,</span><br><span class="line">	<span class="built_in">UIViewAutoresizingFlexbleLeftMargin</span>		= <span class="number">1</span> &lt;&lt; <span class="number">0</span>,</span><br><span class="line">	<span class="built_in">UIViewAutoresizingFlexbleWidth</span>				= <span class="number">1</span> &lt;&lt; <span class="number">1</span>,</span><br><span class="line">	<span class="built_in">UIViewAutoresizingFlexbleRighMargin</span> 		= <span class="number">1</span> &lt;&lt; <span class="number">2</span>,</span><br><span class="line">	.....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">enum UIViewAutoresizing {
+    UIViewAutoresizingNone                        = 0,
+    UIViewAutoresizingFlexbleLeftMargin        = 1 &lt;&lt; 0,
+    UIViewAutoresizingFlexbleWidth                = 1 &lt;&lt; 1,
+    UIViewAutoresizingFlexbleRighMargin         = 1 &lt;&lt; 2,
+    .....
+}
+
+</code></pre>
 <ul>
 <li>在处理枚举类型的switch语句中不要实现default分支. 这样的话, 加入新枚举之后, 编译器就会提示开发者. switch语句并未处理所有枚举.</li>
 </ul>
 <hr>
 <h2 id="对象、消息、运行期"><a href="#对象、消息、运行期" class="headerlink" title="对象、消息、运行期"></a>对象、消息、运行期</h2><h3 id="6-理解属性这一概念"><a href="#6-理解属性这一概念" class="headerlink" title="6.理解属性这一概念"></a>6.理解属性这一概念</h3><p>属性用来通过存取放方法来访问实例变量, 是OC提供的一个简洁方便管理的抽象机制. @property语法. 如果用了这些属性了, 编译器会自动编写访问这些属性所需的方法, 次过程叫”自动合成”(autosynthesis),并添加对应的实例变量. 也可以在类的实现代码里通过<code>@synthesize</code>语法来指定实例变量的名字</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">@implementaion EOCPerson</span><br><span class="line"><span class="keyword">@synthesize</span> fireName = _myFirstname;</span><br><span class="line"><span class="keyword">@synthesize</span> lastName = _myLastName;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<pre><code class="objc">@implementaion EOCPerson
+@synthesize fireName = _myFirstname;
+@synthesize lastName = _myLastName;
+@end
+</code></pre>
 <p>可通过<code>@dynamic</code>关键字来告诉编译器不要自动创建实现属性所用的实例变量和存取方法.</p>
 <p>修饰属性的特质关键字</p>
 <ul>
@@ -56,7 +258,9 @@ ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = {
 <p><br></p>
 <hr>
 <h3 id="8-理解”对象等同性”"><a href="#8-理解”对象等同性”" class="headerlink" title="8. 理解”对象等同性”"></a>8. 理解”对象等同性”</h3><p>有时,按照==操作符比较出来的结果未必是我们想要的, 该操作比较的是两个指针本身, 而不是所指的对象. 应该使用NSObject协议中声明的<code>isEqual</code><br>NSObject协议中有两个用于判断等同性的关键方法:</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)isEqual:(<span class="keyword">id</span>)object;</span><br><span class="line">- (<span class="built_in">NSUInteger</span>)hash;</span><br></pre></td></tr></table></figure>
+<pre><code class="objc">- (BOOL)isEqual:(id)object;
+- (NSUInteger)hash;
+</code></pre>
 <ul>
 <li><p>若想检测对象的等同性, 请提供<code>isEqual:</code>与<code>hash</code>方法.</p>
 </li>
@@ -96,14 +300,150 @@ ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = {
 <hr>
 <p><br></p>
 <p>本篇文章参考摘自 <font color="#B8860B">Effective Objective-C 2.0 编写高质量 iOS 与 OS X 代码的52个有效方法</font></p>
-</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">lydsnm</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://www.lydsnm.top/2016/08/24/OC开发相关注意事项/">http://www.lydsnm.top/2016/08/24/OC开发相关注意事项/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/iOS/">iOS</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2016/09/20/OC开发相关注意事项二/"><i class="fa fa-chevron-left">  </i><span>OC开发相关注意事项</span></a></div><div class="next-post pull-right"><a href="/2016/08/23/简单整理Swift与Objective-C的不同/"><span>整理下Swift与Objective-C的一些不同</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="lv-container" data-id="city" data-uid="MTAyMC80MzM3My8xOTkxNA=="><script>(function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-})(document, 'script');</script></div></div></div><footer class="footer-bg" style="background-image: url(https://woolni.oss-cn-chengdu.aliyuncs.com/Blog/tech_backgroud.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2015 - 2019 By lydsnm</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-  $('#nav').addClass('is-mobile')
-  $('footer').addClass('is-mobile')
-}</script></body></html>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+     
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/iOS/">iOS</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/09/20/OC开发相关注意事项二/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">OC开发相关注意事项</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/08/23/阶段总结/">
+        <span class="next-text nav-default">阶段总结</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+      
+        
+
+<script type="text/javascript">
+  var disqus_shortname = 'donglyu';
+  var disqus_identifier = '2016/08/24/OC开发相关注意事项/';
+
+  var disqus_title = "OC开发相关注意事项";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+
+
+      
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">lydsnm.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+<!--prettify代码高亮脚本引入-->
+
+    <script src="/plugins/prettify/prettify.js"></script>
+    <script type="text/javascript">
+    jQuery(function($){
+        $('pre').addClass('prettyprint');
+        prettyPrint();
+    });
+    </script>
+
+
+  </body>
+</html>

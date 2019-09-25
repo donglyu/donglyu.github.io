@@ -1,42 +1,430 @@
-<!DOCTYPE html><html lang="zh-Hans™"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="本地推送之定时推送"><meta name="keywords" content="推送"><meta name="author" content="lydsnm"><meta name="copyright" content="lydsnm"><title>本地推送之定时推送 | lydsnm的工作记录</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><link rel="dns-prefetch" href="https://www.google-analytics.com"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<!DOCTYPE html>
+<html lang="zh-Hans™">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
+<meta name="baidu-site-verification" content="hkLiBHH93D">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
-ga('create', 'UA-65933410-1', 'auto');
-ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  copy: {
-    success: 'Copy successfully',
-    error: 'Copy error',
-    noSupport: 'The browser does not support'
-  }
-} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#iOS10-之前-使用旧的本地推送注册方式"><span class="toc-number">1.</span> <span class="toc-text">iOS10 之前, 使用旧的本地推送注册方式:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-在-AppDelegate中代理注册使用通知-和注册远程通知一致"><span class="toc-number">1.1.</span> <span class="toc-text">1. 在 AppDelegate中代理注册使用通知, 和注册远程通知一致</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-注册本地推送-在固定时间推送通知"><span class="toc-number">1.2.</span> <span class="toc-text">2. 注册本地推送,在固定时间推送通知</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-取消本地推送"><span class="toc-number">1.3.</span> <span class="toc-text">3. 取消本地推送</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#iOS-10后本地定时推送"><span class="toc-number">2.</span> <span class="toc-text">iOS 10后本地定时推送</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-注册推送"><span class="toc-number">2.1.</span> <span class="toc-text">1. 注册推送</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-iOS10Later取消推送"><span class="toc-number">2.2.</span> <span class="toc-text">2. iOS10Later取消推送</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充"><span class="toc-number">3.</span> <span class="toc-text">补充</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">lydsnm</div><div class="author-info__description text-center">行远自迩，登高自卑。</div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">37</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">13</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://woolni.oss-cn-chengdu.aliyuncs.com/Blog/tech_backgroud.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">lydsnm的工作记录</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">归档</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="http://life.lydsnm.top">生活</a></span></div><div id="post-info"><div id="post-title">本地推送之定时推送</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2016-10-18</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/iOS/">iOS</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>项目中使用到了定时提醒推送, 故整理记录下来.</p>
-<h2 id="iOS10-之前-使用旧的本地推送注册方式"><a href="#iOS10-之前-使用旧的本地推送注册方式" class="headerlink" title="iOS10 之前, 使用旧的本地推送注册方式:"></a>iOS10 之前, 使用旧的本地推送注册方式:</h2><h3 id="1-在-AppDelegate中代理注册使用通知-和注册远程通知一致"><a href="#1-在-AppDelegate中代理注册使用通知-和注册远程通知一致" class="headerlink" title="1. 在 AppDelegate中代理注册使用通知, 和注册远程通知一致"></a>1. 在 <code>AppDelegate</code>中代理注册使用通知, 和注册远程通知一致</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">UIMutableUserNotificationCategory</span> *categorys = [[<span class="built_in">UIMutableUserNotificationCategory</span> alloc] init];</span><br><span class="line"><span class="built_in">UIUserNotificationSettings</span> *userSettings = [<span class="built_in">UIUserNotificationSettings</span> settingsForTypes:<span class="built_in">UIUserNotificationTypeBadge</span>|<span class="built_in">UIUserNotificationTypeSound</span>|<span class="built_in">UIUserNotificationTypeAlert</span></span><br><span class="line">                                                                                    categories:[<span class="built_in">NSSet</span> setWithObject:categorys]];</span><br><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] registerUserNotificationSettings:userSettings];</span><br><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] registerForRemoteNotifications];</span><br></pre></td></tr></table></figure>
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="本地推送之定时推送">
+
+
+
+
+  <meta name="keywords" content="推送,">
+
+
+
+
+  <link rel="alternate" href="/default" title="LYDSNM'S WORK">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://www.lydsnm.top/2016/10/18/本地推送之定时推送/">
+
+
+<meta name="description" content="项目中使用到了定时提醒推送, 故整理记录下来. iOS10 之前, 使用旧的本地推送注册方式:1. 在 AppDelegate中代理注册使用通知, 和注册远程通知一致 UIMutableUserNotificationCategory *categorys = [[UIMutableUserNotificationCategory alloc] init];  UIUserNotification">
+<meta name="keywords" content="推送">
+<meta property="og:type" content="article">
+<meta property="og:title" content="本地推送之定时推送">
+<meta property="og:url" content="http://www.lydsnm.top/2016/10/18/本地推送之定时推送/index.html">
+<meta property="og:site_name" content="LYDSNM&#39;S WORK">
+<meta property="og:description" content="项目中使用到了定时提醒推送, 故整理记录下来. iOS10 之前, 使用旧的本地推送注册方式:1. 在 AppDelegate中代理注册使用通知, 和注册远程通知一致 UIMutableUserNotificationCategory *categorys = [[UIMutableUserNotificationCategory alloc] init];  UIUserNotification">
+<meta property="og:locale" content="zh-Hans™">
+<meta property="og:updated_time" content="2018-03-04T05:52:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="本地推送之定时推送">
+<meta name="twitter:description" content="项目中使用到了定时提醒推送, 故整理记录下来. iOS10 之前, 使用旧的本地推送注册方式:1. 在 AppDelegate中代理注册使用通知, 和注册远程通知一致 UIMutableUserNotificationCategory *categorys = [[UIMutableUserNotificationCategory alloc] init];  UIUserNotification">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+
+  <link href="/plugins/prettify/prettify.css" rel="stylesheet">
+
+
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b733e1eaeacbf8f87d3be047f28c3973";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    <title> 本地推送之定时推送 - LYDSNM'S WORK </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">LYDSNM'S WORK</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="/">
+                            
+                            
+                                首页
+                            
+                        </a>
+                    </li>
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="/archives">
+                            
+                            
+                                归档
+                            
+                        </a>
+                    </li>
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="http://life.lydsnm.top">
+                            
+                            
+                                生活
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          本地推送之定时推送
+        
+      </h1>
+
+      <time class="post-time">
+          2016-10-18
+      </time>
+    </header>
+
+
+
+    
+            
+  <div class="toc-container">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#iOS10-之前-使用旧的本地推送注册方式"><span class="toc-text">iOS10 之前, 使用旧的本地推送注册方式:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-在-AppDelegate中代理注册使用通知-和注册远程通知一致"><span class="toc-text">1. 在 AppDelegate中代理注册使用通知, 和注册远程通知一致</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-注册本地推送-在固定时间推送通知"><span class="toc-text">2. 注册本地推送,在固定时间推送通知</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-取消本地推送"><span class="toc-text">3. 取消本地推送</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#iOS-10后本地定时推送"><span class="toc-text">iOS 10后本地定时推送</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-注册推送"><span class="toc-text">1. 注册推送</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-iOS10Later取消推送"><span class="toc-text">2. iOS10Later取消推送</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充"><span class="toc-text">补充</span></a></li></ol>
+  </div> 
+
+
+            <div class="post-content">
+                <p>项目中使用到了定时提醒推送, 故整理记录下来.</p>
+<h2 id="iOS10-之前-使用旧的本地推送注册方式"><a href="#iOS10-之前-使用旧的本地推送注册方式" class="headerlink" title="iOS10 之前, 使用旧的本地推送注册方式:"></a>iOS10 之前, 使用旧的本地推送注册方式:</h2><h3 id="1-在-AppDelegate中代理注册使用通知-和注册远程通知一致"><a href="#1-在-AppDelegate中代理注册使用通知-和注册远程通知一致" class="headerlink" title="1. 在 AppDelegate中代理注册使用通知, 和注册远程通知一致"></a>1. 在 <code>AppDelegate</code>中代理注册使用通知, 和注册远程通知一致</h3><pre><code class="objc"> UIMutableUserNotificationCategory *categorys = [[UIMutableUserNotificationCategory alloc] init];
+ UIUserNotificationSettings *userSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert
+                                                                                     categories:[NSSet setWithObject:categorys]];
+ [[UIApplication sharedApplication] registerUserNotificationSettings:userSettings];
+ [[UIApplication sharedApplication] registerForRemoteNotifications];   
+
+</code></pre>
 <a id="more"></a>
-<h3 id="2-注册本地推送-在固定时间推送通知"><a href="#2-注册本地推送-在固定时间推送通知" class="headerlink" title="2. 注册本地推送,在固定时间推送通知"></a>2. 注册本地推送,在固定时间推送通知</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)RegisterLocalNotificationiOS10Before:(<span class="built_in">NSDate</span> *)time&#123;</span><br><span class="line">    <span class="built_in">UILocalNotification</span> *notification = [[<span class="built_in">UILocalNotification</span> alloc] init];</span><br><span class="line">    <span class="comment">// 设置触发通知的时间</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//    NSDate *fireDate = [NSDate dateWithTimeIntervalSinceNow:10];</span></span><br><span class="line">    notification.fireDate = time; <span class="comment">// fireDate</span></span><br><span class="line">    <span class="comment">// 时区</span></span><br><span class="line">    notification.timeZone = [<span class="built_in">NSTimeZone</span> defaultTimeZone];</span><br><span class="line">    <span class="comment">// 设置重复的间隔</span></span><br><span class="line">    notification.repeatInterval = kCFCalendarUnitDay; <span class="comment">// 每天提醒.</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 通知内容</span></span><br><span class="line">    notification.alertTitle = <span class="string">@"时光匆匆，我只在乎你"</span>;</span><br><span class="line">    notification.alertBody = <span class="string">@"今天有什么想要记录和分享吗？"</span>; </span><br><span class="line">    notification.applicationIconBadgeNumber = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 通知被触发时播放的声音</span></span><br><span class="line">    notification.soundName = <span class="built_in">UILocalNotificationDefaultSoundName</span>;</span><br><span class="line">    <span class="comment">// 通知参数</span></span><br><span class="line">    <span class="built_in">NSDictionary</span> *userDict = [<span class="built_in">NSDictionary</span> dictionaryWithObject:LPVMNoticeEveryDayKey forKey:LPVMNoticeEveryDayKey];</span><br><span class="line">    notification.userInfo = userDict;</span><br><span class="line">    </span><br><span class="line">    notification.repeatInterval = <span class="built_in">NSCalendarUnitDay</span>;</span><br><span class="line">    <span class="comment">// 执行通知注册</span></span><br><span class="line">    [[<span class="built_in">UIApplication</span> sharedApplication] scheduleLocalNotification:notification];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="3-取消本地推送"><a href="#3-取消本地推送" class="headerlink" title="3. 取消本地推送"></a>3. 取消本地推送</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)CancelLocalNotificationWithKey:(<span class="built_in">NSString</span> *)key &#123;</span><br><span class="line">    <span class="comment">// 获取所有本地通知数组</span></span><br><span class="line">    <span class="built_in">NSArray</span> *localNotifications = [<span class="built_in">UIApplication</span> sharedApplication].scheduledLocalNotifications;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">UILocalNotification</span> *notification <span class="keyword">in</span> localNotifications) &#123;</span><br><span class="line">        <span class="built_in">NSDictionary</span> *userInfo = notification.userInfo;        </span><br><span class="line">        <span class="keyword">if</span> (userInfo) &#123;</span><br><span class="line">            <span class="comment">// 根据设置通知参数时指定的key来获取通知参数</span></span><br><span class="line">            <span class="built_in">NSString</span> *info = userInfo[key];</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 如果找到需要取消的通知，则取消</span></span><br><span class="line">            <span class="keyword">if</span> (info != <span class="literal">nil</span>) &#123;</span><br><span class="line">                [[<span class="built_in">UIApplication</span> sharedApplication] cancelLocalNotification:notification];</span><br><span class="line">                DLog(<span class="string">@"移除一条注册了的本地推送"</span>);   </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-注册本地推送-在固定时间推送通知"><a href="#2-注册本地推送-在固定时间推送通知" class="headerlink" title="2. 注册本地推送,在固定时间推送通知"></a>2. 注册本地推送,在固定时间推送通知</h3><pre><code class="objc">+ (void)RegisterLocalNotificationiOS10Before:(NSDate *)time{
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    // 设置触发通知的时间
+
+//    NSDate *fireDate = [NSDate dateWithTimeIntervalSinceNow:10];
+    notification.fireDate = time; // fireDate
+    // 时区
+    notification.timeZone = [NSTimeZone defaultTimeZone];
+    // 设置重复的间隔
+    notification.repeatInterval = kCFCalendarUnitDay; // 每天提醒.
+
+    // 通知内容
+    notification.alertTitle = @&quot;时光匆匆，我只在乎你&quot;;
+    notification.alertBody = @&quot;今天有什么想要记录和分享吗？&quot;; 
+    notification.applicationIconBadgeNumber = 1;
+    // 通知被触发时播放的声音
+    notification.soundName = UILocalNotificationDefaultSoundName;
+    // 通知参数
+    NSDictionary *userDict = [NSDictionary dictionaryWithObject:LPVMNoticeEveryDayKey forKey:LPVMNoticeEveryDayKey];
+    notification.userInfo = userDict;
+
+    notification.repeatInterval = NSCalendarUnitDay;
+    // 执行通知注册
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+}
+</code></pre>
+<h3 id="3-取消本地推送"><a href="#3-取消本地推送" class="headerlink" title="3. 取消本地推送"></a>3. 取消本地推送</h3><pre><code class="objc">+ (void)CancelLocalNotificationWithKey:(NSString *)key {
+    // 获取所有本地通知数组
+    NSArray *localNotifications = [UIApplication sharedApplication].scheduledLocalNotifications;
+    for (UILocalNotification *notification in localNotifications) {
+        NSDictionary *userInfo = notification.userInfo;        
+        if (userInfo) {
+            // 根据设置通知参数时指定的key来获取通知参数
+            NSString *info = userInfo[key];
+
+            // 如果找到需要取消的通知，则取消
+            if (info != nil) {
+                [[UIApplication sharedApplication] cancelLocalNotification:notification];
+                DLog(@&quot;移除一条注册了的本地推送&quot;);   
+            }
+        }
+    }
+}
+</code></pre>
 <hr>
 <p><br></p>
-<h2 id="iOS-10后本地定时推送"><a href="#iOS-10后本地定时推送" class="headerlink" title="iOS 10后本地定时推送"></a>iOS 10后本地定时推送</h2><h3 id="1-注册推送"><a href="#1-注册推送" class="headerlink" title="1. 注册推送"></a>1. 注册推送</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)RegisterLocalNotificationiOS10Later:(<span class="built_in">NSDate</span> *)time&#123;</span><br><span class="line">    <span class="comment">// 使用 UNUserNotificationCenter 来管理通知</span></span><br><span class="line">    UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//需创建一个包含待通知内容的 UNMutableNotificationContent 对象，注意不是 UNNotificationContent ,此对象为不可变对象。</span></span><br><span class="line">    UNMutableNotificationContent* content = [[UNMutableNotificationContent alloc] init];</span><br><span class="line">    content.title = [<span class="built_in">NSString</span> localizedUserNotificationStringForKey:<span class="string">@"时光匆匆，我只在乎你"</span> arguments:<span class="literal">nil</span>];</span><br><span class="line">    content.body = [<span class="built_in">NSString</span> localizedUserNotificationStringForKey:<span class="string">@"今天有什么想要记录和分享吗？"</span> arguments:<span class="literal">nil</span>];</span><br><span class="line">    content.sound = [UNNotificationSound defaultSound];</span><br><span class="line">    content.userInfo = [<span class="built_in">NSDictionary</span> dictionaryWithObject:LPVMNoticeEveryDayKey forKey:LPVMNoticeEveryDayKey];</span><br><span class="line">    <span class="comment">// 1.在一段时间后推送本地推送</span></span><br><span class="line">	<span class="comment">//UNTimeIntervalNotificationTrigger* trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:10 repeats:NO];</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSDateComponents</span> *components = [[<span class="built_in">NSDateComponents</span> alloc] init];</span><br><span class="line">    <span class="built_in">NSCalendar</span> *cal = [<span class="built_in">NSCalendar</span> currentCalendar];</span><br><span class="line">    <span class="built_in">NSInteger</span> unitFlags = <span class="built_in">NSCalendarUnitHour</span> | <span class="built_in">NSCalendarUnitMinute</span>;<span class="comment">//NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;</span></span><br><span class="line">    <span class="built_in">NSDateComponents</span> *dd = [cal components:unitFlags fromDate:time];</span><br><span class="line"></span><br><span class="line">    components.hour = [dd hour];</span><br><span class="line">    components.minute = [dd minute]; <span class="comment">// 例如每日21:00时推送</span></span><br><span class="line">    <span class="comment">// 2. 指定日期触发</span></span><br><span class="line">    UNCalendarNotificationTrigger *trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:components repeats:<span class="literal">YES</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 3. 根据位置触发</span></span><br><span class="line">	<span class="comment">//CLLocationCoordinate2D cen = CLLocationCoordinate2DMake(39.990465,116.333386);</span></span><br><span class="line">	<span class="comment">//CLRegion *region = [[CLCircularRegion alloc] initWithCenter:cen radius:100 identifier:@"center"];</span></span><br><span class="line">	<span class="comment">//region.notifyOnEntry = YES;</span></span><br><span class="line">	<span class="comment">//region.notifyOnExit = NO;</span></span><br><span class="line">	<span class="comment">//UNLocationNotificationTrigger *trigger = [UNLocationNotificationTrigger triggerWithRegion:region 	repeats:YES];</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    UNNotificationRequest* request = [UNNotificationRequest requestWithIdentifier:LPVMNoticeEveryDayKey</span><br><span class="line">                                                                          content:content trigger:trigger];</span><br><span class="line">    <span class="comment">//添加推送成功后的处理！</span></span><br><span class="line">    [center addNotificationRequest:request withCompletionHandler:^(<span class="built_in">NSError</span> * _Nullable error) &#123;</span><br><span class="line">        <span class="keyword">if</span> (error) &#123;</span><br><span class="line">            DLog(<span class="string">@"iOS10Later addNotification Error: %@"</span>, error);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="iOS-10后本地定时推送"><a href="#iOS-10后本地定时推送" class="headerlink" title="iOS 10后本地定时推送"></a>iOS 10后本地定时推送</h2><h3 id="1-注册推送"><a href="#1-注册推送" class="headerlink" title="1. 注册推送"></a>1. 注册推送</h3><pre><code class="objc">+ (void)RegisterLocalNotificationiOS10Later:(NSDate *)time{
+    // 使用 UNUserNotificationCenter 来管理通知
+    UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+
+    //需创建一个包含待通知内容的 UNMutableNotificationContent 对象，注意不是 UNNotificationContent ,此对象为不可变对象。
+    UNMutableNotificationContent* content = [[UNMutableNotificationContent alloc] init];
+    content.title = [NSString localizedUserNotificationStringForKey:@&quot;时光匆匆，我只在乎你&quot; arguments:nil];
+    content.body = [NSString localizedUserNotificationStringForKey:@&quot;今天有什么想要记录和分享吗？&quot; arguments:nil];
+    content.sound = [UNNotificationSound defaultSound];
+    content.userInfo = [NSDictionary dictionaryWithObject:LPVMNoticeEveryDayKey forKey:LPVMNoticeEveryDayKey];
+    // 1.在一段时间后推送本地推送
+    //UNTimeIntervalNotificationTrigger* trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:10 repeats:NO];
+
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSInteger unitFlags = NSCalendarUnitHour | NSCalendarUnitMinute;//NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+    NSDateComponents *dd = [cal components:unitFlags fromDate:time];
+
+    components.hour = [dd hour];
+    components.minute = [dd minute]; // 例如每日21:00时推送
+    // 2. 指定日期触发
+    UNCalendarNotificationTrigger *trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:components repeats:YES];
+
+    // 3. 根据位置触发
+    //CLLocationCoordinate2D cen = CLLocationCoordinate2DMake(39.990465,116.333386);
+    //CLRegion *region = [[CLCircularRegion alloc] initWithCenter:cen radius:100 identifier:@&quot;center&quot;];
+    //region.notifyOnEntry = YES;
+    //region.notifyOnExit = NO;
+    //UNLocationNotificationTrigger *trigger = [UNLocationNotificationTrigger triggerWithRegion:region     repeats:YES];
+
+
+    UNNotificationRequest* request = [UNNotificationRequest requestWithIdentifier:LPVMNoticeEveryDayKey
+                                                                          content:content trigger:trigger];
+    //添加推送成功后的处理！
+    [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+        if (error) {
+            DLog(@&quot;iOS10Later addNotification Error: %@&quot;, error);
+        }
+
+    }];
+}
+
+
+</code></pre>
 <p>说明:<br>有4种触发器</p>
 <p><code>UNPushNotificationTrigger</code> 触发APNS服务，系统自动设置（这是区分本地通知和远程通知的标识)</p>
 <p><code>UNTimeIntervalNotificationTrigger</code> 一段时间后触发</p>
 <p><code>UNCalendarNotificationTrigger</code> 指定日期触发</p>
 <p><code>UNLocationNotificationTrigger</code> 根据位置触发，支持进入某地或者离开某地或者都有</p>
-<h3 id="2-iOS10Later取消推送"><a href="#2-iOS10Later取消推送" class="headerlink" title="2. iOS10Later取消推送"></a>2. iOS10Later取消推送</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];</span><br><span class="line">       [center removeAllPendingNotificationRequests];  <span class="comment">// remove all at this moment.</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-iOS10Later取消推送"><a href="#2-iOS10Later取消推送" class="headerlink" title="2. iOS10Later取消推送"></a>2. iOS10Later取消推送</h3><pre><code class="objc"> UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+        [center removeAllPendingNotificationRequests];  // remove all at this moment.
+</code></pre>
 <h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>本地推送的回调, 会调用 <code>AppDeleage</code> 下的<code>application:(UIApplication *)application didReceiveLocalNotification</code>方法</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didReceiveLocalNotification:(<span class="built_in">UILocalNotification</span> *)notification&#123;</span><br><span class="line">  <span class="comment">// TO DO</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">lydsnm</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://www.lydsnm.top/2016/10/18/本地推送之定时推送/">http://www.lydsnm.top/2016/10/18/本地推送之定时推送/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/推送/">推送</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2016/10/19/OC开发相关注意事项三/"><i class="fa fa-chevron-left">  </i><span>OC开发相关注意事项</span></a></div><div class="next-post pull-right"><a href="/2016/10/08/简单明了搞定iOS10推送适配/"><span>简单明了搞定 iOS 10推送适配</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="lv-container" data-id="city" data-uid="MTAyMC80MzM3My8xOTkxNA=="><script>(function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-})(document, 'script');</script></div></div></div><footer class="footer-bg" style="background-image: url(https://woolni.oss-cn-chengdu.aliyuncs.com/Blog/tech_backgroud.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2015 - 2019 By lydsnm</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-  $('#nav').addClass('is-mobile')
-  $('footer').addClass('is-mobile')
-}</script></body></html>
+<pre><code class="objc">-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+  // TO DO
+}
+</code></pre>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+     
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/推送/">推送</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/10/19/OC开发相关注意事项三/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">OC开发相关注意事项</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/10/08/简单明了搞定iOS10推送适配/">
+        <span class="next-text nav-default">简单明了搞定 iOS 10推送适配</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+      
+        
+
+<script type="text/javascript">
+  var disqus_shortname = 'donglyu';
+  var disqus_identifier = '2016/10/18/本地推送之定时推送/';
+
+  var disqus_title = "本地推送之定时推送";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+
+
+      
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">lydsnm.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+<!--prettify代码高亮脚本引入-->
+
+    <script src="/plugins/prettify/prettify.js"></script>
+    <script type="text/javascript">
+    jQuery(function($){
+        $('pre').addClass('prettyprint');
+        prettyPrint();
+    });
+    </script>
+
+
+  </body>
+</html>
