@@ -41,7 +41,7 @@
 <meta property="og:site_name" content="LYDSNM&#39;S WORK">
 <meta property="og:description" content="Rxjava就是实现异步操作的库。 RxJava 的优势也是简洁，随着程序逻辑变得越来越复杂，它依然能够保持简洁。 这篇文章记录一下最核心的内容，不包含更进阶的用法~">
 <meta property="og:locale" content="zh-Hans™">
-<meta property="og:updated_time" content="2019-09-25T14:28:55.939Z">
+<meta property="og:updated_time" content="2019-12-06T10:05:12.634Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RxJava梳理学习">
 <meta name="twitter:description" content="Rxjava就是实现异步操作的库。 RxJava 的优势也是简洁，随着程序逻辑变得越来越复杂，它依然能够保持简洁。 这篇文章记录一下最核心的内容，不包含更进阶的用法~">
@@ -202,7 +202,7 @@ var _hmt = _hmt || [];
 </code></pre>
 <p><code>OnSubscribe</code> 会被存储在返回的 <code>Observable</code> 对象中，它的作用相当于一个计划表，当 Observable 被订阅的时候，OnSubscribe 的 call() 方法会自动被调用。这种模式就是观察者模式。</p>
 <p><code>create()</code> 方法是 RxJava 最基本的创造事件序列的方法。基于这个方法， RxJava 还提供了一些方法用来快捷创建事件队列，例如<code>just(T...)</code>、<code>from(T[]) / from(Iterable&lt;? extends T&gt;) :</code></p>
-<h3 id="3-Subscribe-订阅"><a href="#3-Subscribe-订阅" class="headerlink" title="3.Subscribe (订阅):"></a>3.Subscribe (订阅):</h3><p>//建立订阅关系，由可观察者调用。</p>
+<h3 id="3-Subscribe-订阅"><a href="#3-Subscribe-订阅" class="headerlink" title="3.Subscribe (订阅):"></a>3.Subscribe (订阅):</h3><p>建立订阅关系，由可观察者调用。</p>
 <pre><code class="java">observable.subscribe(observer);
 // 或者：
 observable.subscribe(subscriber);
@@ -367,7 +367,7 @@ public Observable&lt;User&gt; getUser(@Query(&quot;userId&quot;) String userId);
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2019/09/19/2019-09-19-Android开发过程的中概念点/">
+      <a class="prev" href="/2019/09/19/2019-08-19-Android开发过程的中概念点/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text nav-default">Android开发过程的中概念点梳理</span>
         <span class="prev-text nav-mobile">Prev</span>
