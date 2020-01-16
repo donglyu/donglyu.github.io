@@ -14,7 +14,7 @@
 
 
 
-  <meta name="description" content="iOS磁力传感器的应用简单清晰介绍">
+  <meta name="description" content="iOS磁力传感器的应用极简介绍">
 
 
 
@@ -34,19 +34,19 @@
 <link rel="canonical" href="http://www.lydsnm.top/2019/10/25/2018-10-25-iOS磁力传感器其他应用/">
 
 
-<meta name="description" content="有三种获取磁力计数据的方法，如上图所示  Core Motion框架 CMMotionManagers的CMMagnetometer类  Core Motion框架 CMDeviceMotion的CMCalibratedMagneticField属性  Core Location框架 CLLocationManager的CLHeading   1.CMMagnetometer来自磁力计的原始读数">
+<meta name="description" content="有三种获取磁力计数据的方法，如上图所示  Core Motion框架 CMMotionManagers的CMMagnetometer类  Core Motion框架 CMDeviceMotion的CMCalibratedMagneticField属性  Core Location框架 CLLocationManager的CLHeading">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS磁力传感器的应用简单清晰介绍">
+<meta property="og:title" content="iOS磁力传感器的应用极简介绍">
 <meta property="og:url" content="http://www.lydsnm.top/2019/10/25/2018-10-25-iOS磁力传感器其他应用/index.html">
 <meta property="og:site_name" content="LYDSNM&#39;S WORK">
-<meta property="og:description" content="有三种获取磁力计数据的方法，如上图所示  Core Motion框架 CMMotionManagers的CMMagnetometer类  Core Motion框架 CMDeviceMotion的CMCalibratedMagneticField属性  Core Location框架 CLLocationManager的CLHeading   1.CMMagnetometer来自磁力计的原始读数">
+<meta property="og:description" content="有三种获取磁力计数据的方法，如上图所示  Core Motion框架 CMMotionManagers的CMMagnetometer类  Core Motion框架 CMDeviceMotion的CMCalibratedMagneticField属性  Core Location框架 CLLocationManager的CLHeading">
 <meta property="og:locale" content="zh-Hans™">
-<meta property="og:image" content="http://www.lydsnm.top/2019/10/25/2018-10-25-iOS磁力传感器其他应用/media/iOS%E7%A3%81%E5%8A%9B%E4%BC%A0%E6%84%9F%E5%99%A8.png">
-<meta property="og:updated_time" content="2019-11-23T09:42:36.992Z">
+<meta property="og:image" content="http://woolni.oss-cn-chengdu.aliyuncs.com/Blog/ios-ci-li-chuan-gan-qi.png">
+<meta property="og:updated_time" content="2019-12-28T07:44:07.239Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS磁力传感器的应用简单清晰介绍">
-<meta name="twitter:description" content="有三种获取磁力计数据的方法，如上图所示  Core Motion框架 CMMotionManagers的CMMagnetometer类  Core Motion框架 CMDeviceMotion的CMCalibratedMagneticField属性  Core Location框架 CLLocationManager的CLHeading   1.CMMagnetometer来自磁力计的原始读数">
-<meta name="twitter:image" content="http://www.lydsnm.top/2019/10/25/2018-10-25-iOS磁力传感器其他应用/media/iOS%E7%A3%81%E5%8A%9B%E4%BC%A0%E6%84%9F%E5%99%A8.png">
+<meta name="twitter:title" content="iOS磁力传感器的应用极简介绍">
+<meta name="twitter:description" content="有三种获取磁力计数据的方法，如上图所示  Core Motion框架 CMMotionManagers的CMMagnetometer类  Core Motion框架 CMDeviceMotion的CMCalibratedMagneticField属性  Core Location框架 CLLocationManager的CLHeading">
+<meta name="twitter:image" content="http://woolni.oss-cn-chengdu.aliyuncs.com/Blog/ios-ci-li-chuan-gan-qi.png">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
@@ -88,7 +88,7 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-    <title> iOS磁力传感器的应用简单清晰介绍 - LYDSNM'S WORK </title>
+    <title> iOS磁力传感器的应用极简介绍 - LYDSNM'S WORK </title>
   </head>
 
   <body>
@@ -149,7 +149,7 @@ var _hmt = _hmt || [];
     <header class="post-header">
       <h1 class="post-title">
         
-          iOS磁力传感器的应用简单清晰介绍
+          iOS磁力传感器的应用极简介绍
         
       </h1>
 
@@ -163,12 +163,13 @@ var _hmt = _hmt || [];
     
             
   <div class="toc-container">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-CMMagnetometer"><span class="toc-text">1.CMMagnetometer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-CMDeviceMotion（CMCalibratedMagneticField-）"><span class="toc-text">2.CMDeviceMotion（CMCalibratedMagneticField *）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-CLHeading-x-y-z"><span class="toc-text">3.CLHeading [x | y | z]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#例子"><span class="toc-text">例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后"><span class="toc-text">最后</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-CMMagnetometer"><span class="toc-text">1.CMMagnetometer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-CMDeviceMotion（CMCalibratedMagneticField-）"><span class="toc-text">2.CMDeviceMotion（CMCalibratedMagneticField *）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-CLHeading-x-y-z"><span class="toc-text">3.CLHeading [x | y | z]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#例子"><span class="toc-text">例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-text">结语</span></a></li></ol>
   </div> 
 
 
             <div class="post-content">
-                <p><img src="media/iOS%E7%A3%81%E5%8A%9B%E4%BC%A0%E6%84%9F%E5%99%A8.png" alt="iOS磁力传感器"></p>
+                <figure><br><img src="http://woolni.oss-cn-chengdu.aliyuncs.com/Blog/ios-ci-li-chuan-gan-qi.png"><br><br></figure>
+
 <p>有三种获取磁力计数据的方法，如上图所示</p>
 <ol>
 <li><p>Core Motion框架 <code>CMMotionManagers</code>的<code>CMMagnetometer</code>类</p>
@@ -178,6 +179,7 @@ var _hmt = _hmt || [];
 <li><p>Core Location框架 <code>CLLocationManager</code>的<code>CLHeading</code></p>
 </li>
 </ol>
+<a id="more"></a>
 <h2 id="1-CMMagnetometer"><a href="#1-CMMagnetometer" class="headerlink" title="1.CMMagnetometer"></a>1.CMMagnetometer</h2><p>来自磁力计的原始读数</p>
 <pre><code class="objc"> *  magneticField
  *  
@@ -269,7 +271,7 @@ var _hmt = _hmt || [];
 }
 
 </code></pre>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>如果你想知道哪里是磁性或真正北方的位置，推荐使用<code>CLHeading</code>，可以做指南针的一类应用。如果想要创建一个响应紧邻设备磁场的应用，或者想要执行某种特定的传感器融合，可以尝试创建一个AHRS，然后使用<code>CMMagneticField</code>即第二种方式。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>如果你想知道哪里是磁性或真正北方的位置，推荐使用<code>CLHeading</code>，可以做指南针的一类应用。如果想要创建一个响应紧邻设备磁场的应用，或者想要执行某种特定的传感器融合，可以尝试创建一个AHRS，然后使用<code>CMMagneticField</code>即第二种方式。</p>
 
             </div>
           
@@ -328,7 +330,7 @@ var _hmt = _hmt || [];
   var disqus_shortname = 'donglyu';
   var disqus_identifier = '2019/10/25/2018-10-25-iOS磁力传感器其他应用/';
 
-  var disqus_title = "iOS磁力传感器的应用简单清晰介绍";
+  var disqus_title = "iOS磁力传感器的应用极简介绍";
 
 
   var disqus = {
@@ -365,7 +367,7 @@ var _hmt = _hmt || [];
     
         2014 -
     
-    2019
+    2020
     <span class="footer-author">lydsnm.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
