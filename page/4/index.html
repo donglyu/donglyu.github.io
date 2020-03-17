@@ -147,6 +147,83 @@ var _hmt = _hmt || [];
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2016/10/19/OC开发相关注意事项三/">OC开发相关注意事项</a>
+        
+      </h1>
+
+      <time class="post-time">
+          2016-10-19
+      </time>
+    </header>
+
+
+
+    
+        <div class="post-excerpt">
+            
+            
+              
+            
+
+            
+              <h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><p>ARC :<code>Automatic Reference Counting,ARC</code>, ARC 几乎把所有内存管理事宜都交由编译器来决定, 开发者只需专注于业务逻辑.</p>
+<h3 id="1-引用计数"><a href="#1-引用计数" class="headerlink" title="1. 引用计数"></a>1. 引用计数</h3><p>Objective-C 语言实用引用计数来管理内存. 每个对象都有个可以递增和递减的计数器, 用以标识当前有多个事情想令此对象继续存活下去.<br>计数<font color="#A52A2a">>=0</font>表示对象继续存活. 当保留计数降为<font color="#A52A2a"> 0 </font>后, 对象就会被释放了.</p>
+<p>ARC 只负责管理 <code>Objective-C</code> 对象的内存. 注意: <font color="#A52A2a">CoreFoundation</font>对象不归 ARC 管理, 开发者必须适时调用 <font color="#A52A2a">CFRetain/CFRelease</font>.</p>
+<h3 id="2-在-dealloc-方法中只释放引用并解除监听"><a href="#2-在-dealloc-方法中只释放引用并解除监听" class="headerlink" title="2. 在 dealloc 方法中只释放引用并解除监听"></a>2. 在 dealloc 方法中只释放引用并解除监听</h3><p>对象在经历其生命周期后, 最终会为系统所回收, 这时就要执行 <code>dealloc</code> 方法了. 在每个对象的生命周期内, 此方法仅执行以此. 也就是但保留计数降为 0 的时候.</p>
+<p>虽说应该于 <code>dealloc</code> 中释放引用, 但是开销较大或系统内稀缺的资源则不在此列 ,像是文件描述符( file descriptor ), 套接字 (socket), 大块内存等都属于这种资源. 不能指望 <code>dealloc</code> 方法必定会在某个特定的时机调用, 因为有一些无法预料的东西可能也会持有此对象. 在这种情况下, 如果非要等到系统调用 <code>dealloc</code> 方法时才释放, 那么保留这些稀缺资源的时间就太长了, 这么做不合适. 通常的做法时, 实现另外一个方法, 但应用程序用完资源对象后, 就调用此方法 (例如 <font color="#A52A2a">Open</font> 对应 <font color="#A52A2a">Close</font> 方法) . 这样一来, 资源对象的生命期就变得更明确了.</p>
+        </div>
+            
+          
+
+    
+  </article>
+
+        
+            
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2016/10/18/本地推送之定时推送/">本地推送之定时推送</a>
+        
+      </h1>
+
+      <time class="post-time">
+          2016-10-18
+      </time>
+    </header>
+
+
+
+    
+        <div class="post-excerpt">
+            
+            
+              
+            
+
+            
+              <p>项目中使用到了定时提醒推送, 故整理记录下来.</p>
+<h2 id="iOS10-之前-使用旧的本地推送注册方式"><a href="#iOS10-之前-使用旧的本地推送注册方式" class="headerlink" title="iOS10 之前, 使用旧的本地推送注册方式:"></a>iOS10 之前, 使用旧的本地推送注册方式:</h2><h3 id="1-在-AppDelegate中代理注册使用通知-和注册远程通知一致"><a href="#1-在-AppDelegate中代理注册使用通知-和注册远程通知一致" class="headerlink" title="1. 在 AppDelegate中代理注册使用通知, 和注册远程通知一致"></a>1. 在 <code>AppDelegate</code>中代理注册使用通知, 和注册远程通知一致</h3><pre><code class="objc"> UIMutableUserNotificationCategory *categorys = [[UIMutableUserNotificationCategory alloc] init];
+ UIUserNotificationSettings *userSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert
+                                                                                     categories:[NSSet setWithObject:categorys]];
+ [[UIApplication sharedApplication] registerUserNotificationSettings:userSettings];
+ [[UIApplication sharedApplication] registerForRemoteNotifications];   
+
+</code></pre>
+        </div>
+            
+          
+
+    
+  </article>
+
+        
+            
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2016/10/08/简单明了搞定iOS10推送适配/">简单明了搞定 iOS 10推送适配</a>
         
       </h1>
@@ -366,74 +443,6 @@ build/something_else.o
   </article>
 
         
-            
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2016/03/25/我的mvp_mvvm理解/">我的mvp,mvvm理解</a>
-        
-      </h1>
-
-      <time class="post-time">
-          2016-03-25
-      </time>
-    </header>
-
-
-
-    
-        <div class="post-excerpt">
-            
-            
-
-            
-          
-
-    
-  </div></article>
-
-        
-            
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2016/03/08/CocoaPods安装和使用/">CocoaPods安装和使用</a>
-        
-      </h1>
-
-      <time class="post-time">
-          2016-03-08
-      </time>
-    </header>
-
-
-
-    
-        <div class="post-excerpt">
-            
-            
-              
-            
-
-            
-              <p>&emsp;&emsp;CocoaPods应该是iOS和Mac开发中最常用最有名的类库管理工具了，这篇就来整理下CocoaPods的安装和使用。<br>如果pod update pod Setup慢 请直接跳到 <font color="10d3c4"><b>标题2.4</b></font></p>
-<h2 id="一-CocoaPods安装"><a href="#一-CocoaPods安装" class="headerlink" title="一. CocoaPods安装:"></a>一. CocoaPods安装:</h2><h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h3><p>&emsp;&emsp;cocoaPods是用 Ruby 实现的, 要想使用它就需要有 Ruby 环境, 幸运的是OS X 系统默认支持 Ruby, 打开终端输入命令安装 cocoaPods</p>
-<pre><code class="ruby">$ sudo gem install -n /usr/local/bin cocoapods
-</code></pre>
-<p>&emsp;&emsp;CocoaPods是以Ruby gem包的形式被安装的。在安装执行的过程中，可能会问我们是不是更新rake，输入y即可。这是因为rake gem包会在安装的过程中检查更细，如果有可用的新版本就会出现刚才的选项。<br>在安装进程结束的时候，执行命令：</p>
-<pre><code class="ruby">$ pod setup  
-</code></pre>
-<p>如果没有报错，就说明一切安装就成功了！<br><br></p>
-        </div>
-            
-          
-
-    
-  </article>
-
-        
         
   <nav class="pagination">
     
@@ -459,7 +468,7 @@ build/something_else.o
     
     <section id="tags" class="widget-area widget_tags">
         <h3 class="widget-title">Tags</h3>
-        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Photos/">Photos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/up/">up</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coredata/">coredata</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCD/">GCD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/许可证-开源/">许可证, 开源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UITextView-UITextField/">UITextView UITextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCD-同步异步/">GCD 同步异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoaPods/">cocoaPods</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">3</span></li></ul>
+        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/mvp-mvvm/">mvp mvvm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCD/">GCD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/up/">up</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coredata/">coredata</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/许可证-开源/">许可证, 开源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UITextView-UITextField/">UITextView UITextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCD-同步异步/">GCD 同步异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoaPods/">cocoaPods</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li></ul>
     </section>
 
 

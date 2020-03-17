@@ -147,6 +147,82 @@ var _hmt = _hmt || [];
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2017/12/27/苹果的Marzipan/">苹果的Marzipan</a>
+        
+      </h1>
+
+      <time class="post-time">
+          2017-12-27
+      </time>
+    </header>
+
+
+
+    
+        <div class="post-excerpt">
+            
+            
+              
+            
+
+            
+              <p>&emsp;&emsp;听说有个新的东西：为了增强Mac上的软件产品，苹果正在计划模糊macOS和iOS平台之间的界限，允许iOS App Store上的iPhone和iPad应用程序在Mac上运行：</p>
+<p>&emsp;&emsp;<code>Marzipan</code>  <a href="https://baijiahao.baidu.com/s?id=1587358985291753758&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">新闻来源</a>    <em>一个App适配所有设备。</em></p>
+        </div>
+            
+          
+
+    
+  </article>
+
+        
+            
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2017/10/14/Swift中的值类型引用类型相关内容/">Swift中的值类型引用类型相关内容</a>
+        
+      </h1>
+
+      <time class="post-time">
+          2017-10-14
+      </time>
+    </header>
+
+
+
+    
+        <div class="post-excerpt">
+            
+            
+              
+            
+
+            
+              <h2 id="一、Swift中的值类型和引用类型"><a href="#一、Swift中的值类型和引用类型" class="headerlink" title="一、Swift中的值类型和引用类型"></a>一、Swift中的值类型和引用类型</h2><h3 id="1-值类型和引用类型是啥"><a href="#1-值类型和引用类型是啥" class="headerlink" title="1.值类型和引用类型是啥"></a>1.值类型和引用类型是啥</h3><p>最近在用Swift写些小东西，发现Swift中的值类型和引用类型好像有些奇怪，包括之前了解到的NSArray和Array之间的关系，有些混淆了。现在静下来来学习下，记录一下，防止后面犯错。</p>
+<p>首先来过一下基础概念：什么是值类型和引用类型。</p>
+<blockquote>
+<ul>
+<li>值类型：每个实例都拥有数据的一份副本。当被赋值给一个变量或常量，或传递给一个函数时，它都会拷贝一份新的副本。</li>
+<li>引用类型：所有实例共享一个数据副本。当被赋值给一个变量或常量，或传递给一个函数时候，一个引用类型一旦被初始化，会返回一个指向已存在实例的引用。</li>
+</ul>
+</blockquote>
+<p>类(class)是一个引用类型，复制一个引用，即表示建立一个共享的实例。复制之后，两个变量都使用数据中同一份实例。</p>
+<p>类(Class)是一个引用类型，意味着类中的变量不会存储实例，而是一个向内存(堆)中存储该实例位置的引用。</p>
+        </div>
+            
+          
+
+    
+  </article>
+
+        
+            
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2017/09/08/Swift中常见的$0作用/">Swift中常见的$0和$1有什么用？</a>
         
       </h1>
@@ -366,83 +442,6 @@ var _hmt = _hmt || [];
   </article>
 
         
-            
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2016/10/19/OC开发相关注意事项三/">OC开发相关注意事项</a>
-        
-      </h1>
-
-      <time class="post-time">
-          2016-10-19
-      </time>
-    </header>
-
-
-
-    
-        <div class="post-excerpt">
-            
-            
-              
-            
-
-            
-              <h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><p>ARC :<code>Automatic Reference Counting,ARC</code>, ARC 几乎把所有内存管理事宜都交由编译器来决定, 开发者只需专注于业务逻辑.</p>
-<h3 id="1-引用计数"><a href="#1-引用计数" class="headerlink" title="1. 引用计数"></a>1. 引用计数</h3><p>Objective-C 语言实用引用计数来管理内存. 每个对象都有个可以递增和递减的计数器, 用以标识当前有多个事情想令此对象继续存活下去.<br>计数<font color="#A52A2a">>=0</font>表示对象继续存活. 当保留计数降为<font color="#A52A2a"> 0 </font>后, 对象就会被释放了.</p>
-<p>ARC 只负责管理 <code>Objective-C</code> 对象的内存. 注意: <font color="#A52A2a">CoreFoundation</font>对象不归 ARC 管理, 开发者必须适时调用 <font color="#A52A2a">CFRetain/CFRelease</font>.</p>
-<h3 id="2-在-dealloc-方法中只释放引用并解除监听"><a href="#2-在-dealloc-方法中只释放引用并解除监听" class="headerlink" title="2. 在 dealloc 方法中只释放引用并解除监听"></a>2. 在 dealloc 方法中只释放引用并解除监听</h3><p>对象在经历其生命周期后, 最终会为系统所回收, 这时就要执行 <code>dealloc</code> 方法了. 在每个对象的生命周期内, 此方法仅执行以此. 也就是但保留计数降为 0 的时候.</p>
-<p>虽说应该于 <code>dealloc</code> 中释放引用, 但是开销较大或系统内稀缺的资源则不在此列 ,像是文件描述符( file descriptor ), 套接字 (socket), 大块内存等都属于这种资源. 不能指望 <code>dealloc</code> 方法必定会在某个特定的时机调用, 因为有一些无法预料的东西可能也会持有此对象. 在这种情况下, 如果非要等到系统调用 <code>dealloc</code> 方法时才释放, 那么保留这些稀缺资源的时间就太长了, 这么做不合适. 通常的做法时, 实现另外一个方法, 但应用程序用完资源对象后, 就调用此方法 (例如 <font color="#A52A2a">Open</font> 对应 <font color="#A52A2a">Close</font> 方法) . 这样一来, 资源对象的生命期就变得更明确了.</p>
-        </div>
-            
-          
-
-    
-  </article>
-
-        
-            
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2016/10/18/本地推送之定时推送/">本地推送之定时推送</a>
-        
-      </h1>
-
-      <time class="post-time">
-          2016-10-18
-      </time>
-    </header>
-
-
-
-    
-        <div class="post-excerpt">
-            
-            
-              
-            
-
-            
-              <p>项目中使用到了定时提醒推送, 故整理记录下来.</p>
-<h2 id="iOS10-之前-使用旧的本地推送注册方式"><a href="#iOS10-之前-使用旧的本地推送注册方式" class="headerlink" title="iOS10 之前, 使用旧的本地推送注册方式:"></a>iOS10 之前, 使用旧的本地推送注册方式:</h2><h3 id="1-在-AppDelegate中代理注册使用通知-和注册远程通知一致"><a href="#1-在-AppDelegate中代理注册使用通知-和注册远程通知一致" class="headerlink" title="1. 在 AppDelegate中代理注册使用通知, 和注册远程通知一致"></a>1. 在 <code>AppDelegate</code>中代理注册使用通知, 和注册远程通知一致</h3><pre><code class="objc"> UIMutableUserNotificationCategory *categorys = [[UIMutableUserNotificationCategory alloc] init];
- UIUserNotificationSettings *userSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert
-                                                                                     categories:[NSSet setWithObject:categorys]];
- [[UIApplication sharedApplication] registerUserNotificationSettings:userSettings];
- [[UIApplication sharedApplication] registerForRemoteNotifications];   
-
-</code></pre>
-        </div>
-            
-          
-
-    
-  </article>
-
-        
         
   <nav class="pagination">
     
@@ -468,7 +467,7 @@ var _hmt = _hmt || [];
     
     <section id="tags" class="widget-area widget_tags">
         <h3 class="widget-title">Tags</h3>
-        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Photos/">Photos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/up/">up</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coredata/">coredata</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCD/">GCD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/许可证-开源/">许可证, 开源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UITextView-UITextField/">UITextView UITextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCD-同步异步/">GCD 同步异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoaPods/">cocoaPods</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">3</span></li></ul>
+        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/mvp-mvvm/">mvp mvvm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCD/">GCD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/up/">up</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coredata/">coredata</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/许可证-开源/">许可证, 开源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UITextView-UITextField/">UITextView UITextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCD-同步异步/">GCD 同步异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoaPods/">cocoaPods</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li></ul>
     </section>
 
 

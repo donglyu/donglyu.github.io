@@ -14,7 +14,7 @@
 
 
 
-  <meta name="description" content="一些UI记录">
+  <meta name="description" content="dyld Library not loaded @rpath/ iOS 13.3.1">
 
 
 
@@ -31,21 +31,20 @@
 
 
 
-<link rel="canonical" href="http://www.lydsnm.top/2020/01/16/2020-01-16-一些UI记录/">
+<link rel="canonical" href="http://www.lydsnm.top/2020/03/17/2020-03-17-dyld-Library-not-loaded/">
 
 
+<meta name="description" content="真机运行报错 dyld: Library not loaded: @rpath/ iOS 13.3.1真机运行报像dyld: Library not loaded: @rpath/AFNetworking.framework/AFNetworking等的错误 原因造成这个的根本原因：真机系统版本升到iOS 13.3.1后，苹果禁止在免费账户上使用外部框架。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一些UI记录">
-<meta property="og:url" content="http://www.lydsnm.top/2020/01/16/2020-01-16-一些UI记录/index.html">
+<meta property="og:title" content="dyld Library not loaded @rpath&#x2F; iOS 13.3.1">
+<meta property="og:url" content="http://www.lydsnm.top/2020/03/17/2020-03-17-dyld-Library-not-loaded/index.html">
 <meta property="og:site_name" content="LYDSNM&#39;S WORK">
+<meta property="og:description" content="真机运行报错 dyld: Library not loaded: @rpath/ iOS 13.3.1真机运行报像dyld: Library not loaded: @rpath/AFNetworking.framework/AFNetworking等的错误 原因造成这个的根本原因：真机系统版本升到iOS 13.3.1后，苹果禁止在免费账户上使用外部框架。">
 <meta property="og:locale" content="zh-Hans™">
-<meta property="og:image" content="http://woolni.oss-cn-chengdu.aliyuncs.com/UI/Bananza%20Nutrition%20App%20(concept).png">
-<meta property="og:image" content="http://woolni.oss-cn-chengdu.aliyuncs.com/UI/preview_to_do%20list.jpg">
-<meta property="og:image" content="http://woolni.oss-cn-chengdu.aliyuncs.com/UI/attachment_to_do.jpg">
-<meta property="og:updated_time" content="2020-01-16T02:38:03.516Z">
+<meta property="og:updated_time" content="2020-03-17T15:28:10.747Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一些UI记录">
-<meta name="twitter:image" content="http://woolni.oss-cn-chengdu.aliyuncs.com/UI/Bananza%20Nutrition%20App%20(concept).png">
+<meta name="twitter:title" content="dyld Library not loaded @rpath&#x2F; iOS 13.3.1">
+<meta name="twitter:description" content="真机运行报错 dyld: Library not loaded: @rpath/ iOS 13.3.1真机运行报像dyld: Library not loaded: @rpath/AFNetworking.framework/AFNetworking等的错误 原因造成这个的根本原因：真机系统版本升到iOS 13.3.1后，苹果禁止在免费账户上使用外部框架。">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
@@ -87,7 +86,7 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-    <title> 一些UI记录 - LYDSNM'S WORK </title>
+    <title> dyld Library not loaded @rpath/ iOS 13.3.1 - LYDSNM'S WORK </title>
   </head>
 
   <body>
@@ -148,12 +147,12 @@ var _hmt = _hmt || [];
     <header class="post-header">
       <h1 class="post-title">
         
-          一些UI记录
+          dyld Library not loaded @rpath/ iOS 13.3.1
         
       </h1>
 
       <time class="post-time">
-          2020-01-16
+          2020-03-17
       </time>
     </header>
 
@@ -161,15 +160,21 @@ var _hmt = _hmt || [];
 
     
             
+  <div class="toc-container">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#真机运行报错-dyld-Library-not-loaded-rpath-iOS-13-3-1"><span class="toc-text">真机运行报错 dyld: Library not loaded: @rpath/ iOS 13.3.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原因"><span class="toc-text">原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决"><span class="toc-text">解决</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-换用付费了的开发者账号"><span class="toc-text">1.换用付费了的开发者账号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-使用iOS-13-3及以下版本的真机设备"><span class="toc-text">2.使用iOS 13.3及以下版本的真机设备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-不用use-frameworks"><span class="toc-text">3.不用use_frameworks!</span></a></li></ol></li></ol>
+  </div> 
+
 
             <div class="post-content">
-                <figure><br><img src="http://woolni.oss-cn-chengdu.aliyuncs.com/UI/Bananza%20Nutrition%20App%20(concept).png" width="70%/"><br></figure>
-
+                <h2 id="真机运行报错-dyld-Library-not-loaded-rpath-iOS-13-3-1"><a href="#真机运行报错-dyld-Library-not-loaded-rpath-iOS-13-3-1" class="headerlink" title="真机运行报错 dyld: Library not loaded: @rpath/ iOS 13.3.1"></a>真机运行报错 dyld: Library not loaded: @rpath/ iOS 13.3.1</h2><p>真机运行报像<strong>dyld: Library not loaded: @rpath/AFNetworking.framework/AFNetworking</strong>等的错误</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>造成这个的根本原因：<strong>真机系统版本升到iOS 13.3.1后，苹果禁止在免费账户上使用外部框架。</strong></p>
 <a id="more"></a>
-<figure><br><img src="http://woolni.oss-cn-chengdu.aliyuncs.com/UI/preview_to_do%20list.jpg" width="70%/"><br></figure>
-
-<p>这个用了下，借用这个设计做了长图控软件。</p>
-<figure><br><img src="http://woolni.oss-cn-chengdu.aliyuncs.com/UI/attachment_to_do.jpg" width="70%/"><br></figure>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h3 id="1-换用付费了的开发者账号"><a href="#1-换用付费了的开发者账号" class="headerlink" title="1.换用付费了的开发者账号"></a>1.换用付费了的开发者账号</h3><p>对症上面的原因，选用正确的开发者组来调试开发。</p>
+<h3 id="2-使用iOS-13-3及以下版本的真机设备"><a href="#2-使用iOS-13-3及以下版本的真机设备" class="headerlink" title="2.使用iOS 13.3及以下版本的真机设备"></a>2.使用iOS 13.3及以下版本的真机设备</h3><p>降级或者更换设备。</p>
+<h3 id="3-不用use-frameworks"><a href="#3-不用use-frameworks" class="headerlink" title="3.不用use_frameworks!"></a>3.不用<code>use_frameworks!</code></h3><p>将<code>use_frameworks!</code>替换成<code>use_modular_headers!</code>，重新<code>pod install</code>。</p>
+<hr>
+<p>iOS 13.4 beta也没有这个修复，所以预计短时间不能像原来那样使用了。</p>
+<p>如果需要查看更多后续解决方案，请看<a href="[https://stackoverflow.com/questions/60096258/library-not-loaded-rpath-fblpromises-framework-fblpromises-ios-13-3-1](https://stackoverflow.com/questions/60096258/library-not-loaded-rpath-fblpromises-framework-fblpromises-ios-13-3-1">statckoverflow.</a><br>)</p>
 
             </div>
           
@@ -183,15 +188,9 @@ var _hmt = _hmt || [];
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2020/01/22/2020-01-22-长图控/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">长图控</span>
-        <span class="prev-text nav-mobile">Prev</span>
-      </a>
     
-    
-      <a class="next" href="/2019/12/03/2019-12-03-整理App变现方式/">
-        <span class="next-text nav-default">整理App变现方式</span>
+      <a class="next" href="/2020/01/22/2020-01-22-长图控/">
+        <span class="next-text nav-default">长图控</span>
         <span class="prev-text nav-mobile">Next</span>
         <i class="iconfont icon-right"></i>
       </a>
@@ -226,9 +225,9 @@ var _hmt = _hmt || [];
 
 <script type="text/javascript">
   var disqus_shortname = 'donglyu';
-  var disqus_identifier = '2020/01/16/2020-01-16-一些UI记录/';
+  var disqus_identifier = '2020/03/17/2020-03-17-dyld-Library-not-loaded/';
 
-  var disqus_title = "一些UI记录";
+  var disqus_title = "dyld Library not loaded @rpath/ iOS 13.3.1";
 
 
   var disqus = {
