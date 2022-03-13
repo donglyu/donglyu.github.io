@@ -1,42 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-Hans™">
-  <head><meta name="generator" content="Hexo 3.8.0">
-    
-<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
-<meta name="baidu-site-verification" content="hkLiBHH93D">
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
-
-
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-  <meta name="description" content="CoreData使用记录">
-
-
-
-
-  <meta name="keywords" content="coredata,">
-
-
-
-
-  <link rel="alternate" href="/default" title="LYDSNM'S WORK">
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
-
-
-
-<link rel="canonical" href="http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/">
-
-
-<meta name="description" content="Core Data是苹果针对Mac和iOS平台开发的一个框架, 通过CoreData可以在本地生成数据库sqlite,提供了ORM的功能，将对象和数据模型相互转换 . 通过Core Data管理和操作. 能够快速达到项目的存储数据的需求.      CoreData优点：能够合理管理内存，避免使用sql的麻烦，高效, 由于是苹果提供的解决方案, 所以不用太过担心会有其他问题.  我的观念就是先使用">
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <meta name="description" content="Core Data是苹果针对Mac和iOS平台开发的一个框架, 通过CoreData可以在本地生成数据库sqlite,提供了ORM的功能，将对象和数据模型相互转换 . 通过Core Data管理和操作. 能够快速达到项目的存储数据的需求.      CoreData优点：能够合理管理内存，避免使用sql的麻烦，高效, 由于是苹果提供的解决方案, 所以不用太过担心会有其他问题.  我的观念就是先使用">
 <meta name="keywords" content="coredata">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CoreData使用记录">
@@ -51,128 +21,153 @@
 <meta name="twitter:title" content="CoreData使用记录">
 <meta name="twitter:description" content="Core Data是苹果针对Mac和iOS平台开发的一个框架, 通过CoreData可以在本地生成数据库sqlite,提供了ORM的功能，将对象和数据模型相互转换 . 通过Core Data管理和操作. 能够快速达到项目的存储数据的需求.      CoreData优点：能够合理管理内存，避免使用sql的麻烦，高效, 由于是苹果提供的解决方案, 所以不用太过担心会有其他问题.  我的观念就是先使用">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1106214-2fa5fda1a8bff45e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-
-
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
-
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
-
-
-
-
-
-<script type="text/javascript">
-  var themeConfig = {
-    fancybox: {
-      enable: true
-    },
-  };
-</script>
-
-
-
-
-  
-
-
-
-
-  <link href="/plugins/prettify/prettify.css" rel="stylesheet">
-
-
-<!--百度统计-->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?b733e1eaeacbf8f87d3be047f28c3973";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-    <title> CoreData使用记录 - LYDSNM'S WORK </title>
-  </head>
-
-  <body>
-    <div id="page">
-      <header id="masthead"><div class="site-header-inner">
-    <h1 class="site-title">
-        <a href="/." class="logo">LYDSNM'S WORK</a>
-    </h1>
-
-    <nav id="nav-top">
+    
+    
+      
         
-            <ul id="menu-top" class="nav-top-items">
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/">
-                            
-                            
-                                首页
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/archives">
-                            
-                            
-                                归档
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="http://life.lydsnm.top">
-                            
-                            
-                                生活
-                            
-                        </a>
-                    </li>
-                
-            </ul>
+          <link rel="shortcut icon" href="/images/favicon.ico">
         
-  </nav>
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>CoreData使用记录</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/donglyu">Projects</a></li><!--
+     --><!--
+       --><li><a href="https://life.lydsnm.top/">Life</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2015/12/07/iOS-GCD记录/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2015/11/07/iOS动画整理/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/&text=CoreData使用记录"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/&title=CoreData使用记录"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/&is_video=false&description=CoreData使用记录"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CoreData使用记录&body=Check out this article: http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/&title=CoreData使用记录"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/&title=CoreData使用记录"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/&title=CoreData使用记录"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/&title=CoreData使用记录"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/&name=CoreData使用记录&description=&lt;p&gt;Core Data是苹果针对Mac和iOS平台开发的一个框架, 通过CoreData可以在本地生成数据库sqlite,提供了ORM的功能，将对象和数据模型相互转换 . 通过Core Data管理和操作. 能够快速达到项目的存储数据的需求.&lt;br&gt;      CoreData优点：能够合理管理内存，避免使用sql的麻烦，高效, 由于是苹果提供的解决方案, 所以不用太过担心会有其他问题.  我的观念就是先使用上了后再考虑其他, 问题有一个就解决一个.&lt;br&gt;Core Data 默认使用Sqlite. 因此在沙盒Document文件夹中找到.sqlite的数据库文件. &lt;/p&gt;
+&lt;p&gt; 这里顺便提一个一个比较好用的快速打开模拟器沙盒路径的工具: &lt;a href=&#34;https://github.com/opensim/opensim&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://github.com/opensim/opensim&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;1-使用CoreData&#34;&gt;&lt;a href=&#34;#1-使用CoreData&#34; class=&#34;headerlink&#34; title=&#34;1.使用CoreData&#34;&gt;&lt;/a&gt;1.使用CoreData&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;创建工程时, 勾选Use Core Data&lt;/li&gt;
+&lt;li&gt;手动添加, (如何要想向创建时没有选择Use Core Data&lt;br&gt;如果不知道该添加什么, 一个比较便捷的方法, 是直接新建一个空白工程, 勾选Use Core Data后, 对比AppDelegate.h中的代码, 然后再将多的内容添加到工程中.)&lt;/li&gt;
+&lt;/ol&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/&t=CoreData使用记录"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-使用CoreData"><span class="toc-number">1.</span> <span class="toc-text">1.使用CoreData</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-NSFetchRequest-常用方法-setEntity"><span class="toc-number">2.</span> <span class="toc-text">2.NSFetchRequest 常用方法 -setEntity:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-其他记录"><span class="toc-number">3.</span> <span class="toc-text">3.其他记录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-问题记录"><span class="toc-number">4.</span> <span class="toc-text">4.问题记录</span></a></li></ol>
+    </div>
+  </span>
 </div>
 
-      </header>
-      <div id="content">
-        
-    <div id="primary">
-        
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          CoreData使用记录
-        
-      </h1>
-
-      <time class="post-time">
-          2015-12-06
-      </time>
-    </header>
-
-
-
     
-            
-  <div class="toc-container">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-使用CoreData"><span class="toc-text">1.使用CoreData</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-NSFetchRequest-常用方法-setEntity"><span class="toc-text">2.NSFetchRequest 常用方法 -setEntity:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-其他记录"><span class="toc-text">3.其他记录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-问题记录"><span class="toc-text">4.问题记录</span></a></li></ol>
-  </div> 
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        CoreData使用记录
+    </h1>
 
 
-            <div class="post-content">
-                <p>Core Data是苹果针对Mac和iOS平台开发的一个框架, 通过CoreData可以在本地生成数据库sqlite,提供了ORM的功能，将对象和数据模型相互转换 . 通过Core Data管理和操作. 能够快速达到项目的存储数据的需求.<br>      CoreData优点：能够合理管理内存，避免使用sql的麻烦，高效, 由于是苹果提供的解决方案, 所以不用太过担心会有其他问题.  我的观念就是先使用上了后再考虑其他, 问题有一个就解决一个.<br>Core Data 默认使用Sqlite. 因此在沙盒Document文件夹中找到.sqlite的数据库文件. </p>
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">lydsnm</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2015-12-05T16:00:00.000Z" itemprop="datePublished">2015-12-06</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/iOS/">iOS</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/coredata/">coredata</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Core Data是苹果针对Mac和iOS平台开发的一个框架, 通过CoreData可以在本地生成数据库sqlite,提供了ORM的功能，将对象和数据模型相互转换 . 通过Core Data管理和操作. 能够快速达到项目的存储数据的需求.<br>      CoreData优点：能够合理管理内存，避免使用sql的麻烦，高效, 由于是苹果提供的解决方案, 所以不用太过担心会有其他问题.  我的观念就是先使用上了后再考虑其他, 问题有一个就解决一个.<br>Core Data 默认使用Sqlite. 因此在沙盒Document文件夹中找到.sqlite的数据库文件. </p>
 <p> 这里顺便提一个一个比较好用的快速打开模拟器沙盒路径的工具: <a href="https://github.com/opensim/opensim" target="_blank" rel="noopener">https://github.com/opensim/opensim</a></p>
 <h3 id="1-使用CoreData"><a href="#1-使用CoreData" class="headerlink" title="1.使用CoreData"></a>1.使用CoreData</h3><ol>
 <li>创建工程时, 勾选Use Core Data</li>
@@ -187,7 +182,7 @@ var _hmt = _hmt || [];
 <blockquote>
 <p>右键添加一个Core data -&gt; Data Model(如果创建工程时, 直接勾选use core data, 会直接默认生成.xcdatamodeld).<br>选中.xcdatamodeld主要使用到了下列一些东西:<br>Entity: 实体(我们要生成的模型对象的实体, User, Car, Person等等)<br>Attributes:实体对象属性<br>ReaationShips:关系<br>Fetched Properties:</p>
 </blockquote>
-<p><img src="http://upload-images.jianshu.io/upload_images/1106214-2fa5fda1a8bff45e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&gt;_&lt;"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1106214-2fa5fda1a8bff45e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=">_<"></p>
 <p>另外多表关联内容可以看看: <a href="http://www.jianshu.com/p/e9f3b5e0cd19" target="_blank" rel="noopener">http://www.jianshu.com/p/e9f3b5e0cd19</a></p>
 <p>二.创建实体管理 </p>
 <p>右键添加一个Core data -&gt; NSManagedObject subclass, 一直选择,  选中Car, Wheel.  到最后会实现<br><img src="http://upload-images.jianshu.io/upload_images/1106214-265946bce916ef5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ20151206-1"></p>
@@ -198,7 +193,7 @@ AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
 NSManagedObjectContext *context = appDelegate.managedObjectContext;
 
 //1.保存新数据
-Car *car = [NSEntityDescription insertNewObjectForEntityForName: @&quot;Car&quot; inManagedObjectContext: context];
+Car *car = [NSEntityDescription insertNewObjectForEntityForName: @"Car" inManagedObjectContext: context];
 car.carName = label1.text;
 car.carType = label2.text;
 [appDelegate saveContext];
@@ -206,31 +201,31 @@ car.carType = label2.text;
 //2.查询数据
 NSError *error;
 NSFetchRequest *request = [NSFetchRequest new];
-NSEntityDescription *entity = [NSEntityDescription entityForName: @&quot;Car&quot; inManagedObjectContext: context];
+NSEntityDescription *entity = [NSEntityDescription entityForName: @"Car" inManagedObjectContext: context];
 [request setEntity: entity];
-NSPredicate *predicate = [NSPredicate predicateWithFormat:@&quot;carName=%@&quot;, carName];
+NSPredicate *predicate = [NSPredicate predicateWithFormat:@"carName=%@", carName];
 [request setPredicate:predicate];
 NSArray *results = [[context executeFetchRequest: request error: &amp;error] copy];
 for (Car *car in results) {
-　    NSLog(@&quot;%@&quot;, car.carName);
+　    NSLog(@"%@", car.carName);
 }
 
 //3.更新数据
 {
 NSFetchRequest** request=[[NSFetchRequest alloc] init];
-NSEntityDescription *car=NSEntityDescription entityForName:@&quot;car&quot; inManagedObjectContext:_myAppDelegate.managedObjectContext];  
+NSEntityDescription *car=NSEntityDescription entityForName:@"car" inManagedObjectContext:_myAppDelegate.managedObjectContext];  
 [request setEntity:car];
 ///查询条件
-NSPredicate* predicate=[NSPredicate predicateWithFormat:@&quot;carName==%@&quot;,@&quot;name&quot;];
+NSPredicate* predicate=[NSPredicate predicateWithFormat:@"carName==%@",@"name"];
  [request setPredicate:predicate];
 NSError* error=nil;
 NSMutableArray* mutableFetchResult=[[_myAppDelegate.managedObjectContext executeFetchRequest:request error:&amp;error] mutableCopy]; 
 if (mutableFetchResult==nil) {
-　NSLog(@&quot;Error:%@&quot;,error); 
+　NSLog(@"Error:%@",error); 
 }
-NSLog(@&quot;The count of entry: %i&quot;,[mutableFetchResult count]);  
+NSLog(@"The count of entry: %i",[mutableFetchResult count]);  
  for (Car* car in mutableFetchResult) {  
-　car.carName = @&quot;name1&quot;  ;
+　car.carName = @"name1"  ;
     ...    
 } 
 //更新后要进行保存，否则没更新  
@@ -240,21 +235,21 @@ NSLog(@&quot;The count of entry: %i&quot;,[mutableFetchResult count]);
 //4.删除数据  
   {
   NSFetchRequest* request=[[NSFetchRequest alloc] init];  
-      NSEntityDescription* car=[NSEntityDescription entityForName:@&quot;Car&quot; inManagedObjectContext:_myAppDelegate.managedObjectContext];  
+      NSEntityDescription* car=[NSEntityDescription entityForName:@"Car" inManagedObjectContext:_myAppDelegate.managedObjectContext];  
       [request setEntity:car];  
-      NSPredicate* predicate=[NSPredicate predicateWithFormat:@&quot;carName==%@&quot;,@&quot;name&quot;];  
+      NSPredicate* predicate=[NSPredicate predicateWithFormat:@"carName==%@",@"name"];  
       [request setPredicate:predicate];  
       NSError* error=nil;  
       NSMutableArray* mutableFetchResult=[[_myAppDelegate.managedObjectContext executeFetchRequest:request error:&amp;error] mutableCopy];  
       if (mutableFetchResult==nil) {  
-  　 NSLog(@&quot;Error:%@&quot;,error);  
+  　 NSLog(@"Error:%@",error);  
       }  
-      NSLog(@&quot;The count of entry: %i&quot;,[mutableFetchResult count]);  
+      NSLog(@"The count of entry: %i",[mutableFetchResult count]);  
       for (Car *car in mutableFetchResult) {  
   　　 [_myAppDelegate.managedObjectContext deleteObject:car];  
       }  
       if ([_myAppDelegate.managedObjectContext save:&amp;error]) {  
-  　NSLog(@&quot;Error:%@,%@&quot;,error,[error userInfo]);  
+  　NSLog(@"Error:%@,%@",error,[error userInfo]);  
   　}  
   }
 
@@ -292,149 +287,149 @@ NSLog(@&quot;The count of entry: %i&quot;,[mutableFetchResult count]);
 <p>学习记录, 难免可能会有不准确的, 多多包涵~~</p>
 <p>End!</p>
 
-            </div>
-          
-
-    
-      <footer class="post-footer">
-     
-		
-		<div class="post-tags">
-		  
-			<a href="/tags/coredata/">coredata</a>
-		  
-		</div>
-		
-
-        
-        
-  <nav class="post-nav">
-    
-      <a class="prev" href="/2015/12/07/iOS-GCD记录/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">iOS GCD记录</span>
-        <span class="prev-text nav-mobile">Prev</span>
-      </a>
-    
-    
-      <a class="next" href="/2015/11/07/iOS动画整理/">
-        <span class="next-text nav-default">iOS动画整理</span>
-        <span class="prev-text nav-mobile">Next</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-    
-  </nav>
-
-        
-  <div class="comments" id="comments">
-    
-    <div style="text-align:center;">
-        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
-    </div>
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
   </div>
+</article>
 
 
-      </footer>
-    
-  </article>
 
-    </div>
-
-      </div>
-      
         
+          <div id="footer-post-container">
+  <div id="footer-post">
 
-<script type="text/javascript">
-  var disqus_shortname = 'donglyu';
-  var disqus_identifier = '2015/12/06/CoreData使用记录学习/';
-
-  var disqus_title = "CoreData使用记录";
-
-
-  var disqus = {
-    load : function disqus(){
-        if(typeof DISQUS !== 'object') {
-          (function () {
-          var s = document.createElement('script'); s.async = true;
-          s.type = 'text/javascript';
-          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-          }());
-          $('#load-disqus').remove(); ///加载后移除按钮
-        }
-    }
-  }
-
-  
-    var disqus_config = function () {
-        this.page.url = disqus_url;
-        this.page.identifier = disqus_identifier;
-        this.page.title = disqus_title;
-    };
-  
-
-</script>
-
-
-
-
-      
-      <footer id="colophon"><span class="copyright-year">
-    
-        &copy;
-    
-        2014 -
-    
-    2020
-    <span class="footer-author">lydsnm.</span>
-    <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
-    </span>
-</span>
-
-      </footer>
-
-      <div class="back-to-top" id="back-to-top">
-        <i class="iconfont icon-up"></i>
-      </div>
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/donglyu">Projects</a></li>
+         
+          <li><a href="https://life.lydsnm.top/">Life</a></li>
+        
+      </ul>
     </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-使用CoreData"><span class="toc-number">1.</span> <span class="toc-text">1.使用CoreData</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-NSFetchRequest-常用方法-setEntity"><span class="toc-number">2.</span> <span class="toc-text">2.NSFetchRequest 常用方法 -setEntity:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-其他记录"><span class="toc-number">3.</span> <span class="toc-text">3.其他记录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-问题记录"><span class="toc-number">4.</span> <span class="toc-text">4.问题记录</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/&text=CoreData使用记录"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/&title=CoreData使用记录"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/&is_video=false&description=CoreData使用记录"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CoreData使用记录&body=Check out this article: http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/&title=CoreData使用记录"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/&title=CoreData使用记录"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/&title=CoreData使用记录"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/&title=CoreData使用记录"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/&name=CoreData使用记录&description=&lt;p&gt;Core Data是苹果针对Mac和iOS平台开发的一个框架, 通过CoreData可以在本地生成数据库sqlite,提供了ORM的功能，将对象和数据模型相互转换 . 通过Core Data管理和操作. 能够快速达到项目的存储数据的需求.&lt;br&gt;      CoreData优点：能够合理管理内存，避免使用sql的麻烦，高效, 由于是苹果提供的解决方案, 所以不用太过担心会有其他问题.  我的观念就是先使用上了后再考虑其他, 问题有一个就解决一个.&lt;br&gt;Core Data 默认使用Sqlite. 因此在沙盒Document文件夹中找到.sqlite的数据库文件. &lt;/p&gt;
+&lt;p&gt; 这里顺便提一个一个比较好用的快速打开模拟器沙盒路径的工具: &lt;a href=&#34;https://github.com/opensim/opensim&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://github.com/opensim/opensim&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;1-使用CoreData&#34;&gt;&lt;a href=&#34;#1-使用CoreData&#34; class=&#34;headerlink&#34; title=&#34;1.使用CoreData&#34;&gt;&lt;/a&gt;1.使用CoreData&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;创建工程时, 勾选Use Core Data&lt;/li&gt;
+&lt;li&gt;手动添加, (如何要想向创建时没有选择Use Core Data&lt;br&gt;如果不知道该添加什么, 一个比较便捷的方法, 是直接新建一个空白工程, 勾选Use Core Data后, 对比AppDelegate.h中的代码, 然后再将多的内容添加到工程中.)&lt;/li&gt;
+&lt;/ol&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://www.lydsnm.top/2015/12/06/CoreData使用记录学习/&t=CoreData使用记录"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
     
+    
+    2016-2022
+    lydsnm
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/donglyu">Projects</a></li><!--
+     --><!--
+       --><li><a href="https://life.lydsnm.top/">Life</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
   
-
-
-
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
   
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
-  
-
-
-
-    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
-
-<!--prettify代码高亮脚本引入-->
-
-    <script src="/plugins/prettify/prettify.js"></script>
-    <script type="text/javascript">
-    jQuery(function($){
-        $('pre').addClass('prettyprint');
-        prettyPrint();
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
     });
-    </script>
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
 
+<script src="/js/main.js"></script>
+<!-- search -->
 
-  </body>
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
 </html>

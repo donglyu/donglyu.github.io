@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <meta name="description" content="太南了，因一些需求，需要开始学习 Android 开发😭，这篇文章来记录一些基础概念。后续持续添加，防止遗忘也能偶尔翻来看看~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android开发过程的中概念点梳理">
+<meta property="og:url" content="http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/index.html">
+<meta property="og:site_name" content="LYDSNM&#39;S WORK">
+<meta property="og:description" content="太南了，因一些需求，需要开始学习 Android 开发😭，这篇文章来记录一些基础概念。后续持续添加，防止遗忘也能偶尔翻来看看~">
+<meta property="og:locale" content="zh-Hans™">
+<meta property="og:updated_time" content="2019-12-03T07:29:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android开发过程的中概念点梳理">
+<meta name="twitter:description" content="太南了，因一些需求，需要开始学习 Android 开发😭，这篇文章来记录一些基础概念。后续持续添加，防止遗忘也能偶尔翻来看看~">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Android开发过程的中概念点梳理</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/donglyu">Projects</a></li><!--
+     --><!--
+       --><li><a href="https://life.lydsnm.top/">Life</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2019/12/06/2019-08-28-Rxjava梳理学习/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2019/09/25/2018-07-03应用审核通过，但是内购项目一直处于正在审核中/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/&text=Android开发过程的中概念点梳理"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/&title=Android开发过程的中概念点梳理"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/&is_video=false&description=Android开发过程的中概念点梳理"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Android开发过程的中概念点梳理&body=Check out this article: http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/&title=Android开发过程的中概念点梳理"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/&title=Android开发过程的中概念点梳理"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/&title=Android开发过程的中概念点梳理"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/&title=Android开发过程的中概念点梳理"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/&name=Android开发过程的中概念点梳理&description=&lt;p&gt;太南了，因一些需求，需要开始学习 Android 开发😭，这篇文章来记录一些基础概念。&lt;br&gt;后续持续添加，防止遗忘也能偶尔翻来看看~&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/&t=Android开发过程的中概念点梳理"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Android开发过程的中概念点梳理
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">lydsnm</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-12-03T07:29:42.000Z" itemprop="datePublished">2019-12-03</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Android/">Android</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>太南了，因一些需求，需要开始学习 Android 开发😭，这篇文章来记录一些基础概念。<br>后续持续添加，防止遗忘也能偶尔翻来看看~</p>
+<a id="more"></a>
+<ul>
+<li>EventBus和RxJava的区别</li>
+</ul>
+<p>EventBus是一个<strong>发布 / 订阅的事件总线</strong>。简单点说，就是两人约定好怎么通信，一人发布消息，另外一个约定好的人立马接收到你发的消息。<br>Rx：<strong>函数响应式编程</strong> ，响应式代码的基本组成部分是Observables和Subscribers（事实上Observer才是最小的构建块，但实践中使用最多的是Subscriber，因为Subscriber才是和Observables的对应的。）。Observable发送消息，而Subscriber则用于消费消息。</p>
+<p>主要区别是，rx里面当建立起订阅关系时，你可以用操作符做任何处理（比如转换数据，更改数据等等），而且他能处理异步的操作。 eventbus 就相当于广播，发送了，总能接收到，他在发送后是不能做任何的数据改变，如果要改变，又要重新post一次。</p>
+<p>EventBus有个缺点就是凡是使用了EventBus的类都不能进行混淆了，否则Evnetbus就找不到OnEvent方法了。</p>
+<ul>
+<li>synchronized</li>
+</ul>
+<p>使用synchronized修饰代码块时，每个类又且仅有一个锁（针对静态方法），每个类的示例也是有且仅有一个锁。</p>
+<p>synchronized具有有两种使用方法，第一种是修饰方法，第二种修饰代码块。无论哪种方法，被修饰的内容都会同步执行。这也是synchronized的作用。关于两种方法的使用：对于修饰方法常常会发生不必要的代码块被同步，同时锁不可以选择，但是使用简单。对于修饰代码块方法用起来更精确，需要自己制定锁，用起来稍微麻烦一点。</p>
+<hr>
+<p>更多内容在个人笔记里，比较凌乱，大都是备忘记录的基础知识，或许有一天能够整理好格式，然后发布出来吧😂。</p>
+<p>这篇就到这里了。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/donglyu">Projects</a></li>
+         
+          <li><a href="https://life.lydsnm.top/">Life</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/&text=Android开发过程的中概念点梳理"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/&title=Android开发过程的中概念点梳理"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/&is_video=false&description=Android开发过程的中概念点梳理"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Android开发过程的中概念点梳理&body=Check out this article: http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/&title=Android开发过程的中概念点梳理"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/&title=Android开发过程的中概念点梳理"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/&title=Android开发过程的中概念点梳理"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/&title=Android开发过程的中概念点梳理"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/&name=Android开发过程的中概念点梳理&description=&lt;p&gt;太南了，因一些需求，需要开始学习 Android 开发😭，这篇文章来记录一些基础概念。&lt;br&gt;后续持续添加，防止遗忘也能偶尔翻来看看~&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://www.lydsnm.top/2019/12/03/2019-08-19-Android开发过程的中概念点/&t=Android开发过程的中概念点梳理"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    lydsnm
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/donglyu">Projects</a></li><!--
+     --><!--
+       --><li><a href="https://life.lydsnm.top/">Life</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

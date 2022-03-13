@@ -1,42 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-Hans™">
-  <head><meta name="generator" content="Hexo 3.8.0">
-    
-<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
-<meta name="baidu-site-verification" content="hkLiBHH93D">
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
-
-
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-  <meta name="description" content="OC开发相关注意事项">
-
-
-
-
-  <meta name="keywords" content="OC,">
-
-
-
-
-  <link rel="alternate" href="/default" title="LYDSNM'S WORK">
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
-
-
-
-<link rel="canonical" href="http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/">
-
-
-<meta name="description" content="第7章 熟悉系统框架将一系列代码封装为动态库 (dynamic library) , 并在其中放入描述其借口的头文件, 这样做出来的东西就叫 框架 .有时为 iOS 平台构建的第三方框架实用的是静态库 (static libaray), 这是因为 iOS 应用程序不允许在其中包含动态库. 开发者主要会碰到Foundation, 像是 NSOject, NSArray, NSDictionary 等">
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <meta name="description" content="第7章 熟悉系统框架将一系列代码封装为动态库 (dynamic library) , 并在其中放入描述其借口的头文件, 这样做出来的东西就叫 框架 .有时为 iOS 平台构建的第三方框架实用的是静态库 (static libaray), 这是因为 iOS 应用程序不允许在其中包含动态库. 开发者主要会碰到Foundation, 像是 NSOject, NSArray, NSDictionary 等">
 <meta name="keywords" content="OC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OC开发相关注意事项">
@@ -48,128 +18,151 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OC开发相关注意事项">
 <meta name="twitter:description" content="第7章 熟悉系统框架将一系列代码封装为动态库 (dynamic library) , 并在其中放入描述其借口的头文件, 这样做出来的东西就叫 框架 .有时为 iOS 平台构建的第三方框架实用的是静态库 (static libaray), 这是因为 iOS 应用程序不允许在其中包含动态库. 开发者主要会碰到Foundation, 像是 NSOject, NSArray, NSDictionary 等">
-
-
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
-
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
-
-
-
-
-
-<script type="text/javascript">
-  var themeConfig = {
-    fancybox: {
-      enable: true
-    },
-  };
-</script>
-
-
-
-
-  
-
-
-
-
-  <link href="/plugins/prettify/prettify.css" rel="stylesheet">
-
-
-<!--百度统计-->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?b733e1eaeacbf8f87d3be047f28c3973";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-    <title> OC开发相关注意事项 - LYDSNM'S WORK </title>
-  </head>
-
-  <body>
-    <div id="page">
-      <header id="masthead"><div class="site-header-inner">
-    <h1 class="site-title">
-        <a href="/." class="logo">LYDSNM'S WORK</a>
-    </h1>
-
-    <nav id="nav-top">
+    
+    
+      
         
-            <ul id="menu-top" class="nav-top-items">
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/">
-                            
-                            
-                                首页
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/archives">
-                            
-                            
-                                归档
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="http://life.lydsnm.top">
-                            
-                            
-                                生活
-                            
-                        </a>
-                    </li>
-                
-            </ul>
+          <link rel="shortcut icon" href="/images/favicon.ico">
         
-  </nav>
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>OC开发相关注意事项</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/donglyu">Projects</a></li><!--
+     --><!--
+       --><li><a href="https://life.lydsnm.top/">Life</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2017/02/06/实现自定义UIWebView 的UIMenuController选项/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2016/10/19/OC开发相关注意事项三/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/&text=OC开发相关注意事项"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/&title=OC开发相关注意事项"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/&is_video=false&description=OC开发相关注意事项"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=OC开发相关注意事项&body=Check out this article: http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/&title=OC开发相关注意事项"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/&title=OC开发相关注意事项"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/&title=OC开发相关注意事项"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/&title=OC开发相关注意事项"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/&name=OC开发相关注意事项&description=&lt;h2 id=&#34;第7章-熟悉系统框架&#34;&gt;&lt;a href=&#34;#第7章-熟悉系统框架&#34; class=&#34;headerlink&#34; title=&#34;第7章 熟悉系统框架&#34;&gt;&lt;/a&gt;第7章 熟悉系统框架&lt;/h2&gt;&lt;p&gt;将一系列代码封装为动态库 (dynamic library) , 并在其中放入描述其借口的头文件, 这样做出来的东西就叫 &lt;font color=&#34;a52a2a&#34;&gt;框架&lt;/font&gt; .有时为 iOS 平台构建的第三方框架实用的是静态库 (static libaray), 这是因为 iOS 应用程序不允许在其中包含动态库.&lt;/p&gt;
+&lt;p&gt;开发者主要会碰到&lt;code&gt;Foundation&lt;/code&gt;, 像是 &lt;code&gt;NSOject&lt;/code&gt;, &lt;code&gt;NSArray&lt;/code&gt;, &lt;code&gt;NSDictionary&lt;/code&gt; 等类都在其中, &lt;code&gt;Foundation&lt;/code&gt; 是应用程序的 “基础”.&lt;/p&gt;
+&lt;p&gt;还有个与 &lt;code&gt;Foundation&lt;/code&gt; 相伴的框架, 叫做 &lt;code&gt;CoreFoundation&lt;/code&gt; , 从技术上来将, &lt;code&gt;CoreFoundation&lt;/code&gt; 框架不是 &lt;code&gt;Objective-C&lt;/code&gt; 框架, 但它是编写 &lt;code&gt;Objective-C&lt;/code&gt; 应用程序时所应熟悉的重要框架. &lt;code&gt;Foundation&lt;/code&gt; 框架中的很多功能, 都可以在此框架中找到对应的 C 语言 API. 可以用”无缝桥接”(tollfree bridging). 可以吧 &lt;code&gt;CoreFoundation&lt;/code&gt; 中的 C 语言数据结构平滑转换为 &lt;code&gt;Foundation&lt;/code&gt;中的 Objective-C 对象.&lt;/p&gt;
+&lt;p&gt;除了&lt;code&gt;Foundation&lt;/code&gt; 还有 &lt;code&gt;CFNetwork&lt;/code&gt; , &lt;code&gt;CoreAudio&lt;/code&gt;, &lt;code&gt;AVFoundation&lt;/code&gt;, &lt;code&gt;CoreData&lt;/code&gt;, &lt;code&gt;CoreText&lt;/code&gt; ….&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/&t=OC开发相关注意事项"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第7章-熟悉系统框架"><span class="toc-number">1.</span> <span class="toc-text">第7章 熟悉系统框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-构建缓存时选用-NSCache-而非-NSDictionary"><span class="toc-number">1.1.</span> <span class="toc-text">1. 构建缓存时选用 NSCache 而非 NSDictionary</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-loadView-amp-initialize"><span class="toc-number">1.2.</span> <span class="toc-text">2. loadView &amp; initialize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-NSTimer-会保留其目标对象"><span class="toc-number">1.3.</span> <span class="toc-text">3. NSTimer 会保留其目标对象.</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充"><span class="toc-number">2.</span> <span class="toc-text">补充</span></a></li></ol>
+    </div>
+  </span>
 </div>
 
-      </header>
-      <div id="content">
-        
-    <div id="primary">
-        
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          OC开发相关注意事项
-        
-      </h1>
-
-      <time class="post-time">
-          2016-10-20
-      </time>
-    </header>
-
-
-
     
-            
-  <div class="toc-container">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第7章-熟悉系统框架"><span class="toc-text">第7章 熟悉系统框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-构建缓存时选用-NSCache-而非-NSDictionary"><span class="toc-text">1. 构建缓存时选用 NSCache 而非 NSDictionary</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-loadView-amp-initialize"><span class="toc-text">2. loadView &amp; initialize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-NSTimer-会保留其目标对象"><span class="toc-text">3. NSTimer 会保留其目标对象.</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充"><span class="toc-text">补充</span></a></li></ol>
-  </div> 
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        OC开发相关注意事项
+    </h1>
 
 
-            <div class="post-content">
-                <h2 id="第7章-熟悉系统框架"><a href="#第7章-熟悉系统框架" class="headerlink" title="第7章 熟悉系统框架"></a>第7章 熟悉系统框架</h2><p>将一系列代码封装为动态库 (dynamic library) , 并在其中放入描述其借口的头文件, 这样做出来的东西就叫 <font color="a52a2a">框架</font> .有时为 iOS 平台构建的第三方框架实用的是静态库 (static libaray), 这是因为 iOS 应用程序不允许在其中包含动态库.</p>
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">lydsnm</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2016-10-19T16:00:00.000Z" itemprop="datePublished">2016-10-20</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/iOS/">iOS</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/OC/">OC</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="第7章-熟悉系统框架"><a href="#第7章-熟悉系统框架" class="headerlink" title="第7章 熟悉系统框架"></a>第7章 熟悉系统框架</h2><p>将一系列代码封装为动态库 (dynamic library) , 并在其中放入描述其借口的头文件, 这样做出来的东西就叫 <font color="a52a2a">框架</font> .有时为 iOS 平台构建的第三方框架实用的是静态库 (static libaray), 这是因为 iOS 应用程序不允许在其中包含动态库.</p>
 <p>开发者主要会碰到<code>Foundation</code>, 像是 <code>NSOject</code>, <code>NSArray</code>, <code>NSDictionary</code> 等类都在其中, <code>Foundation</code> 是应用程序的 “基础”.</p>
 <p>还有个与 <code>Foundation</code> 相伴的框架, 叫做 <code>CoreFoundation</code> , 从技术上来将, <code>CoreFoundation</code> 框架不是 <code>Objective-C</code> 框架, 但它是编写 <code>Objective-C</code> 应用程序时所应熟悉的重要框架. <code>Foundation</code> 框架中的很多功能, 都可以在此框架中找到对应的 C 语言 API. 可以用”无缝桥接”(tollfree bridging). 可以吧 <code>CoreFoundation</code> 中的 C 语言数据结构平滑转换为 <code>Foundation</code>中的 Objective-C 对象.</p>
 <p>除了<code>Foundation</code> 还有 <code>CFNetwork</code> , <code>CoreAudio</code>, <code>AVFoundation</code>, <code>CoreData</code>, <code>CoreText</code> ….</p>
@@ -195,149 +188,147 @@ _timer = nil;
 <p><br></p>
 <p>本篇文章参考摘自 <font color="#B8860B">Effective Objective-C 2.0 编写高质量 iOS 与 OS X 代码的52个有效方法</font></p>
 
-            </div>
-          
-
-    
-      <footer class="post-footer">
-     
-		
-		<div class="post-tags">
-		  
-			<a href="/tags/OC/">OC</a>
-		  
-		</div>
-		
-
-        
-        
-  <nav class="post-nav">
-    
-      <a class="prev" href="/2017/02/06/实现自定义UIWebView 的UIMenuController选项/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">对UIMenuController菜单自定义</span>
-        <span class="prev-text nav-mobile">Prev</span>
-      </a>
-    
-    
-      <a class="next" href="/2016/10/19/OC开发相关注意事项三/">
-        <span class="next-text nav-default">OC开发相关注意事项</span>
-        <span class="prev-text nav-mobile">Next</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-    
-  </nav>
-
-        
-  <div class="comments" id="comments">
-    
-    <div style="text-align:center;">
-        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
-    </div>
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
   </div>
+</article>
 
 
-      </footer>
-    
-  </article>
 
-    </div>
-
-      </div>
-      
         
+          <div id="footer-post-container">
+  <div id="footer-post">
 
-<script type="text/javascript">
-  var disqus_shortname = 'donglyu';
-  var disqus_identifier = '2016/10/20/OC开发相关注意事项四/';
-
-  var disqus_title = "OC开发相关注意事项";
-
-
-  var disqus = {
-    load : function disqus(){
-        if(typeof DISQUS !== 'object') {
-          (function () {
-          var s = document.createElement('script'); s.async = true;
-          s.type = 'text/javascript';
-          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-          }());
-          $('#load-disqus').remove(); ///加载后移除按钮
-        }
-    }
-  }
-
-  
-    var disqus_config = function () {
-        this.page.url = disqus_url;
-        this.page.identifier = disqus_identifier;
-        this.page.title = disqus_title;
-    };
-  
-
-</script>
-
-
-
-
-      
-      <footer id="colophon"><span class="copyright-year">
-    
-        &copy;
-    
-        2014 -
-    
-    2020
-    <span class="footer-author">lydsnm.</span>
-    <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
-    </span>
-</span>
-
-      </footer>
-
-      <div class="back-to-top" id="back-to-top">
-        <i class="iconfont icon-up"></i>
-      </div>
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/donglyu">Projects</a></li>
+         
+          <li><a href="https://life.lydsnm.top/">Life</a></li>
+        
+      </ul>
     </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第7章-熟悉系统框架"><span class="toc-number">1.</span> <span class="toc-text">第7章 熟悉系统框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-构建缓存时选用-NSCache-而非-NSDictionary"><span class="toc-number">1.1.</span> <span class="toc-text">1. 构建缓存时选用 NSCache 而非 NSDictionary</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-loadView-amp-initialize"><span class="toc-number">1.2.</span> <span class="toc-text">2. loadView &amp; initialize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-NSTimer-会保留其目标对象"><span class="toc-number">1.3.</span> <span class="toc-text">3. NSTimer 会保留其目标对象.</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充"><span class="toc-number">2.</span> <span class="toc-text">补充</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/&text=OC开发相关注意事项"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/&title=OC开发相关注意事项"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/&is_video=false&description=OC开发相关注意事项"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=OC开发相关注意事项&body=Check out this article: http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/&title=OC开发相关注意事项"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/&title=OC开发相关注意事项"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/&title=OC开发相关注意事项"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/&title=OC开发相关注意事项"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/&name=OC开发相关注意事项&description=&lt;h2 id=&#34;第7章-熟悉系统框架&#34;&gt;&lt;a href=&#34;#第7章-熟悉系统框架&#34; class=&#34;headerlink&#34; title=&#34;第7章 熟悉系统框架&#34;&gt;&lt;/a&gt;第7章 熟悉系统框架&lt;/h2&gt;&lt;p&gt;将一系列代码封装为动态库 (dynamic library) , 并在其中放入描述其借口的头文件, 这样做出来的东西就叫 &lt;font color=&#34;a52a2a&#34;&gt;框架&lt;/font&gt; .有时为 iOS 平台构建的第三方框架实用的是静态库 (static libaray), 这是因为 iOS 应用程序不允许在其中包含动态库.&lt;/p&gt;
+&lt;p&gt;开发者主要会碰到&lt;code&gt;Foundation&lt;/code&gt;, 像是 &lt;code&gt;NSOject&lt;/code&gt;, &lt;code&gt;NSArray&lt;/code&gt;, &lt;code&gt;NSDictionary&lt;/code&gt; 等类都在其中, &lt;code&gt;Foundation&lt;/code&gt; 是应用程序的 “基础”.&lt;/p&gt;
+&lt;p&gt;还有个与 &lt;code&gt;Foundation&lt;/code&gt; 相伴的框架, 叫做 &lt;code&gt;CoreFoundation&lt;/code&gt; , 从技术上来将, &lt;code&gt;CoreFoundation&lt;/code&gt; 框架不是 &lt;code&gt;Objective-C&lt;/code&gt; 框架, 但它是编写 &lt;code&gt;Objective-C&lt;/code&gt; 应用程序时所应熟悉的重要框架. &lt;code&gt;Foundation&lt;/code&gt; 框架中的很多功能, 都可以在此框架中找到对应的 C 语言 API. 可以用”无缝桥接”(tollfree bridging). 可以吧 &lt;code&gt;CoreFoundation&lt;/code&gt; 中的 C 语言数据结构平滑转换为 &lt;code&gt;Foundation&lt;/code&gt;中的 Objective-C 对象.&lt;/p&gt;
+&lt;p&gt;除了&lt;code&gt;Foundation&lt;/code&gt; 还有 &lt;code&gt;CFNetwork&lt;/code&gt; , &lt;code&gt;CoreAudio&lt;/code&gt;, &lt;code&gt;AVFoundation&lt;/code&gt;, &lt;code&gt;CoreData&lt;/code&gt;, &lt;code&gt;CoreText&lt;/code&gt; ….&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://www.lydsnm.top/2016/10/20/OC开发相关注意事项四/&t=OC开发相关注意事项"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
     
+    
+    2016-2022
+    lydsnm
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/donglyu">Projects</a></li><!--
+     --><!--
+       --><li><a href="https://life.lydsnm.top/">Life</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
   
-
-
-
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
   
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
-  
-
-
-
-    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
-
-<!--prettify代码高亮脚本引入-->
-
-    <script src="/plugins/prettify/prettify.js"></script>
-    <script type="text/javascript">
-    jQuery(function($){
-        $('pre').addClass('prettyprint');
-        prettyPrint();
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
     });
-    </script>
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
 
+<script src="/js/main.js"></script>
+<!-- search -->
 
-  </body>
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
 </html>

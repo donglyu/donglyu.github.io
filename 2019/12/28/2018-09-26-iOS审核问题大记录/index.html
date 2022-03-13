@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <meta name="description" content="作为iOS开发，注定了要与苹果审核做坚苦斗争。这里做一些记录，也没有用，就记录记录。 2.1 大礼包解决方案：这个大礼包在自己排查那几种常见的问题后，没有可以回复解释，有概率通过。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS审核问题大记录">
+<meta property="og:url" content="http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/index.html">
+<meta property="og:site_name" content="LYDSNM&#39;S WORK">
+<meta property="og:description" content="作为iOS开发，注定了要与苹果审核做坚苦斗争。这里做一些记录，也没有用，就记录记录。 2.1 大礼包解决方案：这个大礼包在自己排查那几种常见的问题后，没有可以回复解释，有概率通过。">
+<meta property="og:locale" content="zh-Hans™">
+<meta property="og:updated_time" content="2019-12-28T07:43:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS审核问题大记录">
+<meta name="twitter:description" content="作为iOS开发，注定了要与苹果审核做坚苦斗争。这里做一些记录，也没有用，就记录记录。 2.1 大礼包解决方案：这个大礼包在自己排查那几种常见的问题后，没有可以回复解释，有概率通过。">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>iOS审核问题大记录</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/donglyu">Projects</a></li><!--
+     --><!--
+       --><li><a href="https://life.lydsnm.top/">Life</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2020/01/16/2020-01-16-一些UI记录/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2019/12/06/2019-08-28-Rxjava梳理学习/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/&text=iOS审核问题大记录"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/&title=iOS审核问题大记录"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/&is_video=false&description=iOS审核问题大记录"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=iOS审核问题大记录&body=Check out this article: http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/&title=iOS审核问题大记录"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/&title=iOS审核问题大记录"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/&title=iOS审核问题大记录"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/&title=iOS审核问题大记录"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/&name=iOS审核问题大记录&description=&lt;p&gt;作为iOS开发，注定了要与苹果审核做坚苦斗争。这里做一些记录，也没有用，就记录记录。&lt;/p&gt;
+&lt;h3 id=&#34;2-1-大礼包&#34;&gt;&lt;a href=&#34;#2-1-大礼包&#34; class=&#34;headerlink&#34; title=&#34;2.1 大礼包&#34;&gt;&lt;/a&gt;2.1 大礼包&lt;/h3&gt;&lt;p&gt;解决方案：&lt;br&gt;这个大礼包在自己排查那几种常见的问题后，没有可以回复解释，有概率通过。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/&t=iOS审核问题大记录"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-大礼包"><span class="toc-number">1.</span> <span class="toc-text">2.1 大礼包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-包含未经必要授权的金融交易"><span class="toc-number">2.</span> <span class="toc-text">2.3.1 包含未经必要授权的金融交易</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-2"><span class="toc-number">3.</span> <span class="toc-text">4.2.2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#记录一些审核问题分享链接"><span class="toc-number"></span> <span class="toc-text">记录一些审核问题分享链接</span></a>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        iOS审核问题大记录
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">lydsnm</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-12-28T07:43:34.000Z" itemprop="datePublished">2019-12-28</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/iOS/">iOS</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>作为iOS开发，注定了要与苹果审核做坚苦斗争。这里做一些记录，也没有用，就记录记录。</p>
+<h3 id="2-1-大礼包"><a href="#2-1-大礼包" class="headerlink" title="2.1 大礼包"></a>2.1 大礼包</h3><p>解决方案：<br>这个大礼包在自己排查那几种常见的问题后，没有可以回复解释，有概率通过。</p>
+<a id="more"></a>
+<h3 id="2-3-1-包含未经必要授权的金融交易"><a href="#2-3-1-包含未经必要授权的金融交易" class="headerlink" title="2.3.1 包含未经必要授权的金融交易"></a>2.3.1 包含未经必要授权的金融交易</h3><blockquote>
+<p>Guideline 2.3.1 - Performance</p>
+</blockquote>
+<blockquote>
+<p>We discovered that your app contains hidden features. Attempting to hide features, functionality or content in your app is considered egregious behavior and can lead to removal from the Apple Developer Program.</p>
+</blockquote>
+<blockquote>
+<p>Specifically, your app contains financial transactions without the necessary authorization.</p>
+</blockquote>
+<p>解决方案：<br>如果确定没有涉及到金融交易和隐藏功能，回复解释功能。<br>如果有，在附件文件中附加提交资质证明材料供审核。</p>
+<h3 id="4-2-2"><a href="#4-2-2" class="headerlink" title="4.2.2"></a>4.2.2</h3><blockquote>
+<p>Guideline 4.2.2 - Design - Minimum Functionality</p>
+</blockquote>
+<blockquote>
+<p>We noticed that your app only includes links, images, or content aggregated from the Internet with limited or no native iOS functionality. Although this content may be curated from the web specifically for your users, since it does not sufficiently differ from a mobile web browsing experience, it is not appropriate for the App Store. </p>
+</blockquote>
+<p>解决方案：</p>
+<p>①元数据方面修改方案</p>
+<p>1，谈产品可用性，对于用户的需求点；</p>
+<p>2，描述本产品与App Store其他产品区别，本产品做了哪些细节性优化，或者哪些具体功能的不同性；</p>
+<p>②二进制方面修改方案</p>
+<p>1，添加开关；方法类似于下方；</p>
+<p>2，改功能；可以添加垃圾功能也可以独立开发其他的功能来丰富产品；</p>
+<h2 id="记录一些审核问题分享链接"><a href="#记录一些审核问题分享链接" class="headerlink" title="记录一些审核问题分享链接"></a>记录一些审核问题分享链接</h2><p><a href="https://www.freebuf.com/column/188785.html" target="_blank" rel="noopener">苹果审核一直卡“审核中”怎么办?最新苹果App Store卡审“漏洞”解决教程</a></p>
+<p><a href="https://www.freebuf.com/column/190066.html" target="_blank" rel="noopener">整理这近半年帮客户上架金融期货,彩票,棋牌游戏及其他App等等遇到的审核被拒问题解决方案</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/donglyu">Projects</a></li>
+         
+          <li><a href="https://life.lydsnm.top/">Life</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-大礼包"><span class="toc-number">1.</span> <span class="toc-text">2.1 大礼包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-包含未经必要授权的金融交易"><span class="toc-number">2.</span> <span class="toc-text">2.3.1 包含未经必要授权的金融交易</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-2"><span class="toc-number">3.</span> <span class="toc-text">4.2.2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#记录一些审核问题分享链接"><span class="toc-number"></span> <span class="toc-text">记录一些审核问题分享链接</span></a>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/&text=iOS审核问题大记录"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/&title=iOS审核问题大记录"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/&is_video=false&description=iOS审核问题大记录"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=iOS审核问题大记录&body=Check out this article: http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/&title=iOS审核问题大记录"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/&title=iOS审核问题大记录"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/&title=iOS审核问题大记录"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/&title=iOS审核问题大记录"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/&name=iOS审核问题大记录&description=&lt;p&gt;作为iOS开发，注定了要与苹果审核做坚苦斗争。这里做一些记录，也没有用，就记录记录。&lt;/p&gt;
+&lt;h3 id=&#34;2-1-大礼包&#34;&gt;&lt;a href=&#34;#2-1-大礼包&#34; class=&#34;headerlink&#34; title=&#34;2.1 大礼包&#34;&gt;&lt;/a&gt;2.1 大礼包&lt;/h3&gt;&lt;p&gt;解决方案：&lt;br&gt;这个大礼包在自己排查那几种常见的问题后，没有可以回复解释，有概率通过。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://www.lydsnm.top/2019/12/28/2018-09-26-iOS审核问题大记录/&t=iOS审核问题大记录"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    lydsnm
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/donglyu">Projects</a></li><!--
+     --><!--
+       --><li><a href="https://life.lydsnm.top/">Life</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

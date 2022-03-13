@@ -1,42 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-Hans™">
-  <head><meta name="generator" content="Hexo 3.8.0">
-    
-<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
-<meta name="baidu-site-verification" content="hkLiBHH93D">
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
-
-
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-  <meta name="description" content="整理下Swift与Objective-C的一些不同">
-
-
-
-
-  <meta name="keywords" content="Swift,">
-
-
-
-
-  <link rel="alternate" href="/default" title="LYDSNM'S WORK">
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
-
-
-
-<link rel="canonical" href="http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/">
-
-
-<meta name="description" content="在OC中对代码进行逻辑组织用的是#pragma mark - , 生成分割线而在swift中有了一些新的语法如: //MARK: //FIXME TODO: //MARK: - 生成分割线 //MARK: 说明">
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <meta name="description" content="在OC中对代码进行逻辑组织用的是#pragma mark - , 生成分割线而在swift中有了一些新的语法如: //MARK: //FIXME TODO: //MARK: - 生成分割线 //MARK: 说明">
 <meta name="keywords" content="Swift">
 <meta property="og:type" content="article">
 <meta property="og:title" content="整理下Swift与Objective-C的一些不同">
@@ -44,132 +14,154 @@
 <meta property="og:site_name" content="LYDSNM&#39;S WORK">
 <meta property="og:description" content="在OC中对代码进行逻辑组织用的是#pragma mark - , 生成分割线而在swift中有了一些新的语法如: //MARK: //FIXME TODO: //MARK: - 生成分割线 //MARK: 说明">
 <meta property="og:locale" content="zh-Hans™">
-<meta property="og:updated_time" content="2019-09-25T15:00:20.428Z">
+<meta property="og:updated_time" content="2019-09-25T15:00:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="整理下Swift与Objective-C的一些不同">
 <meta name="twitter:description" content="在OC中对代码进行逻辑组织用的是#pragma mark - , 生成分割线而在swift中有了一些新的语法如: //MARK: //FIXME TODO: //MARK: - 生成分割线 //MARK: 说明">
-
-
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
-
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
-
-
-
-
-
-<script type="text/javascript">
-  var themeConfig = {
-    fancybox: {
-      enable: true
-    },
-  };
-</script>
-
-
-
-
-  
-
-
-
-
-  <link href="/plugins/prettify/prettify.css" rel="stylesheet">
-
-
-<!--百度统计-->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?b733e1eaeacbf8f87d3be047f28c3973";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-    <title> 整理下Swift与Objective-C的一些不同 - LYDSNM'S WORK </title>
-  </head>
-
-  <body>
-    <div id="page">
-      <header id="masthead"><div class="site-header-inner">
-    <h1 class="site-title">
-        <a href="/." class="logo">LYDSNM'S WORK</a>
-    </h1>
-
-    <nav id="nav-top">
+    
+    
+      
         
-            <ul id="menu-top" class="nav-top-items">
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/">
-                            
-                            
-                                首页
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/archives">
-                            
-                            
-                                归档
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="http://life.lydsnm.top">
-                            
-                            
-                                生活
-                            
-                        </a>
-                    </li>
-                
-            </ul>
+          <link rel="shortcut icon" href="/images/favicon.ico">
         
-  </nav>
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>整理下Swift与Objective-C的一些不同</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/donglyu">Projects</a></li><!--
+     --><!--
+       --><li><a href="https://life.lydsnm.top/">Life</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2016/08/24/OC开发相关注意事项/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2016/08/23/阶段总结/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/&text=整理下Swift与Objective-C的一些不同"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/&title=整理下Swift与Objective-C的一些不同"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/&is_video=false&description=整理下Swift与Objective-C的一些不同"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=整理下Swift与Objective-C的一些不同&body=Check out this article: http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/&title=整理下Swift与Objective-C的一些不同"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/&title=整理下Swift与Objective-C的一些不同"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/&title=整理下Swift与Objective-C的一些不同"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/&title=整理下Swift与Objective-C的一些不同"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/&name=整理下Swift与Objective-C的一些不同&description=&lt;p&gt;在OC中对代码进行逻辑组织用的是#pragma mark - , 生成分割线&lt;br&gt;而在swift中有了一些新的语法&lt;br&gt;如: &lt;code&gt;//MARK:&lt;/code&gt; &lt;code&gt;//FIXME&lt;/code&gt; &lt;code&gt;TODO:&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;//MARK: -&lt;/code&gt; 生成分割线&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;//MARK:&lt;/code&gt; 说明&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/&t=整理下Swift与Objective-C的一些不同"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChangeLog"><span class="toc-number">1.</span> <span class="toc-text">ChangeLog</span></a></li></ol>
+    </div>
+  </span>
 </div>
 
-      </header>
-      <div id="content">
-        
-    <div id="primary">
-        
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          整理下Swift与Objective-C的一些不同
-        
-      </h1>
-
-      <time class="post-time">
-          2016-08-23
-      </time>
-    </header>
-
-
-
     
-            
-  <div class="toc-container">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChangeLog"><span class="toc-text">ChangeLog</span></a></li></ol>
-  </div> 
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        整理下Swift与Objective-C的一些不同
+    </h1>
 
 
-            <div class="post-content">
-                <p>在OC中对代码进行逻辑组织用的是#pragma mark - , 生成分割线<br>而在swift中有了一些新的语法<br>如: <code>//MARK:</code> <code>//FIXME</code> <code>TODO:</code></p>
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">lydsnm</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2016-08-22T16:00:00.000Z" itemprop="datePublished">2016-08-23</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/iOS/">iOS</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Swift/">Swift</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>在OC中对代码进行逻辑组织用的是#pragma mark - , 生成分割线<br>而在swift中有了一些新的语法<br>如: <code>//MARK:</code> <code>//FIXME</code> <code>TODO:</code></p>
 <p><code>//MARK: -</code> 生成分割线</p>
 <p><code>//MARK:</code> 说明</p>
 <a id="more"></a>
@@ -198,149 +190,146 @@ extension UIView {
 <hr>
 <h2 id="ChangeLog"><a href="#ChangeLog" class="headerlink" title="ChangeLog"></a>ChangeLog</h2><p>2016-12-3 区别太多，放弃，当新学一门语言吧，感觉还快些，😄。</p>
 
-            </div>
-          
-
-    
-      <footer class="post-footer">
-     
-		
-		<div class="post-tags">
-		  
-			<a href="/tags/Swift/">Swift</a>
-		  
-		</div>
-		
-
-        
-        
-  <nav class="post-nav">
-    
-      <a class="prev" href="/2016/08/24/OC开发相关注意事项/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">OC开发相关注意事项</span>
-        <span class="prev-text nav-mobile">Prev</span>
-      </a>
-    
-    
-      <a class="next" href="/2016/08/23/阶段总结/">
-        <span class="next-text nav-default">阶段总结</span>
-        <span class="prev-text nav-mobile">Next</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-    
-  </nav>
-
-        
-  <div class="comments" id="comments">
-    
-    <div style="text-align:center;">
-        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
-    </div>
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
   </div>
+</article>
 
 
-      </footer>
-    
-  </article>
 
-    </div>
-
-      </div>
-      
         
+          <div id="footer-post-container">
+  <div id="footer-post">
 
-<script type="text/javascript">
-  var disqus_shortname = 'donglyu';
-  var disqus_identifier = '2016/08/23/简单整理Swift与Objective-C的不同/';
-
-  var disqus_title = "整理下Swift与Objective-C的一些不同";
-
-
-  var disqus = {
-    load : function disqus(){
-        if(typeof DISQUS !== 'object') {
-          (function () {
-          var s = document.createElement('script'); s.async = true;
-          s.type = 'text/javascript';
-          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-          }());
-          $('#load-disqus').remove(); ///加载后移除按钮
-        }
-    }
-  }
-
-  
-    var disqus_config = function () {
-        this.page.url = disqus_url;
-        this.page.identifier = disqus_identifier;
-        this.page.title = disqus_title;
-    };
-  
-
-</script>
-
-
-
-
-      
-      <footer id="colophon"><span class="copyright-year">
-    
-        &copy;
-    
-        2014 -
-    
-    2020
-    <span class="footer-author">lydsnm.</span>
-    <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
-    </span>
-</span>
-
-      </footer>
-
-      <div class="back-to-top" id="back-to-top">
-        <i class="iconfont icon-up"></i>
-      </div>
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/donglyu">Projects</a></li>
+         
+          <li><a href="https://life.lydsnm.top/">Life</a></li>
+        
+      </ul>
     </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ChangeLog"><span class="toc-number">1.</span> <span class="toc-text">ChangeLog</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/&text=整理下Swift与Objective-C的一些不同"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/&title=整理下Swift与Objective-C的一些不同"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/&is_video=false&description=整理下Swift与Objective-C的一些不同"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=整理下Swift与Objective-C的一些不同&body=Check out this article: http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/&title=整理下Swift与Objective-C的一些不同"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/&title=整理下Swift与Objective-C的一些不同"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/&title=整理下Swift与Objective-C的一些不同"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/&title=整理下Swift与Objective-C的一些不同"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/&name=整理下Swift与Objective-C的一些不同&description=&lt;p&gt;在OC中对代码进行逻辑组织用的是#pragma mark - , 生成分割线&lt;br&gt;而在swift中有了一些新的语法&lt;br&gt;如: &lt;code&gt;//MARK:&lt;/code&gt; &lt;code&gt;//FIXME&lt;/code&gt; &lt;code&gt;TODO:&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;//MARK: -&lt;/code&gt; 生成分割线&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;//MARK:&lt;/code&gt; 说明&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://www.lydsnm.top/2016/08/23/简单整理Swift与Objective-C的不同/&t=整理下Swift与Objective-C的一些不同"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
     
+    
+    2016-2022
+    lydsnm
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/donglyu">Projects</a></li><!--
+     --><!--
+       --><li><a href="https://life.lydsnm.top/">Life</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
   
-
-
-
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
   
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
-  
-
-
-
-    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
-
-<!--prettify代码高亮脚本引入-->
-
-    <script src="/plugins/prettify/prettify.js"></script>
-    <script type="text/javascript">
-    jQuery(function($){
-        $('pre').addClass('prettyprint');
-        prettyPrint();
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
     });
-    </script>
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
 
+<script src="/js/main.js"></script>
+<!-- search -->
 
-  </body>
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
 </html>

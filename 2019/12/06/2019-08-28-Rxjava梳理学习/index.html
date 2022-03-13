@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <meta name="description" content="Rxjava就是实现异步操作的库。 RxJava 的优势也是简洁，随着程序逻辑变得越来越复杂，它依然能够保持简洁。 这篇文章记录一下最核心的内容，不包含更进阶的用法~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RxJava梳理学习">
+<meta property="og:url" content="http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/index.html">
+<meta property="og:site_name" content="LYDSNM&#39;S WORK">
+<meta property="og:description" content="Rxjava就是实现异步操作的库。 RxJava 的优势也是简洁，随着程序逻辑变得越来越复杂，它依然能够保持简洁。 这篇文章记录一下最核心的内容，不包含更进阶的用法~">
+<meta property="og:locale" content="zh-Hans™">
+<meta property="og:updated_time" content="2019-12-06T10:05:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RxJava梳理学习">
+<meta name="twitter:description" content="Rxjava就是实现异步操作的库。 RxJava 的优势也是简洁，随着程序逻辑变得越来越复杂，它依然能够保持简洁。 这篇文章记录一下最核心的内容，不包含更进阶的用法~">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>RxJava梳理学习</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/donglyu">Projects</a></li><!--
+     --><!--
+       --><li><a href="https://life.lydsnm.top/">Life</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2019/12/28/2018-09-26-iOS审核问题大记录/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2019/12/03/2019-08-19-Android开发过程的中概念点/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/&text=RxJava梳理学习"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/&title=RxJava梳理学习"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/&is_video=false&description=RxJava梳理学习"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=RxJava梳理学习&body=Check out this article: http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/&title=RxJava梳理学习"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/&title=RxJava梳理学习"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/&title=RxJava梳理学习"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/&title=RxJava梳理学习"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/&name=RxJava梳理学习&description=&lt;p&gt;Rxjava就是实现&lt;code&gt;异步操作&lt;/code&gt;的库。&lt;/p&gt;
+&lt;p&gt;RxJava 的优势也是简洁，随着程序逻辑变得越来越复杂，它依然能够保持简洁。&lt;/p&gt;
+&lt;p&gt;这篇文章记录一下最核心的内容，不包含更进阶的用法~&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/&t=RxJava梳理学习"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Observer-Subscriber-：观察者"><span class="toc-number">1.</span> <span class="toc-text">1.Observer(Subscriber)：观察者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Observable-可观察者即被观察者"><span class="toc-number">2.</span> <span class="toc-text">2.Observable:可观察者即被观察者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Subscribe-订阅"><span class="toc-number">3.</span> <span class="toc-text">3.Subscribe (订阅):</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-线程控制-——-Scheduler"><span class="toc-number">4.</span> <span class="toc-text">4.线程控制 —— Scheduler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-转换"><span class="toc-number">5.</span> <span class="toc-text">5.转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-线程控制（二）Scheduler"><span class="toc-number">6.</span> <span class="toc-text">6.线程控制（二）Scheduler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-参考理解例子"><span class="toc-number">7.</span> <span class="toc-text">7.参考理解例子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#与Retrofit的结合"><span class="toc-number">7.1.</span> <span class="toc-text">与Retrofit的结合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#不使用Retrofit来请求并更新数据库"><span class="toc-number">7.2.</span> <span class="toc-text">不使用Retrofit来请求并更新数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用RxJava来实现同样更新数据库的功能"><span class="toc-number">7.3.</span> <span class="toc-text">使用RxJava来实现同样更新数据库的功能</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">8.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        RxJava梳理学习
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">lydsnm</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-12-06T10:05:12.000Z" itemprop="datePublished">2019-12-06</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Android/">Android</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Rxjava就是实现<code>异步操作</code>的库。</p>
+<p>RxJava 的优势也是简洁，随着程序逻辑变得越来越复杂，它依然能够保持简洁。</p>
+<p>这篇文章记录一下最核心的内容，不包含更进阶的用法~</p>
+<a id="more"></a>
+<h3 id="1-Observer-Subscriber-：观察者"><a href="#1-Observer-Subscriber-：观察者" class="headerlink" title="1.Observer(Subscriber)：观察者"></a>1.Observer(Subscriber)：观察者</h3><p>Observer 决定事件触发的时候将有怎样的行为。<br>RxJava 中的 Observer 接口的实现方式:</p>
+<pre><code class="java">Observer&lt;String&gt; observer = new Observer&lt;String&gt;() {
+    @Override
+    public void onNext(String s) {
+        Log.d(tag, "Item: " + s);
+    }
+    @Override
+    public void onCompleted() {
+        Log.d(tag, "Completed!");
+    }
+    @Override
+    public void onError(Throwable e) {
+        Log.d(tag, "Error!");
+    }
+};
+</code></pre>
+<p>除了 Observer 接口之外，RxJava 还内置了一个实现了 Observer 的抽象类：<code>Subscriber</code>。</p>
+<p><code>onStart()</code>: 这是 <code>Subscriber</code> 增加的方法，它会在 subscribe 刚开始，而事件还未发送之前被调用，用来做一些准备工作，但是！！！这个不适用于显示进度条等UI线程操作</p>
+<p><code>unsubscribe()</code>: 这是 Subscriber 所实现的另一个接口 Subscription 的方法，用于取消订阅。在这个方法被调用后，Subscriber 将不再接收事件。一般在这个方法调用前，可以使用 <code>isUnsubscribed()</code> 先判断一下状态。 unsubscribe() 这个方法很重要，因为在 subscribe() 之后， Observable 会持有 Subscriber 的引用，这个引用如果不能及时被释放，将有内存泄露的风险。所以最好保持一个原则：要在不再使用的时候尽快在合适的地方（例如 <code>onPause()</code> <code>onStop()</code> 等方法中）调用 unsubscribe() 来解除引用关系，以避免内存泄露的发生。</p>
+<h3 id="2-Observable-可观察者即被观察者"><a href="#2-Observable-可观察者即被观察者" class="headerlink" title="2.Observable:可观察者即被观察者"></a>2.Observable:可观察者即被观察者</h3><p>创建被观察者，并定义事件触发规则。</p>
+<pre><code class="java">Observable observable = Observable.create(new Observable.OnSubscribe&lt;String&gt;() {
+    @Override
+    public void call(Subscriber&lt;? super String&gt; subscriber) {
+        subscriber.onNext("Hello");
+        subscriber.onNext("Hi");
+        subscriber.onNext("Aloha");
+        subscriber.onCompleted();
+    }
+});
+</code></pre>
+<p><code>OnSubscribe</code> 会被存储在返回的 <code>Observable</code> 对象中，它的作用相当于一个计划表，当 Observable 被订阅的时候，OnSubscribe 的 call() 方法会自动被调用。这种模式就是观察者模式。</p>
+<p><code>create()</code> 方法是 RxJava 最基本的创造事件序列的方法。基于这个方法， RxJava 还提供了一些方法用来快捷创建事件队列，例如<code>just(T...)</code>、<code>from(T[]) / from(Iterable&lt;? extends T&gt;) :</code></p>
+<h3 id="3-Subscribe-订阅"><a href="#3-Subscribe-订阅" class="headerlink" title="3.Subscribe (订阅):"></a>3.Subscribe (订阅):</h3><p>建立订阅关系，由可观察者调用。</p>
+<pre><code class="java">observable.subscribe(observer);
+// 或者：
+observable.subscribe(subscriber);
+</code></pre>
+<h3 id="4-线程控制-——-Scheduler"><a href="#4-线程控制-——-Scheduler" class="headerlink" title="4.线程控制 —— Scheduler"></a>4.线程控制 —— Scheduler</h3><p>观察者模式本身的目的就是『后台处理，前台回调』的异步机制，而实现异步就需要Scheduler了。</p>
+<p>在不指定线程的情况下， RxJava 遵循的是线程不变的原则，即：在哪个线程调用 subscribe()，就在哪个线程生产事件；在哪个线程生产事件，就在哪个线程消费事件。如果需要切换线程，就需要用到 Scheduler （调度器）。</p>
+<p>在RxJava 中，Scheduler ——调度器，相当于线程控制器，RxJava 通过它来指定每一段代码应该运行在什么样的线程。Android中常用的Scheduler有两个（有更多的，请看原始网站链接。）：</p>
+<blockquote>
+<p>Schedulers.io():I/O 操作,耗时的线程<br>AndroidSchedulers.mainThread()：主线程</p>
+</blockquote>
+<p><code>subscribeOn()</code>: <strong>指定 subscribe() 所发生的线程</strong>，即 Observable.OnSubscribe 被激活时所处的线程。或者叫做事件产生的线程。<br><code>observeOn()</code>: <strong>指定 Subscriber 所运行在的线程</strong>。或者叫做事件消费的线程。</p>
+<pre><code class="java">Observable observable = Observable.create(new Observable.OnSubscribe&lt;String&gt;() {
+    @Override
+    public void call(Subscriber&lt;? super String&gt; subscriber) {//这里在IO线程操作
+        subscriber.onNext("Hello");
+        subscriber.onNext("Hi");
+        subscriber.onNext("Aloha");
+        subscriber.onCompleted();
+    }
+})
+.subscribeOn(Schedulers.io()) // 指定 subscribe() 发生在 IO 线程
+.observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程
+.subscribe(new Action1&lt;Integer&gt;() {
+        @Override
+        public void call(Integer number) {//回调到主线程，进行UI操作
+            Log.d(tag, "number:" + number);
+        }
+    });
+</code></pre>
+<p>事实上，这种在 <strong>subscribe()</strong> 之前写上两句 <strong>subscribeOn(Scheduler.io())</strong> 和 <strong>observeOn(AndroidSchedulers.mainThread())</strong> 的使用方式非常常见，它适用于多数的 『后台线程取数据，主线程显示』的程序策略。</p>
+<h3 id="5-转换"><a href="#5-转换" class="headerlink" title="5.转换"></a>5.转换</h3><p>RxJava 提供了对事件序列进行变换的支持，这是它的核心功能之一，也是大多数人说『RxJava 真是太好用了』的最大原因。<strong>所谓变换，就是将事件序列中的对象或整个序列进行加工处理，转换成不同的事件或事件序列</strong>。</p>
+<p>一个map()的例子：</p>
+<pre><code class="java">Observable.just("images/logo.png") // 输入类型 String
+    .map(new Func1&lt;String, Bitmap&gt;() {
+        @Override
+        public Bitmap call(String filePath) { // 参数类型 String
+            return getBitmapFromPath(filePath); // 返回类型 Bitmap
+        }
+    })
+    .subscribe(new Action1&lt;Bitmap&gt;() {
+        @Override
+        public void call(Bitmap bitmap) { // 参数类型 Bitmap
+            showBitmap(bitmap);
+        }
+    });
+</code></pre>
+<p><strong>Func1</strong> 是Rxjava的一个接口，用于包装含有一个参数的方法，且有返回值。（<strong>Action0</strong> 和 <strong>Action1</strong> 对应的就是无返回值的）。而 <strong>FuncX</strong> 就是多个不同参数的方法。</p>
+<p>可以看到，map() 方法将参数中的 String 对象转换成一个 Bitmap 对象后返回，而在经过 map() 方法后，事件的参数类型也由 String 转为了 Bitmap。这种直接变换对象并返回的，是最常见的也最容易理解的变换。不过 RxJava 的变换远不止这样，它不仅可以针对事件对象，还可以针对整个事件队列，这使得 RxJava 变得非常灵活。</p>
+<h3 id="6-线程控制（二）Scheduler"><a href="#6-线程控制（二）Scheduler" class="headerlink" title="6.线程控制（二）Scheduler"></a>6.线程控制（二）Scheduler</h3><p>除了灵活的变换，RxJava 另一个牛逼的地方，就是线程的自由控制。</p>
+<p>前面讲到了，可以利用 subscribeOn() 结合 observeOn() 来实现线程控制，让事件的产生和消费发生在不同的线程。可是在了解了 map() flatMap() 等变换方法后，有些好事的（其实就是当初刚接触 RxJava 时的我）就问了：能不能多切换几次线程？</p>
+<p>答案是：能。因为 observeOn() 指定的是 Subscriber 的线程，而这个 Subscriber 并不是（严格说应该为『不一定是』，但这里不妨理解为『不是』）subscribe() 参数中的 Subscriber ，而是 observeOn() 执行时的当前 Observable 所对应的 Subscriber ，即它的直接下级 Subscriber 。换句话说，observeOn() 指定的是它之后的操作所在的线程。因此如果有多次切换线程的需求，只要在每个想要切换线程的位置调用一次 observeOn() 即可。上代码：</p>
+<pre><code class="java">Observable.just(1, 2, 3, 4) // IO 线程，由 subscribeOn() 指定
+    .subscribeOn(Schedulers.io())
+    .observeOn(Schedulers.newThread())
+    .map(mapOperator) // 新线程，由 observeOn() 指定
+    .observeOn(Schedulers.io())
+    .map(mapOperator2) // IO 线程，由 observeOn() 指定
+    .observeOn(AndroidSchedulers.mainThread) 
+    .subscribe(subscriber);  // Android 主线程，由 observeOn() 指定
+</code></pre>
+<p>如上，通过 observeOn() 的多次调用，程序实现了线程的多次切换。<br>不过，不同于 observeOn() ， subscribeOn() 的位置放在哪里都可以，但它是只能调用一次的。</p>
+<h3 id="7-参考理解例子"><a href="#7-参考理解例子" class="headerlink" title="7.参考理解例子"></a>7.参考理解例子</h3><h4 id="与Retrofit的结合"><a href="#与Retrofit的结合" class="headerlink" title="与Retrofit的结合"></a>与Retrofit的结合</h4><p>Retrofit传统方式定义API</p>
+<pre><code class="java">@GET("/user")
+public void getUser(@Query("userId") String userId, Callback&lt;User&gt; callback);
+</code></pre>
+<p>在程序的构建过程中， Retrofit 会把自动把方法实现并生成代码，然后开发者就可以利用下面的方法来获取特定用户并处理响应：</p>
+<pre><code class="java">getUser(userId, new Callback&lt;User&gt;() {
+    @Override
+    public void success(User user) {
+        userView.setUser(user);
+    }
+
+    @Override
+    public void failure(RetrofitError error) {
+        // Error handling
+        ...
+    }
+};
+</code></pre>
+<p>而使用 RxJava 形式的 API，定义同样的请求是这样的：</p>
+<pre><code class="java">@GET("/user")
+public Observable&lt;User&gt; getUser(@Query("userId") String userId);
+</code></pre>
+<p>使用时是这样的：</p>
+<pre><code class="java">getUser(userId)
+    .observeOn(AndroidSchedulers.mainThread())
+    .subscribe(new Observer&lt;User&gt;() {
+        @Override
+        public void onNext(User user) {
+            userView.setUser(user);
+        }
+
+        @Override
+        public void onCompleted() {
+        }
+
+        @Override
+        public void onError(Throwable error) {
+            // Error handling
+            ...
+        }
+    });
+</code></pre>
+<h4 id="不使用Retrofit来请求并更新数据库"><a href="#不使用Retrofit来请求并更新数据库" class="headerlink" title="不使用Retrofit来请求并更新数据库"></a>不使用Retrofit来请求并更新数据库</h4><pre><code class="java">getUser(userId, new Callback&lt;User&gt;() {
+    @Override
+    public void success(User user) {
+        new Thread() {
+            @Override
+            public void run() {
+                processUser(user); // 尝试修正 User 数据
+                runOnUiThread(new Runnable() { // 切回 UI 线程
+                    @Override
+                    public void run() {
+                        userView.setUser(user);
+                    }
+                });
+            }).start();
+    }
+
+    @Override
+    public void failure(RetrofitError error) {
+        // Error handling
+        ...
+    }
+};
+</code></pre>
+<h4 id="使用RxJava来实现同样更新数据库的功能"><a href="#使用RxJava来实现同样更新数据库的功能" class="headerlink" title="使用RxJava来实现同样更新数据库的功能"></a>使用RxJava来实现同样更新数据库的功能</h4><pre><code class="java">getUser(userId)
+    .doOnNext(new Action1&lt;User&gt;() {
+        @Override
+        public void call(User user) {
+            processUser(user);
+        })
+    .observeOn(AndroidSchedulers.mainThread())
+    .subscribe(new Observer&lt;User&gt;() {
+        @Override
+        public void onNext(User user) {
+            userView.setUser(user);
+        }
+
+        @Override
+        public void onCompleted() {
+        }
+
+        @Override
+        public void onError(Throwable error) {
+            // Error handling
+            ...
+        }
+    });
+</code></pre>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>更多详细的请看大佬的文章<a href="https://gank.io/post/560e15be2dca930e00da1083#toc_25" target="_blank" rel="noopener">给 Android 开发者的 RxJava 详解</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/donglyu">Projects</a></li>
+         
+          <li><a href="https://life.lydsnm.top/">Life</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Observer-Subscriber-：观察者"><span class="toc-number">1.</span> <span class="toc-text">1.Observer(Subscriber)：观察者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Observable-可观察者即被观察者"><span class="toc-number">2.</span> <span class="toc-text">2.Observable:可观察者即被观察者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Subscribe-订阅"><span class="toc-number">3.</span> <span class="toc-text">3.Subscribe (订阅):</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-线程控制-——-Scheduler"><span class="toc-number">4.</span> <span class="toc-text">4.线程控制 —— Scheduler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-转换"><span class="toc-number">5.</span> <span class="toc-text">5.转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-线程控制（二）Scheduler"><span class="toc-number">6.</span> <span class="toc-text">6.线程控制（二）Scheduler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-参考理解例子"><span class="toc-number">7.</span> <span class="toc-text">7.参考理解例子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#与Retrofit的结合"><span class="toc-number">7.1.</span> <span class="toc-text">与Retrofit的结合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#不使用Retrofit来请求并更新数据库"><span class="toc-number">7.2.</span> <span class="toc-text">不使用Retrofit来请求并更新数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用RxJava来实现同样更新数据库的功能"><span class="toc-number">7.3.</span> <span class="toc-text">使用RxJava来实现同样更新数据库的功能</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">8.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/&text=RxJava梳理学习"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/&title=RxJava梳理学习"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/&is_video=false&description=RxJava梳理学习"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=RxJava梳理学习&body=Check out this article: http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/&title=RxJava梳理学习"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/&title=RxJava梳理学习"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/&title=RxJava梳理学习"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/&title=RxJava梳理学习"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/&name=RxJava梳理学习&description=&lt;p&gt;Rxjava就是实现&lt;code&gt;异步操作&lt;/code&gt;的库。&lt;/p&gt;
+&lt;p&gt;RxJava 的优势也是简洁，随着程序逻辑变得越来越复杂，它依然能够保持简洁。&lt;/p&gt;
+&lt;p&gt;这篇文章记录一下最核心的内容，不包含更进阶的用法~&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://www.lydsnm.top/2019/12/06/2019-08-28-Rxjava梳理学习/&t=RxJava梳理学习"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    lydsnm
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/donglyu">Projects</a></li><!--
+     --><!--
+       --><li><a href="https://life.lydsnm.top/">Life</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

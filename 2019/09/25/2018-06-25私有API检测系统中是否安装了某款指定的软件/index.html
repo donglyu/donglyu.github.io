@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <meta name="description" content="前段时间，在一个积分任务墙的项目，需要跳转到市场去安装App，需要检测iOS设备已安装应用列表的需求，要能获取到安装情况（包括安装进度啊，完成回调等）。经过一段时间的了解，还算完成了既定任务。这篇记录下使用和尝试过程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS私有API检测系统中是否安装了某款指定的软件">
+<meta property="og:url" content="http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/index.html">
+<meta property="og:site_name" content="LYDSNM&#39;S WORK">
+<meta property="og:description" content="前段时间，在一个积分任务墙的项目，需要跳转到市场去安装App，需要检测iOS设备已安装应用列表的需求，要能获取到安装情况（包括安装进度啊，完成回调等）。经过一段时间的了解，还算完成了既定任务。这篇记录下使用和尝试过程。">
+<meta property="og:locale" content="zh-Hans™">
+<meta property="og:updated_time" content="2019-09-25T09:50:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS私有API检测系统中是否安装了某款指定的软件">
+<meta name="twitter:description" content="前段时间，在一个积分任务墙的项目，需要跳转到市场去安装App，需要检测iOS设备已安装应用列表的需求，要能获取到安装情况（包括安装进度啊，完成回调等）。经过一段时间的了解，还算完成了既定任务。这篇记录下使用和尝试过程。">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>iOS私有API检测系统中是否安装了某款指定的软件</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/donglyu">Projects</a></li><!--
+     --><!--
+       --><li><a href="https://life.lydsnm.top/">Life</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2019/09/25/2018-07-03应用审核通过，但是内购项目一直处于正在审核中/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2018/12/09/面试问题实记/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/&text=iOS私有API检测系统中是否安装了某款指定的软件"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/&title=iOS私有API检测系统中是否安装了某款指定的软件"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/&is_video=false&description=iOS私有API检测系统中是否安装了某款指定的软件"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=iOS私有API检测系统中是否安装了某款指定的软件&body=Check out this article: http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/&title=iOS私有API检测系统中是否安装了某款指定的软件"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/&title=iOS私有API检测系统中是否安装了某款指定的软件"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/&title=iOS私有API检测系统中是否安装了某款指定的软件"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/&title=iOS私有API检测系统中是否安装了某款指定的软件"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/&name=iOS私有API检测系统中是否安装了某款指定的软件&description=&lt;p&gt;前段时间，在一个积分任务墙的项目，需要跳转到市场去安装App，需要检测iOS设备已安装应用列表的需求，要能获取到安装情况（包括安装进度啊，完成回调等）。经过一段时间的了解，还算完成了既定任务。这篇记录下使用和尝试过程。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/&t=iOS私有API检测系统中是否安装了某款指定的软件"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、URL-Scheme"><span class="toc-number">1.</span> <span class="toc-text">一、URL Scheme</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、获取系统中安装列表和各应用的bundleId。"><span class="toc-number">2.</span> <span class="toc-text">二、获取系统中安装列表和各应用的bundleId。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、通过定时器不断的调度-可以用下面的方法得到-所有正在下载的app"><span class="toc-number">3.</span> <span class="toc-text">三、通过定时器不断的调度 可以用下面的方法得到 所有正在下载的app</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、通过bundle-id判断是否安装并打开app"><span class="toc-number">4.</span> <span class="toc-text">四、通过bundle id判断是否安装并打开app</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">5.</span> <span class="toc-text">结语</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        iOS私有API检测系统中是否安装了某款指定的软件
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">lydsnm</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-09-25T09:50:25.000Z" itemprop="datePublished">2019-09-25</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/iOS/">iOS</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>前段时间，在一个积分任务墙的项目，需要跳转到市场去安装App，需要检测iOS设备已安装应用列表的需求，要能获取到安装情况（包括安装进度啊，完成回调等）。经过一段时间的了解，还算完成了既定任务。这篇记录下使用和尝试过程。</p>
+<a id="more"></a>
+<h2 id="一、URL-Scheme"><a href="#一、URL-Scheme" class="headerlink" title="一、URL Scheme"></a>一、URL Scheme</h2><p>前期考虑过 <strong>URL Scheme </strong>来判断是否安装了某个应用，但是每个app是否设置了URL scheme不知道，而且iOS9上的这个方法能判断的上限是50个，</p>
+<pre><code>[[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:url]]
+</code></pre><p>因此这个实际情况下无法使用。但是我们可能在其他场景下使用到URL Scheme(比如打开系统应用)，可以下面的方法列出所有的URL Scheme，但是哪个scheme是哪个应用就得靠猜了，一个应用也可能有多个URL Scheme。</p>
+<pre><code class="objc">- (NSArray*)privateURLSchemes{
+    return [_workspace privateURLSchemes];
+}
+
+- (NSArray*)publicURLSchemes{
+    return [_workspace publicURLSchemes];
+}
+</code></pre>
+<h2 id="二、获取系统中安装列表和各应用的bundleId。"><a href="#二、获取系统中安装列表和各应用的bundleId。" class="headerlink" title="二、获取系统中安装列表和各应用的bundleId。"></a>二、获取系统中安装列表和各应用的bundleId。</h2><pre><code class="objc"> Class LSApplicationWorkspace_class = objc_getClass("LSApplicationWorkspace");  
+ SEL selector=NSSelectorFromString(@"defaultWorkspace");  
+ NSObject* workspace = [LSApplicationWorkspace_class performSelector:selector];  
+ _workspace = workspace
+</code></pre>
+<pre><code class="objc">#include &lt;objc/runtime.h&gt;  
+
+ SEL selectorALL = NSSelectorFromString(@"allApplications");  
+ NSArray *apps = [_workspace performSelector:selectorALL];
+ NSLog(@"apps: %@", );  
+ [apps[0] performSelector:NSSelectorFromString(@"applicationIdentifier")];//shortVersionString等。
+</code></pre>
+<p>其余一些方法可以去这儿<a href="https://github.com/nst/iOS-Runtime-Headers/blob/master/Frameworks/MobileCoreServices.framework/LSApplicationProxy.h" target="_blank" rel="noopener">查看</a></p>
+<p>关于LSApplicationWorkspace的使用可以查看<a href="https://www.jianshu.com/p/b8d882069197" target="_blank" rel="noopener">iOS私有方法LSApplicationWorkspace.h的一些使用</a></p>
+<h2 id="三、通过定时器不断的调度-可以用下面的方法得到-所有正在下载的app"><a href="#三、通过定时器不断的调度-可以用下面的方法得到-所有正在下载的app" class="headerlink" title="三、通过定时器不断的调度 可以用下面的方法得到 所有正在下载的app"></a>三、通过定时器不断的调度 可以用下面的方法得到 所有正在下载的app</h2><pre><code class="objc">/** 通过定时器不断调用来获取系统中所有正在下载的内容及进度。*/
+- (IBAction)TimerUpdateToGetDownloadProgress:(id)sender {
+
+
+    void *lib = dlopen("/System/Library/Frameworks/MobileCoreServices.framework/MobileCoreServices", RTLD_LAZY);
+
+    if (lib){
+        Class LSApplicationWorkspace = NSClassFromString(@"LSApplicationWorkspace");
+        id AAURLConfiguration1 = [LSApplicationWorkspace performSelector:@selector(defaultWorkspace)];
+
+
+        if (AAURLConfiguration1){
+            id arrApp = [AAURLConfiguration1 performSelector:@selector(allApplications)];
+
+            for (int i=0; i&lt;[arrApp count]; i++) {
+
+                id LSApplicationProxy = [arrApp objectAtIndex:i];
+                NSString* bundleId =[LSApplicationProxy performSelector:@selector(applicationIdentifier)];
+                NSString* name = [LSApplicationProxy localizedName];
+
+                NSProgress *progress = (NSProgress *)[LSApplicationProxy performSelector:@selector(installProgress)];
+
+                NSLog(@"current progress:%lf bundleId:%@", [NSProgress currentProgress], bundleId);
+                // 正在安装的模型数据
+//                InstallingModel *model = [self getInstallModel:bundleId];
+                //如果是正在下载状态
+                if (progress){
+                    //已经检测到的
+//                    if (model) {
+//                        model.progress = [progress localizedDescription];
+//                        model.status  =  [NSString stringWithFormat:@"%@",[[progress userInfo] valueForKey:@"installState"]];
+                        //第一次检测到的
+//                    }else{
+//                        InstallingModel *model = [[InstallingModel alloc] init];
+//                        model.appName = name;
+//                        model.bundleID = bundleId;
+//                        model.progress = [progress localizedDescription];
+//                        model.status  = [NSString stringWithFormat:@"%@",[[progress userInfo] valueForKey:@"installState"]];
+//
+//                        [_installedAry addObject:model];
+//                    }
+
+                }
+            }
+        }
+        if (lib) dlclose(lib);
+    }
+}
+</code></pre>
+<h2 id="四、通过bundle-id判断是否安装并打开app"><a href="#四、通过bundle-id判断是否安装并打开app" class="headerlink" title="四、通过bundle id判断是否安装并打开app"></a>四、通过bundle id判断是否安装并打开app</h2><pre><code class="objc">//通过applicationIdentifier id。判断是否安装某个APP
+        BOOL isInstall = [workspace performSelector:@selector(applicationIsInstalled:) withObject:@"com.tencent.xin"];
+        if (isInstall) {
+            //通过bundle id打开APP
+            [workspace performSelector:@selector(openApplicationWithBundleID:) withObject:@"com.tencent.xin"];
+        }else{
+            NSLog(@"您还没安装");
+        }
+</code></pre>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>以上一些方法大都使用到了私有API、故切记要上架到app store的应用不要使用。<br>在了解过程中，一并完成了一个测试demo，有需要的可以在此基础上试验。<br><a href="https://github.com/donglyu/CheckInstalledAppEtcIniOS" target="_blank" rel="noopener">Demo地址</a></p>
+<p>- EOF -</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/donglyu">Projects</a></li>
+         
+          <li><a href="https://life.lydsnm.top/">Life</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、URL-Scheme"><span class="toc-number">1.</span> <span class="toc-text">一、URL Scheme</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、获取系统中安装列表和各应用的bundleId。"><span class="toc-number">2.</span> <span class="toc-text">二、获取系统中安装列表和各应用的bundleId。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、通过定时器不断的调度-可以用下面的方法得到-所有正在下载的app"><span class="toc-number">3.</span> <span class="toc-text">三、通过定时器不断的调度 可以用下面的方法得到 所有正在下载的app</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、通过bundle-id判断是否安装并打开app"><span class="toc-number">4.</span> <span class="toc-text">四、通过bundle id判断是否安装并打开app</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">5.</span> <span class="toc-text">结语</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/&text=iOS私有API检测系统中是否安装了某款指定的软件"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/&title=iOS私有API检测系统中是否安装了某款指定的软件"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/&is_video=false&description=iOS私有API检测系统中是否安装了某款指定的软件"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=iOS私有API检测系统中是否安装了某款指定的软件&body=Check out this article: http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/&title=iOS私有API检测系统中是否安装了某款指定的软件"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/&title=iOS私有API检测系统中是否安装了某款指定的软件"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/&title=iOS私有API检测系统中是否安装了某款指定的软件"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/&title=iOS私有API检测系统中是否安装了某款指定的软件"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/&name=iOS私有API检测系统中是否安装了某款指定的软件&description=&lt;p&gt;前段时间，在一个积分任务墙的项目，需要跳转到市场去安装App，需要检测iOS设备已安装应用列表的需求，要能获取到安装情况（包括安装进度啊，完成回调等）。经过一段时间的了解，还算完成了既定任务。这篇记录下使用和尝试过程。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://www.lydsnm.top/2019/09/25/2018-06-25私有API检测系统中是否安装了某款指定的软件/&t=iOS私有API检测系统中是否安装了某款指定的软件"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    lydsnm
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/donglyu">Projects</a></li><!--
+     --><!--
+       --><li><a href="https://life.lydsnm.top/">Life</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

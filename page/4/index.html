@@ -1,40 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-Hans™">
-  <head><meta name="generator" content="Hexo 3.8.0">
-    
-<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
-<meta name="baidu-site-verification" content="hkLiBHH93D">
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
-
-
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-  <meta name="description" content="行远自迩，登高自卑。">
-
-
-
-
-
-
-
-  <link rel="alternate" href="/default" title="LYDSNM'S WORK">
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
-
-
-
-<link rel="canonical" href="http://www.lydsnm.top/page/4/">
-
-
-<meta name="description" content="行远自迩，登高自卑。">
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <meta name="description" content="行远自迩，登高自卑。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="LYDSNM&#39;S WORK">
 <meta property="og:url" content="http://www.lydsnm.top/page/4/index.html">
@@ -44,501 +16,356 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LYDSNM&#39;S WORK">
 <meta name="twitter:description" content="行远自迩，登高自卑。">
-
-
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
-
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
-
-
-
-
-
-<script type="text/javascript">
-  var themeConfig = {
-    fancybox: {
-      enable: true
-    },
-  };
-</script>
-
-
-
-
-  
-
-
-
-
-  <link href="/plugins/prettify/prettify.css" rel="stylesheet">
-
-
-<!--百度统计-->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?b733e1eaeacbf8f87d3be047f28c3973";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-    <title> LYDSNM'S WORK </title>
-  </head>
-
-  <body>
-    <div id="page">
-      <header id="masthead"><div class="site-header-inner">
-    <h1 class="site-title">
-        <a href="/." class="logo">LYDSNM'S WORK</a>
-    </h1>
-
-    <nav id="nav-top">
-        
-            <ul id="menu-top" class="nav-top-items">
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/">
-                            
-                            
-                                首页
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/archives">
-                            
-                            
-                                归档
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="http://life.lydsnm.top">
-                            
-                            
-                                生活
-                            
-                        </a>
-                    </li>
-                
-            </ul>
-        
-  </nav>
-</div>
-
-      </header>
-      <div id="content">
-        
-    <div id="primary" class="home">
-        
-            
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2016/10/19/OC开发相关注意事项三/">OC开发相关注意事项</a>
-        
-      </h1>
-
-      <time class="post-time">
-          2016-10-19
-      </time>
-    </header>
-
-
-
-    
-        <div class="post-excerpt">
-            
-            
-              
-            
-
-            
-              <h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><p>ARC :<code>Automatic Reference Counting,ARC</code>, ARC 几乎把所有内存管理事宜都交由编译器来决定, 开发者只需专注于业务逻辑.</p>
-<h3 id="1-引用计数"><a href="#1-引用计数" class="headerlink" title="1. 引用计数"></a>1. 引用计数</h3><p>Objective-C 语言实用引用计数来管理内存. 每个对象都有个可以递增和递减的计数器, 用以标识当前有多个事情想令此对象继续存活下去.<br>计数<font color="#A52A2a">>=0</font>表示对象继续存活. 当保留计数降为<font color="#A52A2a"> 0 </font>后, 对象就会被释放了.</p>
-<p>ARC 只负责管理 <code>Objective-C</code> 对象的内存. 注意: <font color="#A52A2a">CoreFoundation</font>对象不归 ARC 管理, 开发者必须适时调用 <font color="#A52A2a">CFRetain/CFRelease</font>.</p>
-<h3 id="2-在-dealloc-方法中只释放引用并解除监听"><a href="#2-在-dealloc-方法中只释放引用并解除监听" class="headerlink" title="2. 在 dealloc 方法中只释放引用并解除监听"></a>2. 在 dealloc 方法中只释放引用并解除监听</h3><p>对象在经历其生命周期后, 最终会为系统所回收, 这时就要执行 <code>dealloc</code> 方法了. 在每个对象的生命周期内, 此方法仅执行以此. 也就是但保留计数降为 0 的时候.</p>
-<p>虽说应该于 <code>dealloc</code> 中释放引用, 但是开销较大或系统内稀缺的资源则不在此列 ,像是文件描述符( file descriptor ), 套接字 (socket), 大块内存等都属于这种资源. 不能指望 <code>dealloc</code> 方法必定会在某个特定的时机调用, 因为有一些无法预料的东西可能也会持有此对象. 在这种情况下, 如果非要等到系统调用 <code>dealloc</code> 方法时才释放, 那么保留这些稀缺资源的时间就太长了, 这么做不合适. 通常的做法时, 实现另外一个方法, 但应用程序用完资源对象后, 就调用此方法 (例如 <font color="#A52A2a">Open</font> 对应 <font color="#A52A2a">Close</font> 方法) . 这样一来, 资源对象的生命期就变得更明确了.</p>
-        </div>
-            
-          
-
-    
-  </article>
-
-        
-            
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2016/10/18/本地推送之定时推送/">本地推送之定时推送</a>
-        
-      </h1>
-
-      <time class="post-time">
-          2016-10-18
-      </time>
-    </header>
-
-
-
-    
-        <div class="post-excerpt">
-            
-            
-              
-            
-
-            
-              <p>项目中使用到了定时提醒推送, 故整理记录下来.</p>
-<h2 id="iOS10-之前-使用旧的本地推送注册方式"><a href="#iOS10-之前-使用旧的本地推送注册方式" class="headerlink" title="iOS10 之前, 使用旧的本地推送注册方式:"></a>iOS10 之前, 使用旧的本地推送注册方式:</h2><h3 id="1-在-AppDelegate中代理注册使用通知-和注册远程通知一致"><a href="#1-在-AppDelegate中代理注册使用通知-和注册远程通知一致" class="headerlink" title="1. 在 AppDelegate中代理注册使用通知, 和注册远程通知一致"></a>1. 在 <code>AppDelegate</code>中代理注册使用通知, 和注册远程通知一致</h3><pre><code class="objc"> UIMutableUserNotificationCategory *categorys = [[UIMutableUserNotificationCategory alloc] init];
- UIUserNotificationSettings *userSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert
-                                                                                     categories:[NSSet setWithObject:categorys]];
- [[UIApplication sharedApplication] registerUserNotificationSettings:userSettings];
- [[UIApplication sharedApplication] registerForRemoteNotifications];   
-
-</code></pre>
-        </div>
-            
-          
-
-    
-  </article>
-
-        
-            
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2016/10/08/简单明了搞定iOS10推送适配/">简单明了搞定 iOS 10推送适配</a>
-        
-      </h1>
-
-      <time class="post-time">
-          2016-10-08
-      </time>
-    </header>
-
-
-
-    
-        <div class="post-excerpt">
-            
-            
-              
-            
-
-            
-              <p>iOS 10 更新了后发现正式环境, 推送粗问题了.查了相关资料后, 整理了一下解决办法。 iOS 10后, 增加了<font color="#1E90FF">UNUserNotificationCenter</font>, 并且推送通知的处理要在代理方法</p>
-<ul>
-<li><p><font color="#A52A2A">userNotificationCenter:didReceiveNotificationResponse</font> 推送时 APP 在后台</p>
-</li>
-<li><p><font color="#A52A2A">userNotificationCenter:willPresentNotification</font> 推送时 APP 在前台</p>
-</li>
-</ul>
-        </div>
-            
-          
-
-    
-  </article>
-
-        
-            
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2016/09/20/OC开发相关注意事项二/">OC开发相关注意事项</a>
-        
-      </h1>
-
-      <time class="post-time">
-          2016-09-20
-      </time>
-    </header>
-
-
-
-    
-        <div class="post-excerpt">
-            
-            
-              
-            
-
-            
-              <h2 id="接口与-API-设计"><a href="#接口与-API-设计" class="headerlink" title="接口与 API 设计"></a>接口与 API 设计</h2><p>我们在构建应用程序编写接口应考虑将其设计成易于复用的形式, 方便后续项目复用或其他模块使用. 这就需要遵守一定的编程范式, 遵守一些约定俗成的”规则”.</p>
-<h3 id="1-用前缀避免命名空间冲突"><a href="#1-用前缀避免命名空间冲突" class="headerlink" title="1. 用前缀避免命名空间冲突"></a>1. 用前缀避免命名空间冲突</h3><p>OC 没有其他语言内置的命名空间机制. 因此在命名时设法避免潜在的命名冲突, 否则容易就重名.否则会出现类似错误:</p>
-<pre><code class="objc">duplicate symbol _OBJC_METACLASS_$_EOCTHECLASS in:
-build/something.o
-build/something_else.o
-...
-</code></pre>
-<p>苹果宣称其保留使用所有”两字母前缀”(two-letter prefix)的权利,因此我们的命名前缀最好避免使用两个字母当前缀.</p>
-        </div>
-            
-          
-
-    
-  </article>
-
-        
-            
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2016/08/24/OC开发相关注意事项/">OC开发相关注意事项</a>
-        
-      </h1>
-
-      <time class="post-time">
-          2016-08-24
-      </time>
-    </header>
-
-
-
-    
-        <div class="post-excerpt">
-            
-            
-              
-            
-
-            
-              <h2 id="一些基本信息"><a href="#一些基本信息" class="headerlink" title="一些基本信息"></a>一些基本信息</h2><h3 id="1-内存相关"><a href="#1-内存相关" class="headerlink" title="1. 内存相关"></a>1. 内存相关</h3><p>分配在堆中的内存必须直接管理, 而分配在栈中的用于保存变量的内存则会在其栈弹出时自动清理.<br>    Objective-C将堆内存管理抽象出来了. 不需要用malloc及free来分配或释放对象所占内存. Objective-C运行期环境把这部分工作抽象为一套内存管理框架-“引用计数”</p>
-<p>在OC中, 有时会遇到定义里不含*的变量, 可能会使用<code>栈空间</code>. 这些变量所保存的不是Objective-C对象, 比如CoreGraphics中的CGRect.</p>
-<hr>
-<h3 id="2-在类的头文件中尽量少引入其他头文件"><a href="#2-在类的头文件中尽量少引入其他头文件" class="headerlink" title="2. 在类的头文件中尽量少引入其他头文件"></a>2. 在类的头文件中尽量少引入其他头文件</h3><p>而是采用向前声明(forward declaring)<br>减少类的使用者, 所需引入的头文件数量,减少编译时间.<br>也能解决两个类互相引用的问题</p>
-        </div>
-            
-          
-
-    
-  </article>
-
-        
-            
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2016/08/23/简单整理Swift与Objective-C的不同/">整理下Swift与Objective-C的一些不同</a>
-        
-      </h1>
-
-      <time class="post-time">
-          2016-08-23
-      </time>
-    </header>
-
-
-
-    
-        <div class="post-excerpt">
-            
-            
-              
-            
-
-            
-              <p>在OC中对代码进行逻辑组织用的是#pragma mark - , 生成分割线<br>而在swift中有了一些新的语法<br>如: <code>//MARK:</code> <code>//FIXME</code> <code>TODO:</code></p>
-<p><code>//MARK: -</code> 生成分割线</p>
-<p><code>//MARK:</code> 说明</p>
-        </div>
-            
-          
-
-    
-  </article>
-
-        
-            
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2016/08/23/阶段总结/">阶段总结</a>
-        
-      </h1>
-
-      <time class="post-time">
-          2016-08-23
-      </time>
-    </header>
-
-
-
-    
-        <div class="post-excerpt">
-            
-            
-              
-            
-
-            
-              <p>8月</p>
-<p>Swift还是在学习中,可能会搁置一段时间. 基本语法是了解了, 在了解过程也发现某些语法确实和看到的资料不同, 有人开玩笑说, 每过一段时间就好像是学一门新的语言.😁</p>
-        </div>
-            
-          
-
-    
-  </article>
-
-        
-            
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2016/08/22/Photos Framework记录/">Photos Framework记录</a>
-        
-      </h1>
-
-      <time class="post-time">
-          2016-08-22
-      </time>
-    </header>
-
-
-
-    
-        <div class="post-excerpt">
-            
-            
-              
-            
-
-            
-              <p>几个概念是接触Photos需要了解的.</p>
-<h2 id="1-PHAsset-、PHAssetCollection、PHCollectionList"><a href="#1-PHAsset-、PHAssetCollection、PHCollectionList" class="headerlink" title="1. PHAsset 、PHAssetCollection、PHCollectionList"></a>1. PHAsset 、PHAssetCollection、PHCollectionList</h2><p><strong>PHAsset</strong> 、<strong>PHAssetCollection</strong>、<strong>PHCollectionList</strong> 是Photos框架中的模型类，PHAsset类是数据模型，描述图片或者视频文件数据；PHAssetCollection描述了包括相册、moments、智能相册以及共享照片流等一系列图片或者视频文件的集合的元数据；PHCollectionList是一组资源集合，可能是一组Assets，也可能是一组collection<br><br></p>
-<h3 id="1-1-PHAsset-存储获取图片和视频文件的元数据"><a href="#1-1-PHAsset-存储获取图片和视频文件的元数据" class="headerlink" title="1.1 PHAsset: 存储获取图片和视频文件的元数据."></a>1.1 PHAsset: <strong>存储获取图片和视频文件的元数据.</strong></h3><p>这些图片和视频文件可能在手机内, 或者只存在iCloud(当开启了iCloud照片图片功能上传到iCloud了)中,<br>相比以前的ALAsset,提供了更多的资源信息.</p>
-<p>有几个要点</p>
-<blockquote>
-<ul>
-<li>需要使用[PHAsset fetchAsset…]系列类方法获取.</li>
-<li>PHAsset对象只包含原数据, 不包含图片或视频的数据. 要图片和视频数据, 需要使用PHImageManager加载
-        </li></ul></blockquote></div>
-            
-          
-
-    
-  </article>
-
-        
-        
-  <nav class="pagination">
-    
-      <a class="prev" href="/page/3/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text">Prev</span>
-      </a>
     
     
-      <a class="next" href="/page/5/">
-        <span class="next-text">Next</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-    
-  </nav>
-
-    </div>
-    <div id="secondary">
-    
-
-    
-
-    
-    <section id="tags" class="widget-area widget_tags">
-        <h3 class="widget-title">Tags</h3>
-        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/mvp-mvvm/">mvp mvvm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCD/">GCD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/up/">up</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coredata/">coredata</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/许可证-开源/">许可证, 开源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UITextView-UITextField/">UITextView UITextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCD-同步异步/">GCD 同步异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoaPods/">cocoaPods</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li></ul>
-    </section>
-
-
-    
-    <section id="friends" class="widget-area widget_friends">
-        <h3 class="widget-title">友链</h3>
-        <ul class="friend-list">
-        
-            <li class="friend-list-item">
-                <a href="http://life.lydsnm.top" target="_blank" class="friend-list-link">lydsnm生活</a>
-            </li>
-        
-        </ul>
-    </section>
-
-
-</div>
-
-
-      </div>
       
-      <footer id="colophon"><span class="copyright-year">
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
     
-        &copy;
+    <!-- title -->
+    <title>LYDSNM&#39;S WORK</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
     
-        2014 -
+    <!-- rss -->
     
-    2020
-    <span class="footer-author">lydsnm.</span>
-    <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
-    </span>
-</span>
+    
+	<!-- mathjax -->
+	
 
-      </footer>
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 
-      <div class="back-to-top" id="back-to-top">
-        <i class="iconfont icon-up"></i>
-      </div>
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+    <div class="content index py4">
+        
+          <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>LYDSNM&#39;S WORK</h1>
     </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+      <!--
+     --><li><a href="/">Home</a></li><!--
+   --><!--
+     --><li><a href="/about/">About</a></li><!--
+   --><!--
+     --><li><a href="/archives/">Writing</a></li><!--
+   --><!--
+     --><li><a href="https://github.com/donglyu">Projects</a></li><!--
+   --><!--
+     --><li><a href="https://life.lydsnm.top/">Life</a></li><!--
+   -->
+    </ul>
+  </div>
+</header>
+
+        
+        <section id="about">
+  
+    <p>行远自迩，登高自卑。</p>
+
+  
+  
+    <p>
+      Find me on
+      
+      
+      
+        
+          <a class="icon" target="_blank" rel="noopener" href="https://github.com/donglyu" aria-label="github">
+            <i class="fab fa-github"></i><!--
+      ---></a><!--
+    ---><!--
+    ---> and 
+        
+      
+        
+          <a class="icon" target="_blank" rel="noopener" href="mailto:ohlvdong@gmail.com" aria-label="mail">
+            <i class="fas fa-envelope"></i><!--
+      ---></a>
+        <!--
+    --->.
+        
+      
+    </p>
+  
+</section>
+
+<section id="writing">
+  <span class="h1"><a href="/archives/">Writing</a></span>
+  
+  <ul class="post-list">
     
+    
+      
+    
+    
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2016-10-19T16:00:00.000Z" itemprop="datePublished">2016-10-20</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2016/10/20/OC开发相关注意事项四/">OC开发相关注意事项</a>
+    
+
+
+</span>
+      </li>
+    
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2016-10-18T16:00:00.000Z" itemprop="datePublished">2016-10-19</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2016/10/19/OC开发相关注意事项三/">OC开发相关注意事项</a>
+    
+
+
+</span>
+      </li>
+    
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2016-10-17T16:00:00.000Z" itemprop="datePublished">2016-10-18</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2016/10/18/本地推送之定时推送/">本地推送之定时推送</a>
+    
+
+
+</span>
+      </li>
+    
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2016-10-07T16:00:00.000Z" itemprop="datePublished">2016-10-08</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2016/10/08/简单明了搞定iOS10推送适配/">简单明了搞定 iOS 10推送适配</a>
+    
+
+
+</span>
+      </li>
+    
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2016-09-19T16:00:00.000Z" itemprop="datePublished">2016-09-20</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2016/09/20/OC开发相关注意事项二/">OC开发相关注意事项</a>
+    
+
+
+</span>
+      </li>
+    
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2016-08-23T16:00:00.000Z" itemprop="datePublished">2016-08-24</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2016/08/24/OC开发相关注意事项/">OC开发相关注意事项</a>
+    
+
+
+</span>
+      </li>
+    
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2016-08-22T16:00:00.000Z" itemprop="datePublished">2016-08-23</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2016/08/23/简单整理Swift与Objective-C的不同/">整理下Swift与Objective-C的一些不同</a>
+    
+
+
+</span>
+      </li>
+    
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2016-08-22T16:00:00.000Z" itemprop="datePublished">2016-08-23</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2016/08/23/阶段总结/">阶段总结</a>
+    
+
+
+</span>
+      </li>
+    
+  </ul>
   
-
-
-
+    
+    <div class="pagination">
+        
+            <a href="/page/3/"><i class="fas fa-angle-left"></i></a>
+        
+        <span class="page-number">Page 4 of 6</span>
+        
+            <a href="/page/5/"><i class="fas fa-angle-right"></i>
+            </a>
+        
+    </div>
 
 
   
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
-  
+</section>
 
 
 
-    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    lydsnm
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/donglyu">Projects</a></li><!--
+     --><!--
+       --><li><a href="https://life.lydsnm.top/">Life</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
 
-<!--prettify代码高亮脚本引入-->
-
-    <script src="/plugins/prettify/prettify.js"></script>
-    <script type="text/javascript">
-    jQuery(function($){
-        $('pre').addClass('prettyprint');
-        prettyPrint();
-    });
-    </script>
+    </div>
+    <!-- styles -->
 
 
-  </body>
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
 </html>
